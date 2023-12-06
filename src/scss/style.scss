@@ -1,5 +1,7 @@
 @import "./mixins";
 
+/* colors */
+
 :root {
 	--0: #F4F9FB;
 	--100: #DAE3EF;
@@ -13,13 +15,23 @@
 	--900: #161719;
 
 	--primary-darker: #3390BE;
+	--primary-dark: #5CA8CE;
 	--primary-main: #79CAF2;
 	--primary-bright: #48C3FF;
 	--primary-light: #BAE8FF;
+
+	--destructive-dark: #DC4747;
+	--destructive-main: #F05454;
+	--destructive-light: #FF8383;
+
+	--positive: #80E29C;
 }
+
+/* layout */
 
 .wrapper {
 	min-height: 100%;
+	background-color: var(--0);
 }
 
 .container {
@@ -31,6 +43,8 @@
 	@include rv('padding-top', 35, 50, 1920, 320);
 	@include rv('padding-bottom', 35, 50, 1920, 320);
 }
+
+/* text styles */
 
 h1,
 h2,
@@ -72,4 +86,122 @@ h3 {
 	color: var(--primary-bright);
 	font-size: 16px;
 	text-decoration: underline;
+}
+
+/* buttons */
+
+button.button {
+	padding: 0 24px;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: 500;
+	height: 52px;
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+	transition: 350ms;
+
+	&:disabled {
+		pointer-events: none;
+	}
+
+	&:active {
+		scale: 0.975;
+	}
+
+	&_icon {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		svg {
+			height: 16px;
+		}
+	}
+
+	&_left-icon {
+		flex-direction: row-reverse;
+	}
+
+	&_primary {
+		background-color: var(--primary-main);
+		color: var(--700);
+
+		&:disabled {
+			background-color: var(--100);
+			color: var(--200);
+		}
+
+		&:hover {
+			background-color: var(--primary-light);
+		}
+
+		&:active {
+			background-color: var(--primary-dark);
+		}
+
+		svg,
+		svg path {
+			fill: var(--700);
+		}
+
+		&:focus {
+			outline-color: var(--primary-main);
+		}
+	}
+
+	&_default {
+		background-color: var(--0);
+		color: var(--500);
+		border: 1px solid var(--100);
+		padding: 0 23px;
+
+		&:disabled {
+			background-color: var(--0);
+			color: var(--100);
+		}
+
+		&:hover {
+			background-color: var(--100);
+		}
+
+		&:active {
+			background-color: var(--200);
+		}
+
+		svg,
+		svg path {
+			fill: var(--500);
+		}
+
+		&:focus {
+			outline-color: var(--100);
+		}
+	}
+
+	&_destructive {
+		background-color: var(--destructive-main);
+		color: var(--0);
+
+		&:disabled {
+			background-color: #FFE1E1;
+			color: #FAC6C6;
+		}
+
+		&:hover {
+			background-color: var(--destructive-light);
+		}
+
+		&:active {
+			background-color: var(--destructive-dark);
+		}
+
+		svg,
+		svg path {
+			fill: var(--0);
+		}
+
+		&:focus {
+			outline-color: var(--destructive-main);
+		}
+	}
 }
