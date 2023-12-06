@@ -1,0 +1,11 @@
+@mixin rv($property, $endValue, $startValue, $startWidth, $endWidth) {
+	$addValue: $startValue - $endValue;
+
+	@media (max-width: #{$startWidth}px) {
+		#{$property}: calc(#{$endValue}px + $addValue * ((100vw - #{$endWidth}px) / ($startWidth - $endWidth)));
+	}
+
+	@media (max-width: #{$endWidth}px) {
+		#{$property}: #{$endValue}px;
+	}
+}

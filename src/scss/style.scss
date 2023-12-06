@@ -1,0 +1,63 @@
+:root {
+	--0: #F4F9FB;
+	--100: #DAE3EF;
+	--200: #BAC3D2;
+	--300: #8A92A0;
+	--400: #6F7681;
+	--500: #4F545C;
+	--600: #3C4047;
+	--700: #2E3136;
+	--800: #232529;
+	--900: #161719;
+
+	--primary-darker: #3390BE;
+	--primary-main: #79CAF2;
+	--primary-bright: #48C3FF;
+	--primary-light: #BAE8FF;
+}
+
+.wrapper {
+	min-height: 100%;
+}
+
+h1,
+h2,
+h3 {
+	font-family: 'Fira Sans Condensed', sans-serif;
+	color: var(--900);
+}
+
+h1,
+h2 {
+	font-weight: 700;
+}
+
+h1 {
+	font-size: 32px;
+}
+
+h2 {
+	font-size: 24px;
+}
+
+h3 {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.plain-text {
+	color: var(--900);
+	font-size: 16px;
+}
+
+.description {
+	color: var(--300);
+	font-size: 20px;
+	line-height: 1.5;
+}
+
+.link {
+	color: var(--primary-bright);
+	font-size: 16px;
+	text-decoration: underline;
+}
