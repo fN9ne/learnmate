@@ -9,3 +9,119 @@
 		#{$property}: #{$endValue}px;
 	}
 }
+
+@mixin buttonTypes($bgMain, $bgDisabled, $bgHover, $bgActive, $olFocus, $color, $colorDisabled) {
+	background-color: $bgMain;
+	color: $color;
+
+	svg,
+	svg path {
+		fill: $color;
+	}
+
+	&:disabled {
+		background-color: $bgDisabled;
+		color: $colorDisabled;
+	}
+
+	&:hover {
+		background-color: $bgHover;
+	}
+
+	&:active {
+		background-color: $bgActive;
+	}
+
+	&:focus {
+		outline-color: $olFocus;
+	}
+}
+
+@mixin switchTypes($offBgOrigin,
+	$offBgOriginHover,
+	$offOutlineColor,
+	$offBgOriginActive,
+	$onBgOrigin,
+	$onBgOriginHover,
+	$onOutlineColor,
+	$onBgOriginActive,
+	$offDisabledBgOrigin,
+	$onDisabledBgOrigin) {
+	.switch {
+		&__origin {
+			background-color: $offBgOrigin;
+		}
+	}
+
+	&:hover {
+		.switch {
+			&__origin {
+				background-color: $offBgOriginHover;
+			}
+		}
+	}
+
+	&:focus {
+		.switch {
+			&__origin {
+				outline-color: $offOutlineColor;
+			}
+		}
+	}
+
+	&:active {
+		.switch {
+			&__origin {
+				background-color: $offBgOriginActive;
+			}
+		}
+	}
+
+	&[aria-disabled=true] {
+		.switch {
+			&__origin {
+				background-color: $offDisabledBgOrigin;
+			}
+		}
+	}
+
+	&.switch_checked {
+		.switch {
+			&__origin {
+				background-color: $onBgOrigin;
+			}
+		}
+
+		&:hover {
+			.switch {
+				&__origin {
+					background-color: $onBgOriginHover;
+				}
+			}
+		}
+
+		&:focus {
+			.switch {
+				&__origin {
+					outline-color: $onOutlineColor;
+				}
+			}
+		}
+
+		&:active {
+			.switch {
+				&__origin {
+					background-color: $onBgOriginActive;
+				}
+			}
+		}
+
+		&[aria-disabled=true] {
+			.switch {
+				&__origin {
+					background-color: $onDisabledBgOrigin;
+				}
+			}
+		}
+	}
+}

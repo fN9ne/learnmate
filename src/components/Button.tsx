@@ -3,7 +3,8 @@ import { FC } from "react";
 export enum ButtonTypes {
 	primary = "primary",
 	default = "default",
-	destructive = "destructive",
+	error = "error",
+	positive = "positive",
 }
 
 export enum ButtonIconLocation {
@@ -21,15 +22,16 @@ interface ButtonProps {
 	type?: ButtonTypes;
 	icon?: ButtonIcon | null;
 	disabled?: boolean;
+	onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: FC<ButtonProps> = ({ text, type = ButtonTypes.default, icon, disabled = false }) => {
+const Button: FC<ButtonProps> = ({ text, type = ButtonTypes.default, icon, disabled = false, onClick }) => {
 	const iconLocationClass = icon ? ` button_${icon.location || ButtonIconLocation.left}-icon` : "";
 	const typeClass = "button_" + type;
 	const iconClass = icon ? " button_icon" : "";
 
 	return (
-		<button className={`button ${typeClass}${iconClass}${iconLocationClass}`} disabled={disabled}>
+		<button onClick={onClick} className={`button ${typeClass}${iconClass}${iconLocationClass}`} disabled={disabled}>
 			<span>{text}</span>
 			{icon?.element}
 		</button>

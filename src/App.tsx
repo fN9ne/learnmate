@@ -10,6 +10,7 @@ import Students from "./pages/Students/Students";
 import Student from "./pages/Student/Student";
 import Payments from "./pages/Payments/Payments";
 import LearningPlan from "./pages/LearningPlan/LearningPlan";
+import NotFound from "./pages/NotFound/NotFound";
 
 const App: FC = () => {
 	return (
@@ -28,6 +29,7 @@ const App: FC = () => {
 						<Route path="/app/payments" element={<Payments />} />
 						<Route path="/app/learning-plan" element={<LearningPlan />} />
 					</Route>
+					<Route path="*" element={<NotFound />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
