@@ -22,16 +22,24 @@ interface ButtonProps {
 	type?: ButtonTypes;
 	icon?: ButtonIcon | null;
 	disabled?: boolean;
+	submit?: boolean;
+	loading?: boolean;
 	onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: FC<ButtonProps> = ({ text, type = ButtonTypes.default, icon, disabled = false, onClick }) => {
+const Button: FC<ButtonProps> = ({ text, type = ButtonTypes.default, loading, icon, disabled = false, submit, onClick }) => {
 	const iconLocationClass = icon ? ` button_${icon.location || ButtonIconLocation.left}-icon` : "";
 	const typeClass = "button_" + type;
 	const iconClass = icon ? " button_icon" : "";
 
 	return (
-		<button onClick={onClick} className={`button ${typeClass}${iconClass}${iconLocationClass}`} disabled={disabled}>
+		<button
+			type={submit ? "submit" : "button"}
+			onClick={onClick}
+			className={`button ${typeClass}${iconClass}${iconLocationClass}`}
+			disabled={disabled}
+		>
+			{loading && <div className="button-loader" />}
 			<span>{text}</span>
 			{icon?.element}
 		</button>

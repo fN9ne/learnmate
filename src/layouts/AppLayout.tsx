@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { Outlet } from "react-router-dom";
+import { FC, useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import Sidebar, { SidebarItem } from "../components/Sidebar/Sidebar";
 
@@ -7,6 +7,7 @@ import CalendarIcon from "../icons/calendar.svg?react";
 import GroupIcon from "../icons/group.svg?react";
 import PaymentsIcon from "../icons/payment.svg?react";
 import ListIcon from "../icons/list.svg?react";
+import { useAppSelector } from "../hooks/useAppSelector";
 
 const pages: SidebarItem[] = [
 	{
@@ -32,6 +33,16 @@ const pages: SidebarItem[] = [
 ];
 
 const AppLayout: FC = () => {
+	const { isAuthorized } = useAppSelector((state) => state.user);
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (isAuthorized === false) {
+			navigate("/signin");
+		}
+	}, [isAuthorized]);
+
 	return (
 		<div className="app">
 			<Sidebar pages={pages} />

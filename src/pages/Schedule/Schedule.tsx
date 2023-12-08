@@ -1,6 +1,7 @@
+import supabase from "../../services/createClient";
 import "./Schedule.scss";
 
-import { FC } from "react";
+import { FC, useEffect } from "react";
 
 const Schedule: FC = () => {
 	return <div>Schedule</div>;
