@@ -6,6 +6,8 @@
 	box-shadow: 0px 5px 30px 0px rgba(64, 79, 85, 0.15);
 	align-self: flex-start;
 	flex: 0 0 160px;
+	position: relative;
+	z-index: 1;
 
 	&__container {
 		padding: 16px;

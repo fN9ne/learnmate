@@ -7,6 +7,7 @@ import VisibilityOff from "../icons/visibility-off.svg?react";
 export enum InputTypes {
 	text = "text",
 	password = "password",
+	color = "color",
 }
 
 interface InputProps {
@@ -33,7 +34,7 @@ const Input: FC<InputProps> = ({
 	errorMessage,
 }) => {
 	const [isFocus, setIsFocus] = useState<boolean>(false);
-	const [isEmpty, setIsEmpty] = useState<boolean>(value.length === 0);
+	const [isEmpty, setIsEmpty] = useState<boolean>(type !== InputTypes.color ? value.length === 0 : false);
 
 	const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
 
@@ -41,7 +42,7 @@ const Input: FC<InputProps> = ({
 		const value = event.target.value;
 
 		onChange(value);
-		setIsEmpty(value.length === 0);
+		setIsEmpty(type !== InputTypes.color ? value.length === 0 : false);
 	};
 
 	const placeholderClasses = classNames("input__placeholder", { input__placeholder_required: required });
@@ -60,14 +61,28 @@ const Input: FC<InputProps> = ({
 	return (
 		<div className={inputClasses}>
 			<div className={placeholderClasses}>{placeholder}</div>
-			<input
-				type={type === InputTypes.password ? (isPasswordHidden ? "password" : "text") : type}
-				value={value}
-				onFocus={handleFocus}
-				onBlur={handleBlur}
-				onChange={handleChange}
-				disabled={disabled}
-			/>
+			{type !== InputTypes.color ? (
+				<input
+					type={type === InputTypes.password ? (isPasswordHidden ? "password" : "text") : type}
+					value={value}
+					onFocus={handleFocus}
+					onBlur={handleBlur}
+					onChange={handleChange}
+					disabled={disabled}
+					autoComplete="on"
+				/>
+			) : (
+				<label className="input__label">
+					<input
+						type="color"
+						value={value}
+						onFocus={handleFocus}
+						onBlur={handleBlur}
+						onChange={handleChange}
+						disabled={disabled}
+					/>
+				</label>
+			)}
 			{type === InputTypes.password && (
 				<div onClick={() => setIsPasswordHidden((prev) => !prev)} className={showPasswordClasses}>
 					{isPasswordHidden ? <Visibility /> : <VisibilityOff />}

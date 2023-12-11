@@ -36,6 +36,11 @@
 
 /* layout */
 
+html,
+body {
+	scrollbar-gutter: stable;
+}
+
 .wrapper {
 	display: flex;
 	min-height: 100%;
@@ -807,6 +812,12 @@ h3 {
 		&:focus {
 			border-color: var(--primary-main);
 			outline-color: var(--primary-pale);
+		}
+	}
+
+	&__label {
+		input {
+			padding: 6px 8px;
 		}
 	}
 

@@ -16,7 +16,6 @@ const SignUp: FC = () => {
 	const [isFetching, setIsFetching] = useState<boolean>(false);
 	const [isFormValid, setIsFormValid] = useState<boolean>(false);
 	const [registrationError, setRegistrationError] = useState<string>("");
-	const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
 	const username = useInput("", { minLength: 5 });
 	const email = useInput("", { isEmail: true });
@@ -38,19 +37,29 @@ const SignUp: FC = () => {
 					data: {
 						username: username.value,
 					},
-					emailRedirectTo: "http://localhost:5173/app/schedule?_emailConfirm=true",
+					emailRedirectTo: "http://localhost:5173/check-email/confirmed",
 				},
 			});
+
+			const createUserTables = async () => {
+				const schedules = await supabase.from("schedules").insert({ author_email: email.value.toLowerCase(), schedule: [] });
+				const students = await supabase.from("students").insert({ author_email: email.value.toLowerCase(), students: [] });
+				const payments = await supabase.from("payments").insert({ author_email: email.value.toLowerCase(), payments: [] });
+				const learningPlan = await supabase.from("learning_plan").insert({ author_email: email.value.toLowerCase(), books: [] });
+
+				console.log(schedules.error, students.error, payments.error, learningPlan.error);
+			};
 
 			setIsFetching(false);
 
 			setRegistrationError("");
 
-			console.log(data, error?.message);
-
 			if (data.user !== null) {
 				if (data.user.identities?.length === 0) {
 					setRegistrationError("Пользователь с такой почтой уже зарегистрирован");
+				} else {
+					createUserTables();
+					setTimeout(() => navigate("/check-email"), 500);
 				}
 			}
 

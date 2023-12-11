@@ -1,0 +1,163 @@
+.schedule {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+
+	&__header {
+		display: flex;
+		gap: 20px;
+	}
+}
+
+.schedule-label {
+	color: var(--400);
+}
+
+.schedule-block {
+	border-radius: 10px;
+	padding: 16px 24px;
+	background-color: #F4F9FD;
+	box-shadow: 0px 10px 30px 0px rgba(86, 110, 118, 0.15);
+}
+
+.schedule-month-changer {
+	width: 190px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 8px;
+
+	background: var(--0);
+	border: 1px solid var(--200);
+	border-radius: 8px;
+	padding: 10px 9px;
+
+	&__arrow {
+		width: 24px;
+		height: 24px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+
+		svg {
+			width: 6px;
+
+			path {
+				transition: 350ms;
+				fill: var(--300);
+			}
+		}
+
+		&_next {
+			rotate: 180deg;
+		}
+
+		&:hover {
+			svg path {
+				fill: var(--900);
+			}
+		}
+	}
+
+	&__display {
+		font-weight: 500;
+		color: var(--900);
+		padding-top: 1px;
+		user-select: none;
+		transition: 350ms;
+		cursor: pointer;
+
+		&:hover {
+			scale: 0.95;
+			color: var(--300);
+		}
+	}
+}
+
+.schedule-current-date,
+.schedule-current-time {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	gap: 4px;
+
+	&__display {
+		font-size: 16px;
+		font-weight: 600;
+		color: var(--800);
+	}
+}
+
+.schedule-current-time {
+	&__display {
+		font-weight: 700;
+	}
+}
+
+.calendar {
+	background: #F4F9FD;
+	border-radius: 10px;
+	box-shadow: 0px 10px 30px 0px rgba(86, 110, 118, 0.15);
+	padding: 24px;
+
+	&__header {
+		background-color: var(--100);
+		border-radius: 5px 5px 0 0;
+		display: flex;
+
+		&-item {
+			flex: 0 0 calc(100%/7);
+			padding: 20px 0;
+			text-align: center;
+			font-family: 'Fira Sans Condensed', sans-serif;
+			text-transform: uppercase;
+			font-weight: 500;
+			color: var(--900);
+		}
+	}
+
+	&__body {
+		display: flex;
+		flex-wrap: wrap;
+
+		&>div {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+		}
+	}
+
+	&-day {
+		flex: 0 0 calc(100%/7);
+		height: 120px;
+		padding: 16px;
+
+		&__number {
+			color: var(--200);
+			font-weight: 700;
+		}
+
+		border: 1px solid #e2e2e2;
+		border-top-color: transparent;
+		border-right-color: transparent;
+
+		&:nth-child(7n+7) {
+			border-right-color: #e2e2e2;
+		}
+
+		&_active {
+			background-color: #f1f6f8;
+
+			.calendar-day {
+				&__number {
+					color: var(--900);
+				}
+			}
+		}
+
+		&_learn {}
+	}
+}

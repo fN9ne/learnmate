@@ -10,6 +10,7 @@ export interface IValidation {
 interface useInputReturns {
 	value: string;
 	isDirty: boolean;
+	reset: () => void;
 	onChange: (value: string) => void;
 	onBlur: () => void;
 }
@@ -26,12 +27,17 @@ export const useInput: useInputArguments = (initialValue, validations) => {
 
 	const onChange = (newValue: string) => setValue(newValue);
 	const onBlur = () => setIsDirty(true);
+	const reset = () => {
+		setValue("");
+		setIsDirty(false);
+	};
 
 	return {
 		value,
 		isDirty,
 		onChange,
 		onBlur,
+		reset,
 		...valid,
 	};
 };

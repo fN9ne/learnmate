@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import Button, { ButtonTypes } from "../../components/Button";
 import Flex, { GapSizes } from "../../components/Flex";
 import Input, { InputTypes } from "../../components/Input";
@@ -14,7 +13,7 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 
 const SignIn: FC = () => {
 	const { isAuthorized } = useAppSelector((state) => state.user);
-	const { updateAuthorizedStatus } = useActions();
+	const { updateAuthorizedStatus, updateEmail } = useActions();
 
 	const [isFetching, setIsFetching] = useState<boolean>(false);
 	const [isFormValid, setIsFormValid] = useState<boolean>(false);
@@ -42,6 +41,7 @@ const SignIn: FC = () => {
 
 			if (data.user !== null) {
 				updateAuthorizedStatus(true);
+				updateEmail(data.user.email!);
 
 				setTimeout(() => {
 					navigate("/app/schedule");

@@ -2,24 +2,17 @@ import "./Welcome.scss";
 
 import Button, { ButtonIconLocation, ButtonTypes } from "../../components/Button";
 
-import { FC, useState } from "react";
+import { FC } from "react";
 
 import ArrowLong from "../../icons/arrow_long.svg?react";
 import Description from "../../components/Description";
 import { useNavigate } from "react-router-dom";
 import Flex, { GapSizes } from "../../components/Flex";
-import { useInput } from "../../hooks/useInput";
-import Input, { InputTypes } from "../../components/Input";
 
 const Welcome: FC = () => {
 	const navigate = useNavigate();
 
 	const handleStart = () => navigate("/signin");
-
-	const input = useInput("", { isEmail: true });
-	const input2 = useInput("", { minLength: 8 });
-
-	console.log(input);
 
 	return (
 		<Flex className="welcome" column center gap={GapSizes.gap24}>
