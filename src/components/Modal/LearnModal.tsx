@@ -13,8 +13,9 @@ import { AnimatePresence as AP, motion as m } from "framer-motion";
 
 const LearnModal: FC = () => {
 	const { isLearnModalActive } = useAppSelector((state) => state.modal);
-	const { updateLearnModalStatus, setPickedDay, setLessons } = useActions();
 	const { lessons, pickedDay } = useAppSelector((state) => state.lessons);
+	const { students } = useAppSelector((state) => state.students);
+	const { updateLearnModalStatus, setPickedDay, setLessons, setStudents } = useActions();
 
 	const [thisDayLessons, setThisDayLessons] = useState<Learn[]>([]);
 
@@ -101,7 +102,25 @@ const LearnModal: FC = () => {
 			(lesson) => lesson.day !== pickedDay?.day || lesson.month !== pickedDay?.month || lesson.year !== pickedDay?.year
 		);
 
-		setLessons([...notThisDayLessons, ...thisDayLessons]);
+		const newLessons = [...notThisDayLessons, ...thisDayLessons];
+		const newStudents = students.map((student) => {
+			const studentLessons = newLessons.filter((lesson) => lesson.student?.username === student.username);
+
+			console.log(studentLessons);
+
+			return {
+				...student,
+				lessons_count: studentLessons.length,
+				lessons_history: studentLessons.map((lesson) => ({
+					day: lesson.day,
+					month: lesson.month,
+					weekday: (new Date(lesson.year, lesson.month, lesson.day).getDay() + 6) % 7,
+				})),
+			};
+		});
+
+		setLessons(newLessons);
+		setStudents(newStudents);
 	};
 
 	const handleClose = () => {

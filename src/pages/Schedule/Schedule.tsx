@@ -49,7 +49,7 @@ const Schedule: FC = () => {
 	useEffect(() => {
 		if (email) {
 			const updateStudents = async () => {
-				supabase.from("schedules").update({ schedule: lessons }).eq("author_email", email);
+				await supabase.from("schedules").update({ schedule: lessons }).eq("author_email", email);
 
 				setFetching(false);
 			};
