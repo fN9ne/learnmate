@@ -3,6 +3,9 @@ import { weekdays } from "../../dates/dates";
 
 import { AnimatePresence as AP, motion as m } from "framer-motion";
 import { useAppSelector } from "../../hooks/useAppSelector";
+import LearnModal from "../../components/Modal/LearnModal";
+import { useActions } from "../../hooks/useActions";
+import { Day as DayState } from "../../store/reducers/LessonsSlice";
 
 interface CalendarProps {
 	year: number;
@@ -11,6 +14,8 @@ interface CalendarProps {
 
 const Calendar: FC<CalendarProps> = ({ year, month }) => {
 	const lessons = useAppSelector((state) => state.lessons);
+
+	const { setPickedDay, updateLearnModalStatus } = useActions();
 
 	const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
 	const weekdayOfMonth = (new Date(year, month, 1).getDay() + 6) % 7;
@@ -53,6 +58,11 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 		setVisibleDays(newDays);
 	}, [year, month]);
 
+	const handleOpenModal = (day: DayState) => {
+		updateLearnModalStatus(true);
+		setPickedDay(day);
+	};
+
 	return (
 		<div className="calendar">
 			<header className="calendar__header">
@@ -62,12 +72,27 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 					</div>
 				))}
 			</header>
-			<main className="calendar__body">
+			{/* <main className="calendar__body">
 				<AP mode="wait" initial={false}>
 					{visibleDays.map((day, index) => {
 						const isLearningDay = lessons.lessons.some(
 							(lesson) => lesson.day === day.day && lesson.month === day.month && lesson.year === day.year
 						);
+
+						const currentDate = new Date();
+
+						const thisDayLessons = lessons.lessons.filter(
+							(lesson) => lesson.day === day.day && lesson.month === day.month && lesson.year === day.year
+						);
+
+						const minTime =
+							thisDayLessons.length > 0
+								? thisDayLessons.reduce((min, lesson) => {
+										const lessonTime = lesson.time.hour * 60 + lesson.time.minute;
+										const minTime = min.time.hour * 60 + min.time.minute;
+										return lessonTime < minTime ? lesson : min;
+								  })
+								: null;
 
 						return (
 							<m.div
@@ -75,17 +100,110 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 								animate={{ opacity: 1, scale: 1, rotate: 0 }}
 								exit={{ opacity: 0, scale: 0.6, rotate: 35 }}
 								transition={{ duration: 0.25, delay: index * 0.00675 }}
-								key={`${day.year}-${day.month}-${day.day}-${Math.random() * 1000}`}
+								key={`${month}-${day.day}-${index}`}
 								className={`calendar-day${day.isActive ? " calendar-day_active" : ""}${
 									isLearningDay ? " calendar-day_learn" : ""
+								}${
+									currentDate.getDate() === day.day &&
+									currentDate.getMonth() === day.month &&
+									currentDate.getFullYear() === day.year
+										? " calendar-day_current"
+										: ""
 								}`}
+								onClick={() => handleOpenModal({ day: day.day, month: day.month, year: day.year })}
 							>
 								<div className="calendar-day__number">{day.day}</div>
+								{isLearningDay && (
+									<>
+										<div className="calendar-day__time">
+											{lessons.lessons.length === 1
+												? `Занятие в ${
+														lessons.lessons[0].time.hour < 10 ? "0" + lessons.lessons[0].time.hour : lessons.lessons[0].time.hour
+												  }:${
+														lessons.lessons[0].time.minute < 10
+															? "0" + lessons.lessons[0].time.minute
+															: lessons.lessons[0].time.minute
+												  }`
+												: `Занятия с ${minTime!.time.hour < 10 ? "0" + minTime!.time.hour : minTime!.time.hour}:${
+														minTime!.time.minute < 10 ? "0" + minTime!.time.minute : minTime!.time.minute
+												  }`}
+										</div>
+										<div className="calendar-day__students">
+											{lessons.lessons.map((lesson, index) => (
+												<div className="calendar-day__student" key={index} style={{ backgroundColor: lesson.student?.color }} />
+											))}
+										</div>
+									</>
+								)}
 							</m.div>
 						);
 					})}
 				</AP>
+			</main> */}
+			<main className="calendar__body">
+				{visibleDays.map((day, index) => {
+					const isLearningDay = lessons.lessons.some(
+						(lesson) => lesson.day === day.day && lesson.month === day.month && lesson.year === day.year
+					);
+
+					const currentDate = new Date();
+
+					const thisDayLessons = lessons.lessons.filter(
+						(lesson) => lesson.day === day.day && lesson.month === day.month && lesson.year === day.year
+					);
+
+					const minTime =
+						thisDayLessons.length > 0
+							? thisDayLessons.reduce((min, lesson) => {
+									const lessonTime = lesson.time.hour * 60 + lesson.time.minute;
+									const minTime = min.time.hour * 60 + min.time.minute;
+									return lessonTime < minTime ? lesson : min;
+							  })
+							: null;
+
+					return (
+						<div
+							key={`${month}-${day.day}-${index}`}
+							className={`calendar-day${day.isActive ? " calendar-day_active" : ""}${isLearningDay ? " calendar-day_learn" : ""}${
+								currentDate.getDate() === day.day &&
+								currentDate.getMonth() === day.month &&
+								currentDate.getFullYear() === day.year
+									? " calendar-day_current"
+									: ""
+							}`}
+							onClick={() => handleOpenModal({ day: day.day, month: day.month, year: day.year })}
+						>
+							<div className="calendar-day__number">{day.day}</div>
+							{isLearningDay && (
+								<>
+									<div className="calendar-day__time">
+										{thisDayLessons.length === 1
+											? `Занятие в ${
+													thisDayLessons[0].time.hour < 10 ? "0" + thisDayLessons[0].time.hour : thisDayLessons[0].time.hour
+											  }:${
+													thisDayLessons[0].time.minute < 10 ? "0" + thisDayLessons[0].time.minute : thisDayLessons[0].time.minute
+											  }`
+											: `Занятия с ${minTime!.time.hour < 10 ? "0" + minTime!.time.hour : minTime!.time.hour}:${
+													minTime!.time.minute < 10 ? "0" + minTime!.time.minute : minTime!.time.minute
+											  }`}
+									</div>
+									<div className="calendar-day__students">
+										{thisDayLessons.map((lesson, index) => (
+											<div
+												draggable
+												className="calendar-day__student"
+												key={index}
+												style={{ backgroundColor: lesson.student?.color }}
+											/>
+										))}
+									</div>
+								</>
+							)}
+						</div>
+					);
+				})}
 			</main>
+			<LearnModal />
 		</div>
 	);
 };

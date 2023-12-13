@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Description from "../../components/Description";
 import Flex, { GapSizes } from "../../components/Flex";
 import "./CheckEmail.scss";
@@ -8,6 +8,7 @@ import Button, { ButtonIconLocation, ButtonTypes } from "../../components/Button
 
 import ArrowIcon from "../../icons/arrow_long.svg?react";
 import { useActions } from "../../hooks/useActions";
+import useDocumentTitle from "../../hooks/useDocumentTitle";
 
 const CheckEmail: FC = () => {
 	const { updateAuthorizedStatus, updateEmail } = useActions();
@@ -16,35 +17,41 @@ const CheckEmail: FC = () => {
 
 	const navigate = useNavigate();
 
+	useDocumentTitle(Object.entries(params).length > 0 ? "Почта подтверждена" : "Подтверждение почты");
+
 	if (Object.entries(params).length > 0) {
-		const handleStart = () => {
-			navigate("/app/schedule");
+		if (params.confirmed === "confirmed") {
+			const handleStart = () => {
+				navigate("/app/schedule");
 
-			const userData = localStorage.getItem(`sb-${import.meta.env.VITE_SUPABASE_NAME}-auth-token`);
+				const userData = localStorage.getItem(`sb-${import.meta.env.VITE_SUPABASE_NAME}-auth-token`);
 
-			if (userData) {
-				const user = JSON.parse(userData);
+				if (userData) {
+					const user = JSON.parse(userData);
 
-				updateAuthorizedStatus(true);
-				updateEmail(user.user.email);
-			}
-		};
+					updateAuthorizedStatus(true);
+					updateEmail(user.user.email);
+				}
+			};
 
-		return (
-			<Flex className="check-email" column center gap={GapSizes.gap24}>
-				<h1>Почта подтверждена!</h1>
-				<Description>
-					Рады сообщить, что ваша электронная почта успешно подтверждена! Текперь вы можете в полной мере ползоваться всеми
-					возможностями нашего сервиса. Благодарим вас за регистрацию и желаем приятного использования нашего сервиса!
-				</Description>
-				<Button
-					text="Начать"
-					icon={{ element: <ArrowIcon />, location: ButtonIconLocation.right }}
-					type={ButtonTypes.primary}
-					onClick={handleStart}
-				/>
-			</Flex>
-		);
+			return (
+				<Flex className="check-email" column center gap={GapSizes.gap24}>
+					<h1>Почта подтверждена!</h1>
+					<Description>
+						Рады сообщить, что ваша электронная почта успешно подтверждена! Текперь вы можете в полной мере ползоваться всеми
+						возможностями нашего сервиса. Благодарим вас за регистрацию и желаем приятного использования нашего сервиса!
+					</Description>
+					<Button
+						text="Начать"
+						icon={{ element: <ArrowIcon />, location: ButtonIconLocation.right }}
+						type={ButtonTypes.primary}
+						onClick={handleStart}
+					/>
+				</Flex>
+			);
+		} else {
+			return <Navigate to="/404" />;
+		}
 	} else {
 		return (
 			<Flex className="check-email" column center gap={GapSizes.gap24}>

@@ -9,8 +9,11 @@ import Input, { InputTypes } from "../../components/Input";
 import Button, { ButtonTypes } from "../../components/Button";
 import { useInput } from "../../hooks/useInput";
 import supabase from "../../services/createClient";
+import useDocumentTitle from "../../hooks/useDocumentTitle";
 
 const SignUp: FC = () => {
+	useDocumentTitle("Регистрация");
+
 	const { isAuthorized } = useAppSelector((state) => state.user);
 
 	const [isFetching, setIsFetching] = useState<boolean>(false);

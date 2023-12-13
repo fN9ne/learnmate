@@ -134,6 +134,35 @@
 		flex: 0 0 calc(100%/7);
 		height: 120px;
 		padding: 16px;
+		transition: 350ms;
+		cursor: pointer;
+
+		display: flex;
+		flex-direction: column;
+
+		&__time {
+			margin: 8px 0 0 0;
+			color: var(--900);
+		}
+
+		&__students {
+			flex: 1 1 auto;
+			width: 100%;
+			display: flex;
+			align-items: flex-end;
+			gap: 4px;
+		}
+
+		&__student {
+			width: 20px;
+			height: 20px;
+			border-radius: 5px;
+		}
+
+		&:hover {
+			background-color: rgba(210, 218, 229, 0.4);
+			border-color: var(--100);
+		}
 
 		&__number {
 			color: var(--200);
@@ -158,6 +187,18 @@
 			}
 		}
 
-		&_learn {}
+		&_learn {
+			background-color: rgba(226, 226, 226, 0.45);
+		}
+
+		&_current {
+			border-color: var(--primary-light);
+			background-color: rgba(172, 217, 239, 0.2);
+
+			&:hover {
+				background-color: rgba(172, 217, 239, 0.35);
+				border-color: var(--primary-main);
+			}
+		}
 	}
 }

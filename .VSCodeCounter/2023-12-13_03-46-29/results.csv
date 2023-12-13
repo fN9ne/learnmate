@@ -1,0 +1,103 @@
+"filename", "language", "JSON", "TypeScript", "SCSS", "TypeScript JSX", "XML", "Markdown", "HTML", "Properties", "JavaScript", "comment", "blank", "total"
+"d:\web\2023\my\learnmate\.env", "Properties", 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3
+"d:\web\2023\my\learnmate\.eslintrc.cjs", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 1, 19
+"d:\web\2023\my\learnmate\README.md", "Markdown", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 2
+"d:\web\2023\my\learnmate\index.html", "HTML", 0, 0, 0, 0, 0, 0, 28, 0, 0, 0, 0, 28
+"d:\web\2023\my\learnmate\package-lock.json", "JSON", 11262, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 11263
+"d:\web\2023\my\learnmate\package.json", "JSON", 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 41
+"d:\web\2023\my\learnmate\public\browserconfig.xml", "XML", 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2
+"d:\web\2023\my\learnmate\public\manifest.json", "JSON", 41, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41
+"d:\web\2023\my\learnmate\src\App.tsx", "TypeScript JSX", 0, 0, 0, 80, 0, 0, 0, 0, 0, 0, 14, 94
+"d:\web\2023\my\learnmate\src\components\Banner.tsx", "TypeScript JSX", 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 6, 23
+"d:\web\2023\my\learnmate\src\components\Button.tsx", "TypeScript JSX", 0, 0, 0, 42, 0, 0, 0, 0, 0, 0, 8, 50
+"d:\web\2023\my\learnmate\src\components\Checkbox.tsx", "TypeScript JSX", 0, 0, 0, 46, 0, 0, 0, 0, 0, 0, 9, 55
+"d:\web\2023\my\learnmate\src\components\Description.tsx", "TypeScript JSX", 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 5, 16
+"d:\web\2023\my\learnmate\src\components\Flex.tsx", "TypeScript JSX", 0, 0, 0, 37, 0, 0, 0, 0, 0, 0, 6, 43
+"d:\web\2023\my\learnmate\src\components\Input.tsx", "TypeScript JSX", 0, 0, 0, 83, 0, 0, 0, 0, 0, 0, 14, 97
+"d:\web\2023\my\learnmate\src\components\Modal\DeleteStudentModal.tsx", "TypeScript JSX", 0, 0, 0, 35, 0, 0, 0, 0, 0, 0, 5, 40
+"d:\web\2023\my\learnmate\src\components\Modal\LearnModal.tsx", "TypeScript JSX", 0, 0, 0, 142, 0, 0, 0, 0, 0, 1, 16, 159
+"d:\web\2023\my\learnmate\src\components\Modal\Lesson.tsx", "TypeScript JSX", 0, 0, 0, 59, 0, 0, 0, 0, 0, 1, 12, 72
+"d:\web\2023\my\learnmate\src\components\Modal\Modal.scss", "SCSS", 0, 0, 326, 0, 0, 0, 0, 0, 0, 0, 65, 391
+"d:\web\2023\my\learnmate\src\components\Modal\ModalLayout.tsx", "TypeScript JSX", 0, 0, 0, 37, 0, 0, 0, 0, 0, 0, 10, 47
+"d:\web\2023\my\learnmate\src\components\Modal\NewStudentModal.tsx", "TypeScript JSX", 0, 0, 0, 82, 0, 0, 0, 0, 0, 0, 13, 95
+"d:\web\2023\my\learnmate\src\components\Modal\Select.tsx", "TypeScript JSX", 0, 0, 0, 93, 0, 0, 0, 0, 0, 0, 18, 111
+"d:\web\2023\my\learnmate\src\components\Modal\Time.tsx", "TypeScript JSX", 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 5, 22
+"d:\web\2023\my\learnmate\src\components\Radio.tsx", "TypeScript JSX", 0, 0, 0, 27, 0, 0, 0, 0, 0, 0, 7, 34
+"d:\web\2023\my\learnmate\src\components\Sidebar\Sidebar.scss", "SCSS", 0, 0, 73, 0, 0, 0, 0, 0, 0, 0, 16, 89
+"d:\web\2023\my\learnmate\src\components\Sidebar\Sidebar.tsx", "TypeScript JSX", 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 6, 38
+"d:\web\2023\my\learnmate\src\components\Switch.tsx", "TypeScript JSX", 0, 0, 0, 53, 0, 0, 0, 0, 0, 0, 12, 65
+"d:\web\2023\my\learnmate\src\dates\dates.ts", "TypeScript", 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17
+"d:\web\2023\my\learnmate\src\hooks\useActions.ts", "TypeScript", 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7
+"d:\web\2023\my\learnmate\src\hooks\useAppSelector.ts", "TypeScript", 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 2, 6
+"d:\web\2023\my\learnmate\src\hooks\useDocumentTitle.ts", "TypeScript", 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 5, 16
+"d:\web\2023\my\learnmate\src\hooks\useInput.ts", "TypeScript", 0, 36, 0, 0, 0, 0, 0, 0, 0, 0, 8, 44
+"d:\web\2023\my\learnmate\src\hooks\useValidation.ts", "TypeScript", 0, 35, 0, 0, 0, 0, 0, 0, 0, 0, 7, 42
+"d:\web\2023\my\learnmate\src\icons\arrow_down.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\arrow_left.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\arrow_long.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\at.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\blocks.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\book.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\calendar.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\carets.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 5
+"d:\web\2023\my\learnmate\src\icons\checkmark.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\edit.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\group.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\list.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\lock.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\payment.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\plus.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\table.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\trash.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\user.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\visibility-off.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\visibility.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\icons\write.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"d:\web\2023\my\learnmate\src\layouts\AppLayout.tsx", "TypeScript JSX", 0, 0, 0, 46, 0, 0, 0, 0, 0, 0, 9, 55
+"d:\web\2023\my\learnmate\src\layouts\WrapperLayout.tsx", "TypeScript JSX", 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 4, 24
+"d:\web\2023\my\learnmate\src\main.tsx", "TypeScript JSX", 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 5, 19
+"d:\web\2023\my\learnmate\src\pages\Auth\Auth.scss", "SCSS", 0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 4, 28
+"d:\web\2023\my\learnmate\src\pages\Auth\SignIn.tsx", "TypeScript JSX", 0, 0, 0, 97, 0, 0, 0, 0, 0, 0, 21, 118
+"d:\web\2023\my\learnmate\src\pages\Auth\SignUp.tsx", "TypeScript JSX", 0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 22, 162
+"d:\web\2023\my\learnmate\src\pages\CheckEmail\CheckEmail.scss", "SCSS", 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 6
+"d:\web\2023\my\learnmate\src\pages\CheckEmail\CheckEmail.tsx", "TypeScript JSX", 0, 0, 0, 56, 0, 0, 0, 0, 0, 0, 13, 69
+"d:\web\2023\my\learnmate\src\pages\LearningPlan\LearningPlan.scss", "SCSS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"d:\web\2023\my\learnmate\src\pages\LearningPlan\LearningPlan.tsx", "TypeScript JSX", 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 5, 13
+"d:\web\2023\my\learnmate\src\pages\NotFound\NotFound.scss", "SCSS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"d:\web\2023\my\learnmate\src\pages\NotFound\NotFound.tsx", "TypeScript JSX", 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 8, 31
+"d:\web\2023\my\learnmate\src\pages\Payments\Payments.scss", "SCSS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"d:\web\2023\my\learnmate\src\pages\Payments\Payments.tsx", "TypeScript JSX", 0, 0, 0, 35, 0, 0, 0, 0, 0, 0, 6, 41
+"d:\web\2023\my\learnmate\src\pages\Payments\types.ts", "TypeScript", 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 3, 18
+"d:\web\2023\my\learnmate\src\pages\Schedule\Calendar.tsx", "TypeScript JSX", 0, 0, 0, 121, 0, 0, 0, 0, 0, 68, 20, 209
+"d:\web\2023\my\learnmate\src\pages\Schedule\CurrentDate.tsx", "TypeScript JSX", 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 5, 21
+"d:\web\2023\my\learnmate\src\pages\Schedule\CurrentTime.tsx", "TypeScript JSX", 0, 0, 0, 36, 0, 0, 0, 0, 0, 0, 13, 49
+"d:\web\2023\my\learnmate\src\pages\Schedule\MonthChanger.tsx", "TypeScript JSX", 0, 0, 0, 26, 0, 0, 0, 0, 0, 0, 5, 31
+"d:\web\2023\my\learnmate\src\pages\Schedule\Schedule.scss", "SCSS", 0, 0, 170, 0, 0, 0, 0, 0, 0, 0, 34, 204
+"d:\web\2023\my\learnmate\src\pages\Schedule\Schedule.tsx", "TypeScript JSX", 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 8, 58
+"d:\web\2023\my\learnmate\src\pages\Student\Student.scss", "SCSS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"d:\web\2023\my\learnmate\src\pages\Student\Student.tsx", "TypeScript JSX", 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 6, 16
+"d:\web\2023\my\learnmate\src\pages\Students\Compact.tsx", "TypeScript JSX", 0, 0, 0, 26, 0, 0, 0, 0, 0, 0, 5, 31
+"d:\web\2023\my\learnmate\src\pages\Students\Students.scss", "SCSS", 0, 0, 213, 0, 0, 0, 0, 0, 0, 0, 42, 255
+"d:\web\2023\my\learnmate\src\pages\Students\Students.tsx", "TypeScript JSX", 0, 0, 0, 74, 0, 0, 0, 0, 0, 0, 13, 87
+"d:\web\2023\my\learnmate\src\pages\Students\StudentsShowTypeSwitcher.tsx", "TypeScript JSX", 0, 0, 0, 30, 0, 0, 0, 0, 0, 0, 6, 36
+"d:\web\2023\my\learnmate\src\pages\Students\Table.tsx", "TypeScript JSX", 0, 0, 0, 53, 0, 0, 0, 0, 0, 0, 7, 60
+"d:\web\2023\my\learnmate\src\pages\Welcome\Welcome.scss", "SCSS", 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 7
+"d:\web\2023\my\learnmate\src\pages\Welcome\Welcome.tsx", "TypeScript JSX", 0, 0, 0, 28, 0, 0, 0, 0, 0, 0, 8, 36
+"d:\web\2023\my\learnmate\src\scss\fonts.scss", "SCSS", 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2
+"d:\web\2023\my\learnmate\src\scss\index.scss", "SCSS", 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3
+"d:\web\2023\my\learnmate\src\scss\mixins.scss", "SCSS", 0, 0, 109, 0, 0, 0, 0, 0, 0, 0, 18, 127
+"d:\web\2023\my\learnmate\src\scss\reset.scss", "SCSS", 0, 0, 43, 0, 0, 0, 0, 0, 0, 0, 7, 50
+"d:\web\2023\my\learnmate\src\scss\style.scss", "SCSS", 0, 0, 746, 0, 0, 0, 0, 0, 0, 8, 143, 897
+"d:\web\2023\my\learnmate\src\services\createClient.ts", "TypeScript", 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 4, 9
+"d:\web\2023\my\learnmate\src\store\reducers\ActionCreators.ts", "TypeScript", 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 2, 12
+"d:\web\2023\my\learnmate\src\store\reducers\LessonsSlice.ts", "TypeScript", 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 8, 66
+"d:\web\2023\my\learnmate\src\store\reducers\ModalSlice.ts", "TypeScript", 0, 36, 0, 0, 0, 0, 0, 0, 0, 0, 5, 41
+"d:\web\2023\my\learnmate\src\store\reducers\StudentsSlice.ts", "TypeScript", 0, 52, 0, 0, 0, 0, 0, 0, 0, 0, 7, 59
+"d:\web\2023\my\learnmate\src\store\reducers\UserSlice.ts", "TypeScript", 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 5, 27
+"d:\web\2023\my\learnmate\src\store\store.ts", "TypeScript", 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 4, 22
+"d:\web\2023\my\learnmate\src\vite-env.d.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 3
+"d:\web\2023\my\learnmate\temp.json", "JSON", 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 27
+"d:\web\2023\my\learnmate\tsconfig.json", "JSON", 21, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 26
+"d:\web\2023\my\learnmate\tsconfig.node.json", "JSON", 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 11
+"d:\web\2023\my\learnmate\vite.config.ts", "TypeScript", 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 3, 9
+"Total", "-", 11400, 327, 1721, 1802, 66, 1, 28, 3, 18, 82, 788, 16236

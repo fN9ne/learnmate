@@ -10,8 +10,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import supabase from "../../services/createClient";
 import { useActions } from "../../hooks/useActions";
 import { useAppSelector } from "../../hooks/useAppSelector";
+import useDocumentTitle from "../../hooks/useDocumentTitle";
 
 const SignIn: FC = () => {
+	useDocumentTitle("Авторизация");
+
 	const { isAuthorized } = useAppSelector((state) => state.user);
 	const { updateAuthorizedStatus, updateEmail } = useActions();
 

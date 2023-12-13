@@ -22,6 +22,20 @@
 		border-radius: 10px;
 		background: #F4F9FD;
 		box-shadow: 0px 10px 30px 0px rgba(86, 110, 118, 0.15);
+
+		&_empty {
+			padding: 48px;
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+			align-items: center;
+			justify-content: center;
+
+			.description {
+				max-width: 420px;
+				text-align: center;
+			}
+		}
 	}
 }
 
