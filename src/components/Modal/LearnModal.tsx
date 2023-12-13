@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import ModalLayout from "./ModalLayout";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { useActions } from "../../hooks/useActions";
@@ -111,20 +111,46 @@ const LearnModal: FC = () => {
 		exit: { opacity: 0, scale: 0.95 },
 	};
 
+	const track = useRef(null);
+
 	return (
 		<ModalLayout isActive={isLearnModalActive} onClose={handleClose} className="learn-modal">
 			<div className="learn-modal__header">
-				<h2>
-					{pickedDay
-						? `${pickedDay.day} ${months[pickedDay.month][1]}, ${
-								weekdays[(new Date(pickedDay.year, pickedDay.month, pickedDay.day).getDay() + 6) % 7]
-						  }`
-						: ""}
-				</h2>
+				<div>
+					<h2>
+						{pickedDay
+							? `${pickedDay.day} ${months[pickedDay.month][1]}, ${
+									weekdays[(new Date(pickedDay.year, pickedDay.month, pickedDay.day).getDay() + 6) % 7]
+							  }`
+							: ""}
+					</h2>
+					<AP>
+						{thisDayLessons.length > 0 && (
+							<m.div {...transitions}>
+								<Button
+									text="Добавить занятие"
+									icon={{ element: <WriteIcon /> }}
+									onClick={() => {
+										handleAddLesson();
+
+										const trackElement = track.current! as Element;
+
+										setTimeout(() => {
+											trackElement.scrollBy({
+												top: 1000000,
+												behavior: "smooth",
+											});
+										}, 0);
+									}}
+								/>
+							</m.div>
+						)}
+					</AP>
+				</div>
 				<AP>
 					{thisDayLessons.length > 0 && (
 						<m.div {...transitions}>
-							<Button text="Добавить занятие" icon={{ element: <WriteIcon /> }} onClick={handleAddLesson} />
+							<Description>Не забывайте нажимать на кнопку «Сохранить».</Description>
 						</m.div>
 					)}
 				</AP>
@@ -133,10 +159,9 @@ const LearnModal: FC = () => {
 				<AP mode="wait" initial={false}>
 					{thisDayLessons.length > 0 && (
 						<>
-							<m.div {...transitions} key={1} className="learn-modal__content">
+							<m.div {...transitions} key={1} className="learn-modal__content" ref={track}>
 								{thisDayLessons.map((lesson, index) => (
 									<Lesson
-										isLast={index + 1 === thisDayLessons.length && thisDayLessons.length !== 1}
 										data={lesson}
 										key={index}
 										num={index + 1}

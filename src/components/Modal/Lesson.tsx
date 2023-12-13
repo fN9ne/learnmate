@@ -5,16 +5,17 @@ import TrashIcon from "../../icons/trash.svg?react";
 import Select from "./Select";
 import { Student } from "../../store/reducers/StudentsSlice";
 import Time from "./Time";
+import Textarea from "./Textarea";
+import Switch from "../Switch";
 
 interface LessonProps {
 	data: Learn;
 	num: number;
-	isLast: boolean;
 	changeLesson: (newValues: LearnChange) => void;
 	onRemove: () => void;
 }
 
-const Lesson: FC<LessonProps> = ({ num, data, isLast, changeLesson, onRemove }) => {
+const Lesson: FC<LessonProps> = ({ num, data, changeLesson, onRemove }) => {
 	const handleSwitch = () => changeLesson({ isTest: !data.isTest });
 
 	const [isTarget, setIsTarget] = useState<boolean>(false);
@@ -59,7 +60,7 @@ const Lesson: FC<LessonProps> = ({ num, data, isLast, changeLesson, onRemove }) 
 			</header>
 			<main className="lesson__body">
 				<div className="lesson__row">
-					<Select isLast={isLast} selected={data.student} onSelect={(student: Student) => changeLesson({ student: student })} />
+					<Select selected={data.student} onSelect={(student: Student) => changeLesson({ student: student })} />
 					<div className="lesson__time">
 						<Time
 							value={data.time.hour.toString()}
@@ -79,9 +80,22 @@ const Lesson: FC<LessonProps> = ({ num, data, isLast, changeLesson, onRemove }) 
 						/>
 					</div>
 				</div>
-				<div className="lesson__content"></div>
+				<div className="lesson__content">
+					<Textarea
+						placeholder="Домашнее задание"
+						value={data.homework}
+						onChange={(value) => changeLesson({ homework: value })}
+					/>
+					<Textarea placeholder="Задачи на занятие" value={data.plan} onChange={(value) => changeLesson({ plan: value })} />
+					<Textarea placeholder="Заметки" value={data.note} onChange={(value) => changeLesson({ note: value })} />
+					<Textarea
+						placeholder="Остановились на"
+						value={data.stoppedAt}
+						onChange={(value) => changeLesson({ stoppedAt: value })}
+					/>
+				</div>
 				<div className="lesson__footer">
-					{/* <Switch isChecked={data.isTest} onClick={handleSwitch} text="Пробное занятие" /> */}
+					<Switch isChecked={data.isTest} onClick={handleSwitch} text="Пробное занятие" />
 				</div>
 			</main>
 		</div>

@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import Icon from "../../icons/arrow_down.svg?react";
 import { useAppSelector } from "../../hooks/useAppSelector";
@@ -8,11 +8,10 @@ import { Student } from "../../store/reducers/StudentsSlice";
 
 interface SelectProps {
 	selected: Student | null;
-	isLast: boolean;
 	onSelect: (student: Student) => void;
 }
 
-const Select: FC<SelectProps> = ({ selected, isLast, onSelect }) => {
+const Select: FC<SelectProps> = ({ selected, onSelect }) => {
 	const { students } = useAppSelector((state) => state.students);
 
 	const [active, setActive] = useState<boolean>(false);
@@ -62,9 +61,9 @@ const Select: FC<SelectProps> = ({ selected, isLast, onSelect }) => {
 	}, []);
 
 	const transitions = {
-		initial: { opacity: 0, scale: 0.95, y: isLast ? 12 : -12 },
-		animate: { opacity: 1, scale: 1, y: isLast ? -6 : 6 },
-		exit: { opacity: 0, scale: 0.95, y: isLast ? 12 : -12 },
+		initial: { opacity: 0, scale: 0.95, y: -12 },
+		animate: { opacity: 1, scale: 1, y: 6 },
+		exit: { opacity: 0, scale: 0.95, y: -12 },
 	};
 
 	return (
@@ -83,7 +82,7 @@ const Select: FC<SelectProps> = ({ selected, isLast, onSelect }) => {
 			</div>
 			<AP mode="wait" initial={false}>
 				{active && (
-					<m.div {...transitions} className={`student-select__list${isLast ? " student-select__list_last" : ""}`}>
+					<m.div {...transitions} className={"student-select__list"}>
 						<div
 							className={`student-select__list-wrapper${visibleStudents.length >= 4 ? " student-select__list-wrapper_long" : ""}`}
 						>

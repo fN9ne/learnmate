@@ -112,9 +112,16 @@
 	&__header {
 		padding: 20px 52px;
 		border-bottom: 1px solid var(--100);
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+
+		div {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.description {
+			font-size: 14px;
+		}
 
 		h2 {
 			line-height: 52px;
@@ -123,7 +130,7 @@
 
 	&__body {
 		padding: 40px 52px;
-		height: 540px;
+		height: 630px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -200,6 +207,9 @@
 		padding: 24px;
 		background-color: var(--0);
 		border-radius: 0 0 15px 15px;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
 	}
 
 	&__name {
@@ -235,6 +245,13 @@
 	&__time {
 		display: flex;
 		gap: 12px;
+	}
+
+	&__content {
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: 32px;
+		row-gap: 20px;
 	}
 }
 
@@ -312,7 +329,7 @@
 
 	&__list {
 		position: absolute;
-		z-index: 1;
+		z-index: 3;
 		top: 100%;
 		border-radius: 5px;
 		width: calc(100% - 8px);
@@ -322,11 +339,6 @@
 		border: 1px solid var(--100);
 		background-color: var(--0);
 		box-shadow: 0 0 15px rgba(22, 23, 25, 0.1);
-
-		&_last {
-			top: auto;
-			bottom: 100%;
-		}
 	}
 
 	&__list-wrapper {
@@ -466,6 +478,63 @@
 			&__placeholder {
 				color: var(--400);
 			}
+		}
+	}
+}
+
+.textarea {
+	position: relative;
+
+	flex: 0 0 calc(50% - 16px);
+
+	textarea {
+		width: 100%;
+		height: 110px;
+		resize: none;
+		border-radius: 5px;
+		border: 1px solid var(--100);
+		background-color: var(--0);
+		padding: 11px 16px;
+		color: var(--900);
+		position: relative;
+		z-index: 1;
+		outline: 2px solid transparent;
+		outline-offset: 1px;
+		transition: 350ms;
+
+		&:focus {
+			border-color: var(--primary-main);
+			outline-color: var(--primary-pale);
+		}
+	}
+
+	&__placeholder {
+		position: absolute;
+		z-index: 2;
+		left: 10px;
+		padding: 0 5px;
+		background-color: var(--0);
+		top: 14px;
+		line-height: 1;
+		color: var(--300);
+		font-family: 'Fira Sans Condensed', sans-serif;
+		text-transform: uppercase;
+		transition: 350ms;
+		pointer-events: none;
+		user-select: none;
+	}
+
+	&_focused,
+	&_filled {
+		.textarea__placeholder {
+			top: -6px;
+			font-size: 12px;
+		}
+	}
+
+	&_focused {
+		.textarea__placeholder {
+			color: var(--primary-darker);
 		}
 	}
 }
