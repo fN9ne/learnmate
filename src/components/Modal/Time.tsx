@@ -9,6 +9,7 @@ interface TimeInterface {
 	limits: {
 		min: number;
 		max: number;
+		step?: number;
 	};
 }
 
@@ -19,7 +20,8 @@ const Time: FC<TimeInterface> = ({ limits, value, onChange, placeholder }) => {
 				type="number"
 				min={limits.min}
 				max={limits.max}
-				value={Number(value) < 10 ? "0" + value : value}
+				step={limits.step}
+				value={Number(value) >= 0 ? (Number(value) < 10 ? "0" + value : value) : -1}
 				onChange={onChange}
 				className="lesson-time__input"
 			/>

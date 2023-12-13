@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
 import ModalLayout from "./ModalLayout";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { useActions } from "../../hooks/useActions";
@@ -18,6 +18,9 @@ const LearnModal: FC = () => {
 
 	const [thisDayLessons, setThisDayLessons] = useState<Learn[]>([]);
 
+	const [lessonAdded, setLessonAdded] = useState<boolean>(false);
+	const [lastChildHash, setLastChildHash] = useState<string>("");
+
 	const sortByTime = (a: Learn, b: Learn) => {
 		const timeA = a.time.hour * 60 + a.time.minute;
 		const timeB = b.time.hour * 60 + b.time.minute;
@@ -27,22 +30,28 @@ const LearnModal: FC = () => {
 	useEffect(() => {
 		if (lessons.length > 0) {
 			setThisDayLessons(
-				lessons
-					.filter(
-						(lesson) => lesson.day === pickedDay?.day && lesson.month === pickedDay?.month && lesson.year === pickedDay.year
-					)
-					.sort(sortByTime)
+				lessons.filter(
+					(lesson) => lesson.day === pickedDay?.day && lesson.month === pickedDay?.month && lesson.year === pickedDay.year
+				)
 			);
 		}
 	}, [lessons, isLearnModalActive]);
 
 	// useEffect(() => console.log(thisDayLessons), [thisDayLessons]);
 
+	const generateHash = () => {
+		const ascii = "abcdefghijklmnopqrstuvwxyz0123456789";
+		return Array.from({ length: 16 }, () => ascii[Math.floor(Math.random() * ascii.length)]).join("");
+	};
+
 	const handleAddLesson = () => {
+		const hash = generateHash();
+
 		setThisDayLessons((prev) =>
 			[
 				...prev,
 				{
+					hash: hash,
 					student: null,
 					day: pickedDay!.day,
 					month: pickedDay!.month,
@@ -59,7 +68,26 @@ const LearnModal: FC = () => {
 				},
 			].sort(sortByTime)
 		);
+
+		setLastChildHash(hash);
+
+		setLessonAdded(true);
 	};
+
+	useLayoutEffect(() => {
+		if (lessonAdded && lastChildHash !== "") {
+			const trackElement = track.current as Element;
+			const childrenArray = Array.from(trackElement?.children || []);
+			const newLessonElement = childrenArray.find((child) => child.id === lastChildHash) as Element;
+
+			if (newLessonElement) {
+				newLessonElement.scrollIntoView({ behavior: "smooth" });
+			}
+
+			setLessonAdded(false);
+		}
+	}, [thisDayLessons]);
+
 	const handleRemoveLesson = (indexToRemove: number) => {
 		const newThisDayLessons = thisDayLessons.filter((_, index) => index !== indexToRemove).sort(sortByTime);
 
@@ -111,7 +139,7 @@ const LearnModal: FC = () => {
 		exit: { opacity: 0, scale: 0.95 },
 	};
 
-	const track = useRef(null);
+	const track = useRef<HTMLDivElement | null>(null);
 
 	return (
 		<ModalLayout isActive={isLearnModalActive} onClose={handleClose} className="learn-modal">
@@ -132,15 +160,6 @@ const LearnModal: FC = () => {
 									icon={{ element: <WriteIcon /> }}
 									onClick={() => {
 										handleAddLesson();
-
-										const trackElement = track.current! as Element;
-
-										setTimeout(() => {
-											trackElement.scrollBy({
-												top: 1000000,
-												behavior: "smooth",
-											});
-										}, 0);
 									}}
 								/>
 							</m.div>

@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Student } from "./StudentsSlice";
 
 export interface Learn {
+	hash: string;
 	student: Student | null;
 	day: number;
 	month: number;

@@ -8,6 +8,30 @@
 		display: flex;
 		gap: 20px;
 	}
+
+	&__loader {
+		flex: 1 1 auto;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		span {
+			display: block;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			border: 5px solid var(--900);
+			border-left-color: transparent;
+			animation: loading 1s linear infinite;
+		}
+
+		@keyframes loading {
+			to {
+				rotate: 360deg;
+			}
+		}
+	}
 }
 
 .schedule-label {
@@ -157,6 +181,21 @@
 			width: 20px;
 			height: 20px;
 			border-radius: 5px;
+			cursor: grab;
+
+			transition: 450ms;
+
+			&:hover {
+				opacity: 0.75;
+				width: 30px;
+				height: 30px;
+				border-radius: 7.5px;
+				margin: -5px;
+			}
+
+			&:active {
+				cursor: grabbing;
+			}
 		}
 
 		&:hover {
@@ -191,6 +230,22 @@
 			background-color: rgba(226, 226, 226, 0.45);
 		}
 
+		&_inactive {
+			background-color: var(--0);
+
+			.calendar-day {
+
+				&__time {
+					color: var(--200);
+				}
+
+				&__students {
+					opacity: 0.3;
+				}
+			}
+		}
+
+
 		&_current {
 			border-color: var(--primary-light);
 			background-color: rgba(172, 217, 239, 0.2);
@@ -199,6 +254,11 @@
 				background-color: rgba(172, 217, 239, 0.35);
 				border-color: var(--primary-main);
 			}
+		}
+
+		&_dragover {
+			background-color: rgba(210, 218, 229, 0.4);
+			border-color: var(--100);
 		}
 	}
 }

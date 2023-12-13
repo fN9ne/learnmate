@@ -39,19 +39,25 @@ const Lesson: FC<LessonProps> = ({ num, data, changeLesson, onRemove }) => {
 	}, []);
 
 	useEffect(() => {
-		if (data.time.minute === 60) {
+		if (data.time.minute >= 60) {
 			changeLesson({ time: { hour: data.time.hour + 1, minute: 0 } });
+		}
+		if (data.time.minute <= -1) {
+			changeLesson({ time: { hour: data.time.hour - 1, minute: 59 } });
 		}
 	}, [data.time.minute]);
 
 	useEffect(() => {
-		if (data.time.hour === 24) {
+		if (data.time.hour >= 24) {
 			changeLesson({ time: { hour: 0, minute: data.time.minute } });
+		}
+		if (data.time.hour <= -1) {
+			changeLesson({ time: { hour: 23, minute: data.time.minute } });
 		}
 	}, [data.time.hour]);
 
 	return (
-		<div className="lesson" ref={ref} style={{ zIndex: isTarget ? 2 : 1 }} onClick={() => setIsTarget(true)}>
+		<div id={data.hash} className="lesson" ref={ref} style={{ zIndex: isTarget ? 2 : 1 }} onClick={() => setIsTarget(true)}>
 			<header className="lesson__header">
 				<div className="lesson__name">Занятие {num}</div>
 				<div className="lesson__remove" onClick={onRemove}>
@@ -64,7 +70,7 @@ const Lesson: FC<LessonProps> = ({ num, data, changeLesson, onRemove }) => {
 					<div className="lesson__time">
 						<Time
 							value={data.time.hour.toString()}
-							limits={{ min: 0, max: 23 }}
+							limits={{ min: -1, max: 24 }}
 							onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 								changeLesson({ time: { hour: Number(event.target.value), minute: data.time.minute } })
 							}
@@ -72,7 +78,7 @@ const Lesson: FC<LessonProps> = ({ num, data, changeLesson, onRemove }) => {
 						/>
 						<Time
 							value={data.time.minute.toString()}
-							limits={{ min: 0, max: 60 }}
+							limits={{ min: -1, max: 60 }}
 							onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 								changeLesson({ time: { hour: data.time.hour, minute: Number(event.target.value) } })
 							}
