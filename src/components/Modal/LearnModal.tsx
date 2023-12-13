@@ -38,8 +38,6 @@ const LearnModal: FC = () => {
 		}
 	}, [lessons, isLearnModalActive]);
 
-	// useEffect(() => console.log(thisDayLessons), [thisDayLessons]);
-
 	const generateHash = () => {
 		const ascii = "abcdefghijklmnopqrstuvwxyz0123456789";
 		return Array.from({ length: 16 }, () => ascii[Math.floor(Math.random() * ascii.length)]).join("");
@@ -105,8 +103,6 @@ const LearnModal: FC = () => {
 		const newLessons = [...notThisDayLessons, ...thisDayLessons];
 		const newStudents = students.map((student) => {
 			const studentLessons = newLessons.filter((lesson) => lesson.student?.username === student.username);
-
-			console.log(studentLessons);
 
 			return {
 				...student,

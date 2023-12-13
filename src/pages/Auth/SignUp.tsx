@@ -49,8 +49,6 @@ const SignUp: FC = () => {
 				const students = await supabase.from("students").insert({ author_email: email.value.toLowerCase(), students: [] });
 				const payments = await supabase.from("payments").insert({ author_email: email.value.toLowerCase(), payments: [] });
 				const learningPlan = await supabase.from("learning_plan").insert({ author_email: email.value.toLowerCase(), books: [] });
-
-				console.log(schedules.error, students.error, payments.error, learningPlan.error);
 			};
 
 			setIsFetching(false);

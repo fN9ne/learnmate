@@ -20,20 +20,14 @@ import useDocumentTitle from "../../hooks/useDocumentTitle";
 const Students: FC = () => {
 	useDocumentTitle("Ученики");
 
-	const { students, showType } = useAppSelector((state) => state.students);
+	const { students, showType, isLoaded } = useAppSelector((state) => state.students);
 	const { email } = useAppSelector((state) => state.user);
 	const { updateShowType, updateNewStudentModalStatus, updateStudentsFetching } = useActions();
 
 	useEffect(() => {
-		if (email) {
+		if (email && isLoaded) {
 			const updateStudents = async () => {
-				const { error } = await supabase
-					.from("students")
-					.update({ students: students })
-					.eq("author_email", email)
-					.select("students");
-
-				console.log(error);
+				await supabase.from("students").update({ students: students }).eq("author_email", email).select("students");
 
 				updateStudentsFetching(false);
 			};

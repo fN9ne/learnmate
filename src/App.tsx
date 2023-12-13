@@ -23,7 +23,7 @@ import { Learn } from "./store/reducers/LessonsSlice";
 import { Student } from "./store/reducers/StudentsSlice";
 
 const App: FC = () => {
-	const { updateAuthorizedStatus, updateEmail } = useActions();
+	const { updateAuthorizedStatus, updateEmail, updateLoadedLessons, updateLoadedStudents } = useActions();
 
 	const location = useLocation();
 
@@ -50,11 +50,13 @@ const App: FC = () => {
 				if (schedules.data) {
 					const learns: { schedule: Learn[] }[] = schedules.data;
 					setLessons(learns[0].schedule);
+					updateLoadedLessons(true);
 				}
 
 				if (students.data) {
 					const studentsData: { students: Student[] }[] = students.data;
 					setStudents(studentsData[0].students);
+					updateLoadedStudents(true);
 				}
 			};
 

@@ -23,7 +23,7 @@ const Schedule: FC = () => {
 	const [fetching, setFetching] = useState<boolean>(true);
 
 	const { email } = useAppSelector((state) => state.user);
-	const { lessons } = useAppSelector((state) => state.lessons);
+	const { lessons, isLoaded } = useAppSelector((state) => state.lessons);
 
 	const handlePrevMonth = () => {
 		if (currentMonth - 1 < 0) {
@@ -47,7 +47,7 @@ const Schedule: FC = () => {
 	};
 
 	useEffect(() => {
-		if (email) {
+		if (email && isLoaded) {
 			const updateStudents = async () => {
 				await supabase.from("schedules").update({ schedule: lessons }).eq("author_email", email);
 

@@ -40,17 +40,22 @@ export interface Day {
 interface LessonsState {
 	lessons: Learn[];
 	pickedDay: Day | null;
+	isLoaded: boolean;
 }
 
 const initialState: LessonsState = {
 	lessons: [],
 	pickedDay: null,
+	isLoaded: false,
 };
 
 const lessonsSlice = createSlice({
 	name: "lessons",
 	initialState,
 	reducers: {
+		updateLoadedLessons(state, action: PayloadAction<boolean>) {
+			state.isLoaded = action.payload;
+		},
 		addLesson(state, action: PayloadAction<Learn[]>) {
 			state.lessons = [...state.lessons, ...action.payload];
 		},

@@ -21,6 +21,7 @@ interface StudentsState {
 	showType: StudentsShowType;
 	fetching: boolean;
 	studentToDelete: Student | null;
+	isLoaded: boolean;
 }
 
 const initialState: StudentsState = {
@@ -28,12 +29,16 @@ const initialState: StudentsState = {
 	showType: StudentsShowType.compact,
 	fetching: false,
 	studentToDelete: null,
+	isLoaded: false,
 };
 
 const studentsSlice = createSlice({
 	name: "students",
 	initialState,
 	reducers: {
+		updateLoadedStudents(state, action: PayloadAction<boolean>) {
+			state.isLoaded = action.payload;
+		},
 		updateStudentToDelete(state, action: PayloadAction<Student>) {
 			state.studentToDelete = action.payload;
 		},
