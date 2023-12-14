@@ -2,6 +2,10 @@ import "./Sidebar.scss";
 
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
+import Button, { ButtonTypes } from "../Button";
+
+import LogoutIcon from "../../icons/logout.svg?react";
+import { useActions } from "../../hooks/useActions";
 
 export interface SidebarItem {
 	icon: React.ReactNode;
@@ -14,6 +18,8 @@ export interface SidebarProps {
 }
 
 const Sidebar: FC<SidebarProps> = ({ pages }) => {
+	const { updateLogoutModalStatus } = useActions();
+
 	return (
 		<aside className="sidebar">
 			<div className="sidebar__container">
@@ -27,6 +33,12 @@ const Sidebar: FC<SidebarProps> = ({ pages }) => {
 								</NavLink>
 							</li>
 						))}
+						<Button
+							onClick={() => updateLogoutModalStatus(true)}
+							text="Выход"
+							icon={{ element: <LogoutIcon /> }}
+							type={ButtonTypes.error}
+						/>
 					</ul>
 				</nav>
 			</div>

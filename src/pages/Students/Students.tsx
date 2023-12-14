@@ -27,14 +27,16 @@ const Students: FC = () => {
 	useEffect(() => {
 		if (email && isLoaded) {
 			const updateStudents = async () => {
-				await supabase.from("students").update({ students: students }).eq("author_email", email).select("students");
+				updateStudentsFetching(true);
+
+				await supabase.from("students").update({ students: students }).eq("author_email", email);
 
 				updateStudentsFetching(false);
 			};
 
 			updateStudents();
 		}
-	}, [students]);
+	}, [email, students, isLoaded]);
 
 	const transitions = {
 		initial: { opacity: 0, y: -70, scale: 0.95 },

@@ -4,12 +4,14 @@ interface ModalState {
 	isNewStudentModalActive: boolean;
 	isDeleteStudentModalActive: boolean;
 	isLearnModalActive: boolean;
+	isLogoutModalActive: boolean;
 }
 
 const initialState: ModalState = {
 	isNewStudentModalActive: false,
 	isDeleteStudentModalActive: false,
 	isLearnModalActive: false,
+	isLogoutModalActive: false,
 };
 
 const modalSlice = createSlice({
@@ -33,6 +35,15 @@ const modalSlice = createSlice({
 			Object.values(state).some((value) => value === true)
 				? (document.documentElement.style.overflow = "hidden")
 				: (document.documentElement.style.overflow = "visible");
+		},
+		updateLogoutModalStatus(state, action: PayloadAction<boolean>) {
+			state.isLogoutModalActive = action.payload;
+			Object.values(state).some((value) => value === true)
+				? (document.documentElement.style.overflow = "hidden")
+				: (document.documentElement.style.overflow = "visible");
+		},
+		resetModal() {
+			return initialState;
 		},
 	},
 });

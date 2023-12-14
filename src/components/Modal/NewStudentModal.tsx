@@ -29,7 +29,6 @@ const NewStudentModal: FC = () => {
 			payment: 350,
 			lessons_count: 0,
 			color: color.value,
-			payed_lessons: 0,
 			lessons_history: [],
 		});
 

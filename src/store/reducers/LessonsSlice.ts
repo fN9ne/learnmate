@@ -41,18 +41,23 @@ interface LessonsState {
 	lessons: Learn[];
 	pickedDay: Day | null;
 	isLoaded: boolean;
+	fetching: boolean;
 }
 
 const initialState: LessonsState = {
 	lessons: [],
 	pickedDay: null,
 	isLoaded: false,
+	fetching: false,
 };
 
 const lessonsSlice = createSlice({
 	name: "lessons",
 	initialState,
 	reducers: {
+		updateFetchingLessons(state, action: PayloadAction<boolean>) {
+			state.fetching = action.payload;
+		},
 		updateLoadedLessons(state, action: PayloadAction<boolean>) {
 			state.isLoaded = action.payload;
 		},
@@ -64,6 +69,9 @@ const lessonsSlice = createSlice({
 		},
 		setPickedDay(state, action: PayloadAction<Day | null>) {
 			state.pickedDay = action.payload;
+		},
+		resetLessons() {
+			return initialState;
 		},
 	},
 });

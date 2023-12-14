@@ -19,7 +19,10 @@ const DeleteStudentModal: FC = () => {
 			onClose={() => updateDeleteStudentModalActive(false)}
 		>
 			<h1>Удалить ученика?</h1>
-			<Description>Вы собираетесь удалить ученика «{studentToDelete?.username}», это действие необратимо.</Description>
+			<Description>
+				Вы собираетесь удалить ученика
+				<br />«{studentToDelete?.name}, {studentToDelete?.username}», это действие необратимо.
+			</Description>
 			<div className="student-delete__footer">
 				<Button
 					text="Удалить"

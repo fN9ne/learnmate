@@ -7,8 +7,7 @@ export interface Student {
 	payment: number;
 	lessons_count: number;
 	color: string;
-	payed_lessons: number;
-	lessons_history: { day: number; month: number; weekday: number }[];
+	lessons_history: string[];
 }
 
 export enum StudentsShowType {
@@ -56,6 +55,9 @@ const studentsSlice = createSlice({
 		},
 		updateShowType(state, action: PayloadAction<StudentsShowType>) {
 			state.showType = action.payload;
+		},
+		resetStudents() {
+			return initialState;
 		},
 	},
 });

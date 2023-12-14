@@ -87,14 +87,16 @@
 	}
 }
 
-.student-delete {
+.student-delete,
+.logout-modal {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 24px;
+	padding: 40px;
 
 	.description {
-		max-width: 400px;
+		max-width: 480px;
 		text-align: center;
 	}
 

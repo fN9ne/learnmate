@@ -20,6 +20,9 @@ const userSlice = createSlice({
 		updateAuthorizedStatus(state, action: PayloadAction<boolean>) {
 			state.isAuthorized = action.payload;
 		},
+		resetUser() {
+			return initialState;
+		},
 	},
 });
 

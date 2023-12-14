@@ -10,14 +10,17 @@ import WriteIcon from "../../icons/write.svg?react";
 import { Learn, LearnChange } from "../../store/reducers/LessonsSlice";
 import Lesson from "./Lesson";
 import { AnimatePresence as AP, motion as m } from "framer-motion";
+import { Payment } from "../../store/reducers/PaymentsSlice";
 
 const LearnModal: FC = () => {
 	const { isLearnModalActive } = useAppSelector((state) => state.modal);
 	const { lessons, pickedDay } = useAppSelector((state) => state.lessons);
 	const { students } = useAppSelector((state) => state.students);
-	const { updateLearnModalStatus, setPickedDay, setLessons, setStudents } = useActions();
+	const { payments } = useAppSelector((state) => state.payments);
+	const { updateLearnModalStatus, setPickedDay, setLessons, setStudents, setPayments } = useActions();
 
 	const [thisDayLessons, setThisDayLessons] = useState<Learn[]>([]);
+	const [thisDayPayments, setThisDayPayments] = useState<Payment[]>([]);
 
 	const [lessonAdded, setLessonAdded] = useState<boolean>(false);
 	const [lastChildHash, setLastChildHash] = useState<string>("");
@@ -37,6 +40,17 @@ const LearnModal: FC = () => {
 			);
 		}
 	}, [lessons, isLearnModalActive]);
+
+	useEffect(() => {
+		if (payments.length > 0) {
+			setThisDayPayments(
+				payments.filter(
+					(payment) =>
+						payment.date.day === pickedDay?.day && payment.date.month === pickedDay?.month && payment.date.year === pickedDay.year
+				)
+			);
+		}
+	}, [payments, isLearnModalActive]);
 
 	const generateHash = () => {
 		const ascii = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -68,6 +82,22 @@ const LearnModal: FC = () => {
 			].sort(sortByTime)
 		);
 
+		setThisDayPayments((prev) => [
+			...prev,
+			{
+				hash,
+				student: null,
+				date: {
+					day: pickedDay!.day,
+					month: pickedDay!.month,
+					year: pickedDay!.year,
+					hour: 12,
+					minute: 0,
+				},
+				status: false,
+			},
+		]);
+
 		setLastChildHash(hash);
 
 		setLessonAdded(true);
@@ -89,34 +119,81 @@ const LearnModal: FC = () => {
 
 	const handleRemoveLesson = (indexToRemove: number) => {
 		const newThisDayLessons = thisDayLessons.filter((_, index) => index !== indexToRemove).sort(sortByTime);
+		const newThisDayPayments = thisDayPayments.filter(
+			(payment) => payment.hash !== thisDayLessons.filter((_, index) => index === indexToRemove)[0].hash
+		);
 
 		setThisDayLessons(newThisDayLessons);
+		setThisDayPayments(newThisDayPayments);
 
-		handleSave(newThisDayLessons);
+		handleSave(newThisDayLessons, newThisDayPayments);
 	};
 
-	const handleSave = (thisDayLessons: Learn[]) => {
+	const handleSave = (thisDayLessons: Learn[], thisDayPayments: Payment[]) => {
 		const notThisDayLessons = lessons.filter(
 			(lesson) => lesson.day !== pickedDay?.day || lesson.month !== pickedDay?.month || lesson.year !== pickedDay?.year
 		);
 
-		const newLessons = [...notThisDayLessons, ...thisDayLessons];
+		const newLessons = [...notThisDayLessons, ...thisDayLessons].map((lesson) => {
+			const studentLessons = [...notThisDayLessons, ...thisDayLessons].filter(
+				(les) => les.student!.username === lesson.student!.username
+			);
+
+			return {
+				...lesson,
+				student: lesson.student
+					? {
+							...lesson.student,
+							lessons_count: studentLessons.length,
+							lessons_history: studentLessons.map((l) => l.hash),
+					  }
+					: null,
+			};
+		});
+
 		const newStudents = students.map((student) => {
 			const studentLessons = newLessons.filter((lesson) => lesson.student?.username === student.username);
 
 			return {
 				...student,
 				lessons_count: studentLessons.length,
-				lessons_history: studentLessons.map((lesson) => ({
-					day: lesson.day,
-					month: lesson.month,
-					weekday: (new Date(lesson.year, lesson.month, lesson.day).getDay() + 6) % 7,
-				})),
+				lessons_history: studentLessons.map((lesson) => lesson.hash),
 			};
 		});
 
+		const notThisDayPayments = payments.filter(
+			(payment) =>
+				payment.date.day !== pickedDay?.day || payment.date.month !== pickedDay?.month || payment.date.year !== pickedDay?.year
+		);
+
+		const newPayments = [...notThisDayPayments, ...thisDayPayments]
+			.sort((a, b) => {
+				const date1 = new Date(a.date.year, a.date.month, a.date.day);
+				const date2 = new Date(b.date.year, b.date.month, b.date.day);
+
+				if (date1 > date2) return -1;
+				if (date1 < date2) return 1;
+
+				return 0;
+			})
+			.map((payment) => {
+				const studentLessons = [...notThisDayPayments, ...thisDayPayments].filter(
+					(les) => les.student!.username === payment.student!.username
+				);
+
+				return {
+					...payment,
+					student: {
+						...payment.student!,
+						lessons_count: studentLessons.length,
+						lessons_history: studentLessons.map((l) => l.hash),
+					},
+				};
+			});
+
 		setLessons(newLessons);
 		setStudents(newStudents);
+		setPayments(newPayments);
 	};
 
 	const handleClose = () => {
@@ -146,6 +223,40 @@ const LearnModal: FC = () => {
 
 			return newLessons;
 		});
+
+		if (Object.keys(newValues).includes("isTest")) {
+			setThisDayPayments((prev) => {
+				const newPayments = prev.map((payment) => {
+					if (payment.hash === initial.hash) {
+						return {
+							...payment,
+							status: newValues.isTest ? null : false,
+						};
+					}
+
+					return payment;
+				});
+
+				return newPayments;
+			});
+		}
+
+		if (Object.keys(newValues).includes("student")) {
+			setThisDayPayments((prev) => {
+				const newPayments = prev.map((payment) => {
+					if (payment.hash === initial.hash) {
+						return {
+							...payment,
+							student: newValues.student!,
+						};
+					}
+
+					return payment;
+				});
+
+				return newPayments;
+			});
+		}
 	};
 
 	const transitions = {
@@ -210,7 +321,7 @@ const LearnModal: FC = () => {
 										text="Сохранить"
 										type={ButtonTypes.primary}
 										onClick={() => {
-											handleSave(thisDayLessons);
+											handleSave(thisDayLessons, thisDayPayments);
 											handleClose();
 										}}
 									/>

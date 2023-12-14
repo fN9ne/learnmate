@@ -21,9 +21,11 @@ import supabase from "./services/createClient";
 import { useAppSelector } from "./hooks/useAppSelector";
 import { Learn } from "./store/reducers/LessonsSlice";
 import { Student } from "./store/reducers/StudentsSlice";
+import LogoutModal from "./components/Modal/LogoutModal";
+import { Payment } from "./store/reducers/PaymentsSlice";
 
 const App: FC = () => {
-	const { updateAuthorizedStatus, updateEmail, updateLoadedLessons, updateLoadedStudents } = useActions();
+	const { updateAuthorizedStatus, updateEmail, updateLoadedLessons, updateLoadedStudents, updateLoadedPayments } = useActions();
 
 	const location = useLocation();
 
@@ -39,13 +41,14 @@ const App: FC = () => {
 	}, []);
 
 	const { email } = useAppSelector((state) => state.user);
-	const { setLessons, setStudents } = useActions();
+	const { setLessons, setStudents, setPayments } = useActions();
 
 	useEffect(() => {
 		if (email) {
 			const fetchData = async () => {
 				const schedules = await supabase.from("schedules").select("schedule").eq("author_email", email);
 				const students = await supabase.from("students").select("students").eq("author_email", email);
+				const payments = await supabase.from("payments").select("payments").eq("author_email", email);
 
 				if (schedules.data) {
 					const learns: { schedule: Learn[] }[] = schedules.data;
@@ -57,6 +60,12 @@ const App: FC = () => {
 					const studentsData: { students: Student[] }[] = students.data;
 					setStudents(studentsData[0].students);
 					updateLoadedStudents(true);
+				}
+
+				if (payments.data) {
+					const paymentsData: { payments: Payment[] }[] = payments.data;
+					setPayments(paymentsData[0].payments);
+					updateLoadedPayments(true);
 				}
 			};
 
@@ -88,6 +97,7 @@ const App: FC = () => {
 				</Routes>
 			</AP>
 			<NewStudentModal />
+			<LogoutModal />
 		</>
 	);
 };
