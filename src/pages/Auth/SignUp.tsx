@@ -40,7 +40,7 @@ const SignUp: FC = () => {
 					data: {
 						username: username.value,
 					},
-					emailRedirectTo: "http://localhost:5173/check-email/confirmed",
+					emailRedirectTo: "http://learnmate.vercel.app/check-email/confirmed",
 				},
 			});
 
