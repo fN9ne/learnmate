@@ -23,9 +23,17 @@ import { Learn } from "./store/reducers/LessonsSlice";
 import { Student } from "./store/reducers/StudentsSlice";
 import LogoutModal from "./components/Modal/LogoutModal";
 import { Payment } from "./store/reducers/PaymentsSlice";
+import { Book } from "./store/reducers/LearningPlanSlice";
 
 const App: FC = () => {
-	const { updateAuthorizedStatus, updateEmail, updateLoadedLessons, updateLoadedStudents, updateLoadedPayments } = useActions();
+	const {
+		updateAuthorizedStatus,
+		updateEmail,
+		updateLoadedLessons,
+		updateLoadedStudents,
+		updateLoadedPayments,
+		updateLoadedBooks,
+	} = useActions();
 
 	const location = useLocation();
 
@@ -41,7 +49,7 @@ const App: FC = () => {
 	}, []);
 
 	const { email } = useAppSelector((state) => state.user);
-	const { setLessons, setStudents, setPayments } = useActions();
+	const { setLessons, setStudents, setPayments, setBooks } = useActions();
 
 	useEffect(() => {
 		if (email) {
@@ -49,6 +57,7 @@ const App: FC = () => {
 				const schedules = await supabase.from("schedules").select("schedule").eq("author_email", email);
 				const students = await supabase.from("students").select("students").eq("author_email", email);
 				const payments = await supabase.from("payments").select("payments").eq("author_email", email);
+				const books = await supabase.from("learning_plan").select("books").eq("author_email", email);
 
 				if (schedules.data) {
 					const learns: { schedule: Learn[] }[] = schedules.data;
@@ -66,6 +75,12 @@ const App: FC = () => {
 					const paymentsData: { payments: Payment[] }[] = payments.data;
 					setPayments(paymentsData[0].payments);
 					updateLoadedPayments(true);
+				}
+
+				if (books.data) {
+					const booksData: { books: Book[] }[] = books.data;
+					setBooks(booksData[0].books);
+					updateLoadedBooks(true);
 				}
 			};
 

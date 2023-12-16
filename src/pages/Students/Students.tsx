@@ -64,13 +64,15 @@ const Students: FC = () => {
 				)}
 				{students.length === 0 && (
 					<m.div {...transitions} key="compact" className="students__body students__body_empty">
-						<Description>Пока что вы не добавили ещё ни одного ученика, давайте добавим первого!</Description>
-						<Button
-							text="Добавить ученика"
-							type={ButtonTypes.primary}
-							icon={{ element: <UserIcon /> }}
-							onClick={() => updateNewStudentModalStatus(true)}
-						/>
+						<>
+							<Description>Пока что вы не добавили ещё ни одного ученика, давайте добавим первого!</Description>
+							<Button
+								text="Добавить ученика"
+								type={ButtonTypes.primary}
+								icon={{ element: <UserIcon /> }}
+								onClick={() => updateNewStudentModalStatus(true)}
+							/>
+						</>
 					</m.div>
 				)}
 			</AP>

@@ -5,6 +5,10 @@ interface ModalState {
 	isDeleteStudentModalActive: boolean;
 	isLearnModalActive: boolean;
 	isLogoutModalActive: boolean;
+	isNewBookModalActive: boolean;
+	isHistoryLessonModalActive: boolean;
+	isEditStudentModalActive: boolean;
+	isNewExtraBookModalActive: boolean;
 }
 
 const initialState: ModalState = {
@@ -12,6 +16,10 @@ const initialState: ModalState = {
 	isDeleteStudentModalActive: false,
 	isLearnModalActive: false,
 	isLogoutModalActive: false,
+	isNewBookModalActive: false,
+	isHistoryLessonModalActive: false,
+	isEditStudentModalActive: false,
+	isNewExtraBookModalActive: false,
 };
 
 const modalSlice = createSlice({
@@ -42,6 +50,31 @@ const modalSlice = createSlice({
 				? (document.documentElement.style.overflow = "hidden")
 				: (document.documentElement.style.overflow = "visible");
 		},
+		updateNewBookModalStatus(state, action: PayloadAction<boolean>) {
+			state.isNewBookModalActive = action.payload;
+			Object.values(state).some((value) => value === true)
+				? (document.documentElement.style.overflow = "hidden")
+				: (document.documentElement.style.overflow = "visible");
+		},
+		updateHistoryLessonModalStatus(state, action: PayloadAction<boolean>) {
+			state.isHistoryLessonModalActive = action.payload;
+			Object.values(state).some((value) => value === true)
+				? (document.documentElement.style.overflow = "hidden")
+				: (document.documentElement.style.overflow = "visible");
+		},
+		updateEditStudentModalStatus(state, action: PayloadAction<boolean>) {
+			state.isEditStudentModalActive = action.payload;
+			Object.values(state).some((value) => value === true)
+				? (document.documentElement.style.overflow = "hidden")
+				: (document.documentElement.style.overflow = "visible");
+		},
+		updateNewExtraBookModalStatus(state, action: PayloadAction<boolean>) {
+			state.isNewExtraBookModalActive = action.payload;
+			Object.values(state).some((value) => value === true)
+				? (document.documentElement.style.overflow = "hidden")
+				: (document.documentElement.style.overflow = "visible");
+		},
+
 		resetModal() {
 			return initialState;
 		},

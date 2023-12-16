@@ -540,3 +540,185 @@
 		}
 	}
 }
+
+.new-book-modal {
+	padding: 40px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+
+	h1 {
+		text-align: center;
+	}
+
+	.input {
+		margin: 12px 0 0 0;
+		width: 500px;
+	}
+
+	.description {
+		font-size: 14px;
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+	}
+
+	&__footer {
+		margin-top: 12px;
+		display: flex;
+		justify-content: center;
+		gap: 24px;
+	}
+}
+
+.history-lesson {
+	max-width: 768px;
+	width: 100%;
+	padding: 0;
+
+	&__header {
+		padding: 40px 52px;
+		border-bottom: 1px solid var(--100);
+	}
+
+	&__body {
+		padding: 24px 52px 36px;
+		display: flex;
+		flex-direction: column;
+		gap: 48px;
+	}
+
+	&__row {
+		display: flex;
+		gap: 48px;
+	}
+
+	&__label {
+		font-family: 'Fira Sans Condensed', sans-serif;
+		font-size: 12px;
+		text-transform: uppercase;
+		color: var(--300);
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	&__time {
+		font-size: 24px;
+		font-weight: 700;
+		color: var(--900);
+	}
+
+	&__test {
+		color: var(--error-main);
+		font-size: 24px;
+		font-weight: 700;
+	}
+
+	&__payed {
+		color: var(--positive-main);
+		font-size: 24px;
+		font-weight: 700;
+	}
+
+	&__content {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+	}
+
+	&__textblock {
+		flex: 0 0 calc(50% - 10px);
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	&__text {
+		line-height: 1.5;
+		color: var(--900);
+	}
+}
+
+.edit-student {
+	padding: 40px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+
+	max-width: 600px;
+	width: 100%;
+
+	&__header {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.description {
+		font-size: 14px;
+	}
+
+	&__body {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		gap: 12px;
+
+		.input,
+		.lesson-time,
+		.textarea {
+
+			&:nth-child(1),
+			&:nth-child(2) {
+				flex: 0 0 calc(50% - 6px);
+			}
+
+			&:nth-child(3),
+			&:nth-child(4),
+			&:nth-child(5) {
+				flex: 0 0 calc(33.33333% - 8px);
+			}
+
+			&:nth-child(6) {
+				flex: 0 0 100%;
+			}
+		}
+
+		.lesson-time {
+			&__input {
+				width: 100%;
+				border-color: var(--400);
+			}
+
+			&__placeholder {
+				left: 50px;
+				top: 50%;
+			}
+		}
+
+		.textarea {
+			textarea {
+				border-color: var(--400);
+
+				&:focus {
+					border-color: var(--primary-main);
+				}
+			}
+		}
+	}
+
+	&__footer {
+		display: flex;
+		justify-content: center;
+		gap: 24px;
+	}
+}

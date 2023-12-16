@@ -15,7 +15,8 @@ interface CalendarProps {
 const Calendar: FC<CalendarProps> = ({ year, month }) => {
 	const lessons = useAppSelector((state) => state.lessons);
 
-	const { setPickedDay, updateLearnModalStatus, setLessons } = useActions();
+	const { setPickedDay, updateLearnModalStatus, setLessons, setPayments } = useActions();
+	const { payments } = useAppSelector((state) => state.payments);
 
 	const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
 	const weekdayOfMonth = (new Date(year, month, 1).getDay() + 6) % 7;
@@ -110,7 +111,24 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 			return lesson;
 		});
 
+		const newPayments = payments.map((payment) => {
+			if (payment.hash === draggingLearn?.hash) {
+				return {
+					...payment,
+					date: {
+						...payment.date,
+						day: day.day,
+						month: day.month,
+						year: day.year,
+					},
+				};
+			}
+
+			return payment;
+		});
+
 		setLessons(newLessons);
+		setPayments(newPayments);
 	};
 
 	const transitions = {

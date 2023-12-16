@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const LogoutModal: FC = () => {
 	const { isLogoutModalActive } = useAppSelector((state) => state.modal);
-	const { updateLogoutModalStatus, resetLessons, resetModal, resetStudents, resetUser } = useActions();
+	const { updateLogoutModalStatus, resetLessons, resetModal, resetStudents, resetUser, resetLearningPlan } = useActions();
 
 	const [fetching, setFetching] = useState<boolean>(false);
 
@@ -38,6 +38,7 @@ const LogoutModal: FC = () => {
 						resetModal();
 						resetStudents();
 						resetUser();
+						resetLearningPlan();
 					}}
 				/>
 				<Button text="Отмена" type={ButtonTypes.default} onClick={() => updateLogoutModalStatus(false)} />

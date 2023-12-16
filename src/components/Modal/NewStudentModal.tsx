@@ -11,6 +11,7 @@ const NewStudentModal: FC = () => {
 	const { updateNewStudentModalStatus, addStudent, updateStudentsFetching } = useActions();
 
 	const { fetching } = useAppSelector((state) => state.students);
+	const { books } = useAppSelector((state) => state.learningPlan);
 
 	const firstname = useInput("", { minLength: 2 });
 	const username = useInput("", { minLength: 5 });
@@ -30,6 +31,20 @@ const NewStudentModal: FC = () => {
 			lessons_count: 0,
 			color: color.value,
 			lessons_history: [],
+			note: "",
+			learning_plan: books.map((book) => {
+				return {
+					...book,
+					lessons: book.lessons.map((lesson) => {
+						return {
+							num: lesson,
+							finished: false,
+						};
+					}),
+					finished: false,
+				};
+			}),
+			extra_lp: [],
 		});
 
 		updateStudentsFetching(true);

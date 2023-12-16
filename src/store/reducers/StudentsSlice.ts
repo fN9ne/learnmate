@@ -1,5 +1,16 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+export interface IStudentLesson {
+	num: number;
+	finished: boolean;
+}
+
+export interface IStudentBook {
+	name: string;
+	lessons: IStudentLesson[];
+	finished: boolean;
+}
+
 export interface Student {
 	name: string;
 	username: string;
@@ -8,6 +19,9 @@ export interface Student {
 	lessons_count: number;
 	color: string;
 	lessons_history: string[];
+	note: string;
+	learning_plan: IStudentBook[];
+	extra_lp: IStudentBook[];
 }
 
 export enum StudentsShowType {
