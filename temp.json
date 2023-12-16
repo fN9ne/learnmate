@@ -1,0 +1,26 @@
+[
+	{
+		"student": {
+			"name": "Алина",
+			"username": "OPDEsaklDKAPOS",
+			"discord_username": "kkddmm",
+			"payment": 350,
+			"lessons_count": 0,
+			"color": "#b4d8ee",
+			"payed_lessons": 0,
+			"lessons_history": []
+		},
+		"day": 12,
+		"month": 11,
+		"year": 2023,
+		"time": {
+			"hour": 13,
+			"minute": 0
+		},
+		"isTest": false,
+		"homework": "",
+		"stoppedAt": "",
+		"note": "",
+		"plan": ""
+	}
+]

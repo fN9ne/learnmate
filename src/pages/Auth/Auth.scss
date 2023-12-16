@@ -1,0 +1,28 @@
+@import '../../scss/mixins';
+
+.auth-form {
+	max-width: 320px;
+	width: 100%;
+	transition: 350ms;
+
+	&__error {
+		min-height: 12px;
+		line-height: 1;
+		font-size: 12px;
+		color: var(--error-main);
+		opacity: 0;
+		visibility: hidden;
+		transition: 350ms;
+		translate: 0 12px;
+
+		&_active {
+			translate: 0;
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
+	.banner {
+		@include rv('margin-top', -16, -24, 1920, 320);
+	}
+}
