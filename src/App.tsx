@@ -23,7 +23,7 @@ import { Learn } from "./store/reducers/LessonsSlice";
 import { Student } from "./store/reducers/StudentsSlice";
 import LogoutModal from "./components/Modal/LogoutModal";
 import { Payment } from "./store/reducers/PaymentsSlice";
-import { Book } from "./store/reducers/LearningPlanSlice";
+import { IBook } from "./store/reducers/LearningPlanSlice";
 
 const App: FC = () => {
 	const {
@@ -78,7 +78,7 @@ const App: FC = () => {
 				}
 
 				if (books.data) {
-					const booksData: { books: Book[] }[] = books.data;
+					const booksData: { books: IBook[] }[] = books.data;
 					setBooks(booksData[0].books);
 					updateLoadedBooks(true);
 				}

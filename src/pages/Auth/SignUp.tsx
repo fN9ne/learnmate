@@ -45,10 +45,10 @@ const SignUp: FC = () => {
 			});
 
 			const createUserTables = async () => {
-				const schedules = await supabase.from("schedules").insert({ author_email: email.value.toLowerCase(), schedule: [] });
-				const students = await supabase.from("students").insert({ author_email: email.value.toLowerCase(), students: [] });
-				const payments = await supabase.from("payments").insert({ author_email: email.value.toLowerCase(), payments: [] });
-				const learningPlan = await supabase.from("learning_plan").insert({ author_email: email.value.toLowerCase(), books: [] });
+				await supabase.from("schedules").insert({ author_email: email.value.toLowerCase(), schedule: [] });
+				await supabase.from("students").insert({ author_email: email.value.toLowerCase(), students: [] });
+				await supabase.from("payments").insert({ author_email: email.value.toLowerCase(), payments: [] });
+				await supabase.from("learning_plan").insert({ author_email: email.value.toLowerCase(), books: [] });
 			};
 
 			setIsFetching(false);

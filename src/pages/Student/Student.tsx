@@ -21,7 +21,7 @@ import supabase from "../../services/createClient";
 import Checkmark from "../../icons/checkmark.svg?react";
 import ArrowDown from "../../icons/arrow_down.svg?react";
 import BookIcon from "../../icons/book.svg?react";
-import NewExtraBookModal from "../../components/Modal/NewExtrabookModal";
+import NewExtraBookModal from "../../components/Modal/NewExtraBookModal";
 import TrashIcon from "../../icons/trash.svg?react";
 import Plus from "../../icons/plus.svg?react";
 
