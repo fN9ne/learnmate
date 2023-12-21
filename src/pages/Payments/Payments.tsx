@@ -80,7 +80,7 @@ const Payments: FC = () => {
 										<span>{`${payment.student?.name}, ${payment.student?.username}`}</span>
 									</td>
 									<td>{`${payment.date.day} ${months[payment.date.month][1]}, ${
-										weekdays[(new Date(payment.date.year, payment.date.month, payment.date.day).getDay() + 6) % 7]
+										weekdays[(new Date(payment.date.year, payment.date.month, payment.date.day).getDay() + 6) % 7][0]
 									}`}</td>
 									<td>{`${payment.status !== null ? payment.student?.payment.toString() + " ₽" : ""}`}</td>
 									<td>

@@ -27,7 +27,7 @@ const HistoryLessonModal: FC<HistoryLessonModalProps> = ({ lesson }) => {
 				<>
 					<div className="history-lesson__header">
 						<h1>{`${lesson.day} ${months[lesson.month][1]} ${lesson.year}, ${
-							weekdays[(new Date(lesson!.year, lesson.month, lesson.day).getDay() + 6) % 7]
+							weekdays[(new Date(lesson!.year, lesson.month, lesson.day).getDay() + 6) % 7][0]
 						}`}</h1>
 					</div>
 					<div className="history-lesson__body">

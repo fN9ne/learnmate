@@ -195,7 +195,7 @@ const Student: FC = () => {
 											</div>
 											<div className="student-info__edit" onClick={() => updateEditStudentModalStatus(true)}>
 												<EditIcon />
-												<span>Редактировать ученика</span>
+												<span>Редактировать</span>
 											</div>
 										</div>
 										<div className="student-info__main">
@@ -219,7 +219,7 @@ const Student: FC = () => {
 													<div className="student-info-props__value">
 														{calcClosestLesson !== undefined && calcClosestLesson.length > 0
 															? `${calcClosestLesson[0]!.getDate()} ${months[calcClosestLesson[0]!.getMonth()][1]}, ${
-																	weekdays[(calcClosestLesson[0]!.getDay() + 6) % 7]
+																	weekdays[(calcClosestLesson[0]!.getDay() + 6) % 7][0]
 															  }, ${
 																	calcClosestLesson[0]!.getHours() < 10
 																		? "0" + calcClosestLesson[0]!.getHours()
@@ -319,11 +319,20 @@ const Student: FC = () => {
 														updateHistoryLessonModalStatus(true);
 													}}
 												>
-													{`${hi.day} ${months[hi.month][1]}, ${
-														weekdays[(new Date(hi.year, hi.month, hi.day).getDay() + 6) % 7]
-													}, ${hi.time.hour < 10 ? "0" + hi.time.hour : hi.time.hour}:${
-														hi.time.minute < 10 ? "0" + hi.time.minute : hi.time.minute
-													}`}
+													<span className="student-history-item__day">{hi.day}</span>{" "}
+													<span className="student-history-item__month">{months[hi.month][1]}</span>
+													<span className="student-history-item__month-short">{months[hi.month][2]}</span>,{" "}
+													<span className="student-history-item__weekday">
+														{weekdays[(new Date(hi.year, hi.month, hi.day).getDay() + 6) % 7][0]}
+													</span>
+													<span className="student-history-item__weekday-short">
+														{weekdays[(new Date(hi.year, hi.month, hi.day).getDay() + 6) % 7][1]}
+													</span>
+													,{" "}
+													<span className="student-history-item__time">
+														{hi.time.hour < 10 ? "0" + hi.time.hour : hi.time.hour}:
+														{hi.time.minute < 10 ? "0" + hi.time.minute : hi.time.minute}
+													</span>
 												</div>
 											))}
 										</div>

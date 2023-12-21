@@ -75,14 +75,14 @@ const Schedule: FC = () => {
 	return (
 		<div className="schedule">
 			<header className="schedule__header">
+				<CurrentDate />
+				<CurrentTime />
 				<MonthChanger
 					date={`${months[currentMonth][0]} ${currentYear}`}
 					handleNextMonth={handleNextMonth}
 					handlePrevMonth={handlePrevMonth}
 					handleReset={handleReset}
 				/>
-				<CurrentDate />
-				<CurrentTime />
 			</header>
 			<AP mode="wait" initial={false}>
 				{!isLoaded && (

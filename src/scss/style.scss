@@ -52,9 +52,10 @@ body {
 	width: 100%;
 	margin: 0 auto;
 	display: flex;
-	padding: 0 20px;
 	@include rv('padding-top', 35, 50, 1920, 320);
 	@include rv('padding-bottom', 35, 50, 1920, 320);
+	@include rv('padding-left', 12, 20, 1920, 320);
+	@include rv('padding-right', 12, 20, 1920, 320);
 
 	&>div {
 		width: 100%;
@@ -74,6 +75,10 @@ body {
 .app {
 	display: flex;
 	gap: 20px;
+
+	@media (max-width: 1440px) {
+		flex-direction: column;
+	}
 }
 
 /* text styles */
@@ -106,7 +111,7 @@ h3 {
 
 .plain-text {
 	color: var(--900);
-	font-size: 16px;
+	@include rv('font-size', 14, 16, 1920, 320);
 }
 
 .description {

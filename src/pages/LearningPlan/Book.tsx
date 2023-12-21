@@ -50,12 +50,15 @@ const Book: FC<BookProps> = ({ isEditMode, book, changeBook, removeBook }) => {
 				</AP>
 				<input
 					onClick={(event: React.MouseEvent<HTMLInputElement>) => {
-						event.stopPropagation();
+						if (isEditMode) {
+							event.stopPropagation();
+						}
 					}}
 					placeholder=" Введите название книги"
 					type="text"
 					className="book__name"
 					value={book.name}
+					style={{ pointerEvents: !isEditMode ? "none" : "auto" }}
 					onChange={handleChangeName}
 				/>
 				<Arrow className={`book__arrow${isActive ? " book__arrow_rotate" : ""}`} />
