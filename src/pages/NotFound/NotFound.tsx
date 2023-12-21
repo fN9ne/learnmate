@@ -3,7 +3,7 @@ import "./NotFound.scss";
 
 import { FC } from "react";
 
-import Button, { ButtonIconLocation, ButtonTypes } from "../../components/Button";
+import Button, { ButtonTypes } from "../../components/Button";
 import BackIcon from "../../icons/arrow_long.svg?react";
 import useDocumentTitle from "../../hooks/useDocumentTitle";
 
