@@ -1,5 +1,24 @@
 .payments {
-	flex: 1 1 auto;
+	overflow: auto;
+
+	&::-webkit-scrollbar {
+		height: 6px;
+		background-color: var(--100);
+		border-radius: 3px;
+
+		&-thumb {
+			background-color: var(--primary-main);
+			border-radius: 3px;
+
+			&:hover {
+				background-color: var(--primary-light);
+			}
+
+			&:active {
+				background-color: var(--primary-dark);
+			}
+		}
+	}
 
 	&__loader {
 		height: 100%;
@@ -26,6 +45,9 @@
 	}
 
 	.students-table {
+		@media (max-width: 768px) {
+			min-width: 700px;
+		}
 
 		th,
 		td {

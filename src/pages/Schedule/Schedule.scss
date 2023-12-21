@@ -1,3 +1,5 @@
+@import "../../scss/mixins";
+
 .schedule {
 	flex: 1 1 auto;
 	display: flex;
@@ -6,7 +8,8 @@
 
 	&__header {
 		display: flex;
-		gap: 20px;
+		flex-wrap: wrap;
+		@include rv("gap", 12, 20, 1440, 320);
 	}
 
 	&__loader {
@@ -36,6 +39,10 @@
 
 .schedule-label {
 	color: var(--400);
+
+	@media (max-width: 425px) {
+		font-size: 12px;
+	}
 }
 
 .schedule-block {
@@ -43,6 +50,13 @@
 	padding: 16px 24px;
 	background-color: #F4F9FD;
 	box-shadow: 0px 10px 30px 0px rgba(86, 110, 118, 0.15);
+
+	@media (max-width: 425px) {
+		padding: 12px 16px;
+		flex: 1 1 auto;
+		display: flex;
+		justify-content: center;
+	}
 }
 
 .schedule-month-changer {
@@ -56,6 +70,10 @@
 	border: 1px solid var(--200);
 	border-radius: 8px;
 	padding: 10px 9px;
+
+	@media (max-width: 425px) {
+		width: 100%;
+	}
 
 	&__arrow {
 		width: 24px;
@@ -108,10 +126,18 @@
 	height: 100%;
 	gap: 4px;
 
+	@media (max-width: 425px) {
+		align-items: center;
+	}
+
 	&__display {
 		font-size: 16px;
 		font-weight: 600;
 		color: var(--800);
+
+		@media (max-width: 425px) {
+			font-size: 14px;
+		}
 	}
 }
 
@@ -125,12 +151,38 @@
 	background: #F4F9FD;
 	border-radius: 10px;
 	box-shadow: 0px 10px 30px 0px rgba(86, 110, 118, 0.15);
-	padding: 24px;
+	@include rv("padding", 12, 24, 1440, 425);
+
+	&__wrapper {
+		padding: 0 0 5px 0;
+		overflow: auto;
+
+		&::-webkit-scrollbar {
+			height: 6px;
+			background-color: var(--100);
+			border-radius: 3px;
+
+			&-thumb {
+				background-color: var(--primary-main);
+				border-radius: 3px;
+
+				&:hover {
+					background-color: var(--primary-light);
+				}
+
+				&:active {
+					background-color: var(--primary-dark);
+				}
+			}
+		}
+	}
 
 	&__header {
 		background-color: var(--100);
 		border-radius: 5px 5px 0 0;
 		display: flex;
+
+		min-width: 996px;
 
 		&-item {
 			flex: 0 0 calc(100%/7);
@@ -140,12 +192,19 @@
 			text-transform: uppercase;
 			font-weight: 500;
 			color: var(--900);
+
+			@media (max-width: 768px) {
+				padding: 16px 0;
+				font-size: 12px;
+			}
 		}
 	}
 
 	&__body {
 		display: flex;
 		flex-wrap: wrap;
+
+		min-width: 996px;
 
 		&>div {
 			width: 100%;
@@ -164,9 +223,18 @@
 		display: flex;
 		flex-direction: column;
 
+		@media (max-width: 768px) {
+			height: 90px;
+			padding: 12px;
+		}
+
 		&__time {
 			margin: 8px 0 0 0;
 			color: var(--900);
+
+			@media (max-width: 768px) {
+				font-size: 12px;
+			}
 		}
 
 		&__students {
@@ -184,6 +252,12 @@
 			cursor: grab;
 
 			transition: 450ms;
+
+			@media (max-width: 768px) {
+				width: 12px;
+				height: 12px;
+				border-radius: 3px;
+			}
 
 			&:hover {
 				opacity: 0.75;
@@ -206,6 +280,10 @@
 		&__number {
 			color: var(--200);
 			font-weight: 700;
+
+			@media (max-width: 768px) {
+				font-size: 12px;
+			}
 		}
 
 		border: 1px solid #e2e2e2;

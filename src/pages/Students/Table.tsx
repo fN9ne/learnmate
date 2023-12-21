@@ -35,7 +35,7 @@ const Table: FC = () => {
 							<div className="students-table__color" style={{ backgroundColor: student.color }} />
 						</td>
 						<td>{student.name}</td>
-						<td>{student.username}</td>
+						<td className="_cut">{student.username}</td>
 						<td>{student.discord_username}</td>
 						<td>{student.payment} ₽</td>
 						<td className="students-table__compact">{student.lessons_count}</td>

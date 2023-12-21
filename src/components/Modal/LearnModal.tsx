@@ -274,7 +274,7 @@ const LearnModal: FC = () => {
 					<h2>
 						{pickedDay
 							? `${pickedDay.day} ${months[pickedDay.month][1]}, ${
-									weekdays[(new Date(pickedDay.year, pickedDay.month, pickedDay.day).getDay() + 6) % 7]
+									weekdays[(new Date(pickedDay.year, pickedDay.month, pickedDay.day).getDay() + 6) % 7][0]
 							  }`
 							: ""}
 					</h2>

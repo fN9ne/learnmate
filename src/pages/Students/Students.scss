@@ -1,20 +1,50 @@
+@import "../../scss/mixins";
+
 .students {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
 
+	&__wrapper {
+		padding: 0 0 5px 0;
+		overflow: auto;
+
+		&::-webkit-scrollbar {
+			height: 6px;
+			background-color: var(--100);
+			border-radius: 3px;
+
+			&-thumb {
+				background-color: var(--primary-main);
+				border-radius: 3px;
+
+				&:hover {
+					background-color: var(--primary-light);
+				}
+
+				&:active {
+					background-color: var(--primary-dark);
+				}
+			}
+		}
+	}
+
 	&__header {
 		align-self: flex-start;
-		border-radius: 10px;
-		padding: 16px 24px;
 		display: flex;
 		align-items: center;
-		gap: 24px;
-		background-color: #F4F9FD;
-		box-shadow: 0px 10px 30px 0px rgba(86, 110, 118, 0.15);
+		flex-wrap: wrap;
+		gap: 12px;
 		position: relative;
 		z-index: 1;
+
+		&-item {
+			border-radius: 10px;
+			padding: 16px 24px;
+			background-color: #F4F9FD;
+			box-shadow: 0px 10px 30px 0px rgba(86, 110, 118, 0.15);
+		}
 	}
 
 	&__body {
@@ -22,6 +52,10 @@
 		border-radius: 10px;
 		background: #F4F9FD;
 		box-shadow: 0px 10px 30px 0px rgba(86, 110, 118, 0.15);
+
+		@media (max-width: 996px) {
+			padding: 16px;
+		}
 
 		&_empty {
 			padding: 48px;
@@ -42,6 +76,7 @@
 .students-type-switcher {
 	display: flex;
 	height: 52px;
+	@include rv("height", 40, 52, 1440, 320);
 	overflow: auto;
 
 	&__item {
@@ -51,6 +86,7 @@
 		align-items: center;
 		padding: 0 16px;
 		font-size: 16px;
+		@include rv("font-size", 12, 16, 1440, 320);
 		font-family: 'Fira Sans Condensed', sans-serif;
 		text-transform: uppercase;
 		color: var(--300);
@@ -58,6 +94,7 @@
 
 		svg {
 			height: 16px;
+			@include rv("height", 12, 16, 1440, 320);
 
 			path {
 				fill: var(--300);
@@ -103,6 +140,8 @@
 
 	border-collapse: separate;
 	border-spacing: 0 8px;
+
+	min-width: 500px;
 
 	&__compact {
 		width: 1%;
@@ -152,10 +191,21 @@
 		text-transform: uppercase;
 		font-family: 'Fira Sans Condensed', sans-serif;
 		color: var(--700);
+
+		@media (max-width: 996px) {
+			font-size: 12px;
+		}
 	}
 
 	td {
 		box-shadow: 0px 1px 10px 0px rgba(86, 110, 118, 0.1);
+
+		&._cut {
+			max-width: 150px;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+		}
 	}
 
 	th,
@@ -163,6 +213,10 @@
 		padding: 16px 20px;
 		text-align: center;
 		vertical-align: middle;
+
+		@media (max-width: 996px) {
+			padding: 12px;
+		}
 	}
 }
 
@@ -176,8 +230,18 @@
 		display: flex;
 		gap: 12px;
 
+		@media (max-width: 996px) {
+			flex: 0 0 calc(100%/2 - (20px - 20px/2));
+			gap: 4px;
+		}
+
+		@media (max-width: 600px) {
+			flex: 0 0 100%;
+		}
+
 		&__display {
 			flex: 0 0 82px;
+			@include rv("flex-basis", 70, 82, 1440, 320);
 			aspect-ratio: 1 / 1;
 			border-radius: 15px;
 			display: flex;
@@ -187,6 +251,7 @@
 			text-transform: uppercase;
 			font-weight: 900;
 			font-size: 40px;
+			@include rv("font-size", 24, 40, 1440, 320);
 			transition: 350ms;
 		}
 
@@ -205,13 +270,29 @@
 		&__username {
 			color: var(--200);
 			font-size: 16px;
+			@include rv("font-size", 12, 16, 1440, 320);
 			font-weight: 600;
 			font-family: 'Fira Sans Condensed', sans-serif;
 			transition: 350ms;
+			width: 240px;
+			@include rv("width", 160, 240, 1440, 996);
+			width: 240px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+
+			@media (max-width: 996px) {
+				@include rv("width", 100, 135, 996, 600);
+			}
+
+			@media (max-width: 600px) {
+				@include rv("width", 150, 424, 600, 320);
+			}
 		}
 
 		&__name {
 			font-size: 24px;
+			@include rv("font-size", 18, 24, 1440, 320);
 			font-weight: 700;
 			color: var(--600);
 			transition: 350ms;
