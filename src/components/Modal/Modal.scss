@@ -344,6 +344,12 @@
 			}
 		}
 	}
+
+	&__footer {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 24px;
+	}
 }
 
 .student-select {
@@ -842,5 +848,49 @@
 		display: flex;
 		justify-content: center;
 		gap: 24px;
+	}
+}
+
+.patch-note {
+	max-width: 768px;
+	width: 100%;
+	padding: 40px;
+
+	@media (max-width: 768px) {
+		padding: 20px;
+		border-radius: 12px;
+	}
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 0 16px 0;
+		border-bottom: 1px solid var(--200);
+	}
+
+	&__body {
+		margin: 16px 0 0 0;
+	}
+
+	&__list {
+		padding-left: 20px;
+
+		li {
+			&:first-child {
+				margin: 0;
+			}
+
+			margin: 12px 0 0 0;
+			list-style: disc;
+			font-size: 16px;
+			color: var(--900);
+			line-height: 1.35;
+
+			&::marker {
+				position: absolute;
+				left: 0;
+			}
+		}
 	}
 }

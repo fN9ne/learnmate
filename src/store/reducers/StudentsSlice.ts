@@ -12,6 +12,7 @@ export interface IStudentBook {
 }
 
 export interface Student {
+	id: number;
 	name: string;
 	username: string;
 	discord_username: string | null;

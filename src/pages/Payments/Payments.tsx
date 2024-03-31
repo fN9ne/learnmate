@@ -71,30 +71,34 @@ const Payments: FC = () => {
 								<th>к оплате</th>
 								<th>статус</th>
 							</tr>
-							{payments.map((payment, index) => (
-								<tr key={index}>
-									<td className="students-table__compact">
-										<div className="students-table__color" style={{ backgroundColor: payment.student?.color }}></div>
-									</td>
-									<td>
-										<span>{`${payment.student?.name}, ${payment.student?.username}`}</span>
-									</td>
-									<td>{`${payment.date.day} ${months[payment.date.month][1]}, ${
-										weekdays[(new Date(payment.date.year, payment.date.month, payment.date.day).getDay() + 6) % 7][0]
-									}`}</td>
-									<td>{`${payment.status !== null ? payment.student?.payment.toString() + " ₽" : ""}`}</td>
-									<td>
-										{payment.status !== null && (
-											<Switch
-												isChecked={payment.status}
-												onClick={(value: boolean) => handleSwitch(payment.hash, value)}
-												text={{ offText: "Не оплачен", onText: "Оплачен" }}
-												type={SwitchType.redngreen}
-											/>
-										)}
-									</td>
-								</tr>
-							))}
+							{payments.map(
+								(payment, index) =>
+									new Date() >
+										new Date(payment.date.year, payment.date.month, payment.date.day, payment.date.hour, payment.date.minute) && (
+										<tr key={index}>
+											<td className="students-table__compact">
+												<div className="students-table__color" style={{ backgroundColor: payment.student?.color }}></div>
+											</td>
+											<td>
+												<span>{`${payment.student?.name}, ${payment.student?.username}`}</span>
+											</td>
+											<td>{`${payment.date.day} ${months[payment.date.month][1]}, ${
+												weekdays[(new Date(payment.date.year, payment.date.month, payment.date.day).getDay() + 6) % 7][0]
+											}`}</td>
+											<td>{`${payment.status !== null ? payment.student?.payment.toString() + " ₽" : ""}`}</td>
+											<td>
+												{payment.status !== null && (
+													<Switch
+														isChecked={payment.status}
+														onClick={(value: boolean) => handleSwitch(payment.hash, value)}
+														text={{ offText: "Не оплачен", onText: "Оплачен" }}
+														type={SwitchType.redngreen}
+													/>
+												)}
+											</td>
+										</tr>
+									)
+							)}
 						</tbody>
 					</m.table>
 				)}

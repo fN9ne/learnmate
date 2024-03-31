@@ -28,8 +28,6 @@ import Plus from "../../icons/plus.svg?react";
 const Student: FC = () => {
 	const params = useParams();
 
-	useDocumentTitle(`${params.username}`);
-
 	const {
 		updateHistoryLessonModalStatus,
 		updateEditStudentModalStatus,
@@ -48,6 +46,8 @@ const Student: FC = () => {
 	const [student, setStudent] = useState<IStudent | null>(null);
 	const [history, setHistory] = useState<Learn[] | null>(null);
 
+	useDocumentTitle(student ? `${student?.username}` : "");
+
 	const [lessonToModal, setLessonToModal] = useState<Learn | null>(null);
 
 	const navigate = useNavigate();
@@ -56,7 +56,7 @@ const Student: FC = () => {
 
 	useEffect(() => {
 		if (email && isLoaded) {
-			const currentStudent = students.filter((student) => student.username === params.username);
+			const currentStudent = students.filter((student) => student.id === Number(params.id));
 
 			setStudent(currentStudent.length > 0 ? currentStudent[0] : null);
 
@@ -341,7 +341,7 @@ const Student: FC = () => {
 							</>
 						) : (
 							<div className="student-notfound">
-								<Description>К сожалению пользователь с ником «{params.username}» не найден.</Description>
+								<Description>К сожалению пользователь «{params.id}» не найден.</Description>
 								<Button
 									onClick={() => navigate("/app/students")}
 									text="Вернуться к ученикам"

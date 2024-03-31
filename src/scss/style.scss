@@ -281,6 +281,8 @@ h3 {
 
 	&__text {
 		transition: 350ms;
+		text-transform: uppercase;
+		letter-spacing: -0.0125em;
 	}
 
 	&_checked {

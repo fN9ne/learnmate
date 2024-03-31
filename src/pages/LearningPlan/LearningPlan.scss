@@ -1,6 +1,8 @@
 @import '../../scss/mixins';
 
 .learning-plan {
+	flex: 1 1 auto;
+
 	box-shadow: 0px 10px 30px 0px rgba(86, 110, 118, 0.15);
 	border-radius: 15px;
 	overflow: hidden;

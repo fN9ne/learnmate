@@ -40,7 +40,7 @@ const Table: FC = () => {
 						<td>{student.payment} ₽</td>
 						<td className="students-table__compact">{student.lessons_count}</td>
 						<td className="students-table__compact">
-							<NavLink to={`/app/student/${student.username}`} className="link">
+							<NavLink to={`/app/student/${student.id}`} className="link">
 								Подробнее
 							</NavLink>
 						</td>

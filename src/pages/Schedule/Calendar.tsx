@@ -49,7 +49,7 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 
 		const nextMonthDays = Array.from({ length: 6 - lastWeekdayOfMonth }, (_, i) => ({
 			day: i + 1,
-			month,
+			month: month + 1,
 			year,
 			isActive: false,
 		}));
