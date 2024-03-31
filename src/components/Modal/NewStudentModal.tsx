@@ -7,6 +7,7 @@ import Input, { InputTypes } from "../Input";
 import { useInput } from "../../hooks/useInput";
 
 const NewStudentModal: FC = () => {
+	const { students } = useAppSelector((state) => state.students);
 	const { isNewStudentModalActive } = useAppSelector((state) => state.modal);
 	const { updateNewStudentModalStatus, addStudent, updateStudentsFetching } = useActions();
 
@@ -24,6 +25,7 @@ const NewStudentModal: FC = () => {
 		event.preventDefault();
 
 		addStudent({
+			id: students.length !== 0 ? students[students.length - 1].id + 1 : 0,
 			name: firstname.value,
 			username: username.value,
 			discord_username: discord.value.length > 0 ? discord.value : null,

@@ -9,6 +9,7 @@ interface ModalState {
 	isHistoryLessonModalActive: boolean;
 	isEditStudentModalActive: boolean;
 	isNewExtraBookModalActive: boolean;
+	isPatchNoteModalActive: boolean;
 }
 
 const initialState: ModalState = {
@@ -20,6 +21,7 @@ const initialState: ModalState = {
 	isHistoryLessonModalActive: false,
 	isEditStudentModalActive: false,
 	isNewExtraBookModalActive: false,
+	isPatchNoteModalActive: false,
 };
 
 const modalSlice = createSlice({
@@ -70,6 +72,12 @@ const modalSlice = createSlice({
 		},
 		updateNewExtraBookModalStatus(state, action: PayloadAction<boolean>) {
 			state.isNewExtraBookModalActive = action.payload;
+			Object.values(state).some((value) => value === true)
+				? (document.documentElement.style.overflow = "hidden")
+				: (document.documentElement.style.overflow = "visible");
+		},
+		updatePatchNoteModalStatus(state, action: PayloadAction<boolean>) {
+			state.isPatchNoteModalActive = action.payload;
 			Object.values(state).some((value) => value === true)
 				? (document.documentElement.style.overflow = "hidden")
 				: (document.documentElement.style.overflow = "visible");

@@ -16,7 +16,10 @@ interface LessonProps {
 }
 
 const Lesson: FC<LessonProps> = ({ num, data, changeLesson, onRemove }) => {
-	const handleSwitch = () => changeLesson({ isTest: !data.isTest });
+	const handleSwitchTest = () => changeLesson({ isTest: !data.isTest });
+	const handleSwitchConstant = () => {
+		changeLesson({ isConstant: !data.isConstant });
+	};
 
 	const [isTarget, setIsTarget] = useState<boolean>(false);
 
@@ -101,7 +104,8 @@ const Lesson: FC<LessonProps> = ({ num, data, changeLesson, onRemove }) => {
 					/>
 				</div>
 				<div className="lesson__footer">
-					<Switch isChecked={data.isTest} onClick={handleSwitch} text="Пробное занятие" />
+					<Switch isChecked={data.isTest} onClick={handleSwitchTest} text="Пробное занятие" />
+					<Switch isChecked={data.isConstant} onClick={handleSwitchConstant} text="Сделать постоянным" />
 				</div>
 			</main>
 		</div>

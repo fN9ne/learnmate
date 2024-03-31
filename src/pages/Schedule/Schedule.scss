@@ -9,6 +9,7 @@
 	&__header {
 		display: flex;
 		flex-wrap: wrap;
+		gap: 20px;
 		@include rv("gap", 12, 20, 1440, 320);
 	}
 
@@ -154,7 +155,6 @@
 	@include rv("padding", 12, 24, 1440, 425);
 
 	&__wrapper {
-		padding: 0 0 5px 0;
 		overflow: auto;
 
 		&::-webkit-scrollbar {

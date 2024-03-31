@@ -74,6 +74,7 @@ const LearnModal: FC = () => {
 						minute: 0,
 					},
 					isTest: false,
+					isConstant: false,
 					homework: "",
 					plan: "",
 					note: "",
@@ -130,11 +131,63 @@ const LearnModal: FC = () => {
 	};
 
 	const handleSave = (thisDayLessons: Learn[], thisDayPayments: Payment[]) => {
-		const notThisDayLessons = lessons.filter(
+		let notThisDayLessons = lessons.filter(
 			(lesson) => lesson.day !== pickedDay?.day || lesson.month !== pickedDay?.month || lesson.year !== pickedDay?.year
 		);
 
-		const newLessons = [...notThisDayLessons, ...thisDayLessons].map((lesson) => {
+		let constantLessons: Learn[] = [];
+
+		for (let j = 0; j < thisDayLessons.length; j++) {
+			if (thisDayLessons[j].isConstant && thisDayLessons[j].isConstant !== "ready") {
+				thisDayLessons = thisDayLessons.map((lesson) =>
+					lesson.isConstant === true ? { ...lesson, isConstant: "ready" } : lesson
+				);
+
+				for (let i = 0; i < 52; i++) {
+					const k = thisDayLessons[j];
+					const currentDate = new Date(k.year, k.month, k.day);
+					const newDate = new Date(currentDate.setDate(currentDate.getDate() + 7 * (i + 1)));
+
+					constantLessons = [
+						...constantLessons,
+						{
+							...k,
+							hash: "constant-" + k.hash + "-" + generateHash(),
+							year: newDate.getFullYear(),
+							month: newDate.getMonth(),
+							day: newDate.getDate(),
+							homework: "",
+							plan: "",
+							note: "",
+							stoppedAt: "",
+							isConstant: "ready",
+						},
+					];
+				}
+			} else if (thisDayLessons[j].isConstant === false) {
+				notThisDayLessons = notThisDayLessons.filter((lesson) => {
+					/* УДАЛЕНИЕ ПОСЛЕДУЮЩИЙ "ПОСТОЯННЫХ" ЗАНЯТИЙ */
+
+					if (
+						lesson.hash.startsWith(
+							"constant-" +
+								`${
+									thisDayLessons[j].hash.indexOf("constant-") !== -1
+										? thisDayLessons[j].hash.split("-")[1]
+										: thisDayLessons[j].hash
+								}`
+						) &&
+						new Date(pickedDay!.year, pickedDay!.month, pickedDay!.day) < new Date(lesson.year, lesson.month, lesson.day)
+					) {
+						return false;
+					}
+
+					return true;
+				});
+			}
+		}
+
+		const newLessons = [...notThisDayLessons, ...thisDayLessons, ...constantLessons].map((lesson) => {
 			const studentLessons = [...notThisDayLessons, ...thisDayLessons].filter(
 				(les) => les.student!.username === lesson.student!.username
 			);
