@@ -105,7 +105,11 @@ const Lesson: FC<LessonProps> = ({ num, data, changeLesson, onRemove }) => {
 				</div>
 				<div className="lesson__footer">
 					<Switch isChecked={data.isTest} onClick={handleSwitchTest} text="Пробное занятие" />
-					<Switch isChecked={data.isConstant} onClick={handleSwitchConstant} text="Сделать постоянным" />
+					<Switch
+						isChecked={data.isConstant === "ready" || data.isConstant === true}
+						onClick={handleSwitchConstant}
+						text="Сделать постоянным"
+					/>
 				</div>
 			</main>
 		</div>
