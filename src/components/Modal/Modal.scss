@@ -513,6 +513,13 @@
 
 .lesson-time {
 	position: relative;
+	transition: 350ms;
+
+	&_disabled {
+		pointer-events: none;
+		scale: 0.9;
+		opacity: 0.5;
+	}
 
 	&__input {
 		width: 120px;

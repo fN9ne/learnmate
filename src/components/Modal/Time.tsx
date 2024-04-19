@@ -11,11 +11,12 @@ interface TimeInterface {
 		max: number;
 		step?: number;
 	};
+	disabled?: boolean;
 }
 
-const Time: FC<TimeInterface> = ({ limits, value, onChange, placeholder }) => {
+const Time: FC<TimeInterface> = ({ limits, value, onChange, placeholder, disabled }) => {
 	return (
-		<div className="lesson-time">
+		<div className={`lesson-time${disabled ? " lesson-time_disabled" : ""}`}>
 			<input
 				type="number"
 				min={limits.min}
@@ -24,6 +25,7 @@ const Time: FC<TimeInterface> = ({ limits, value, onChange, placeholder }) => {
 				value={Number(value) >= 0 ? (Number(value) < 10 ? "0" + value : value) : -1}
 				onChange={onChange}
 				className="lesson-time__input"
+				disabled={disabled}
 			/>
 			<div className="lesson-time__placeholder">{placeholder}</div>
 			<Icon className="lesson-time__carets" />
