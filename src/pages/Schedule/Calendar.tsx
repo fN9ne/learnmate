@@ -160,38 +160,21 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 								(lesson) => lesson.day === day.day && lesson.month === day.month && lesson.year === day.year
 							);
 
-							const findNearestLesson = (lessons: Learn[]): Learn | null | { time: null } => {
-								if (lessons.length === 0) {
+							const findNearestLesson = (lessons: Learn[]): string | null => {
+								if (!lessons || lessons.length === 0) {
 									return null;
 								}
 
-								const currTime = new Date();
-								const currHour = currTime.getHours();
-								const currMin = currTime.getMinutes();
-								const currTotalMin = currHour * 60 + currMin;
+								const currentTime = new Date();
+								const currentHour = currentTime.getHours();
+								const currentMinute = currentTime.getMinutes();
+								const currentTotalMinutes = currentHour * 60 + currentMinute;
 
-								const lessonsWithTime = lessons.filter((lesson) => lesson.time !== null);
+								const upcomingLessons = lessons.filter((lesson) => {
+									if (!lesson.time) return false;
 
-								if (lessonsWithTime.length === 0) {
-									return { time: null };
-								}
-
-								lessonsWithTime.sort((a, b) => {
-									const timeA = a.time!.hour * 60 + a.time!.minute;
-									const timeB = b.time!.hour * 60 + b.time!.minute;
-									return timeA - timeB;
+									const lessonTotalMinutes = lesson.time.hour * 60 + lesson.time.minute;
 								});
-
-								const upcomingLessons = lessonsWithTime.find((lesson) => {
-									const lessonTotalMin = lesson.time!.hour * 60 + lesson.time!.minute;
-									return lessonTotalMin > currTotalMin;
-								});
-
-								if (!upcomingLessons) {
-									return null;
-								}
-
-								return upcomingLessons;
 							};
 
 							const formatTime = (hour: number, minute: number): string => {
