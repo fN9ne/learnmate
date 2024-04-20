@@ -28,8 +28,6 @@ import Plus from "../../icons/plus.svg?react";
 const Student: FC = () => {
 	const params = useParams();
 
-	useDocumentTitle(`${params.username}`);
-
 	const {
 		updateHistoryLessonModalStatus,
 		updateEditStudentModalStatus,
@@ -48,6 +46,8 @@ const Student: FC = () => {
 	const [student, setStudent] = useState<IStudent | null>(null);
 	const [history, setHistory] = useState<Learn[] | null>(null);
 
+	useDocumentTitle(student ? `${student?.username}` : "");
+
 	const [lessonToModal, setLessonToModal] = useState<Learn | null>(null);
 
 	const navigate = useNavigate();
@@ -56,7 +56,7 @@ const Student: FC = () => {
 
 	useEffect(() => {
 		if (email && isLoaded) {
-			const currentStudent = students.filter((student) => student.username === params.username);
+			const currentStudent = students.filter((student) => student.id === Number(params.id));
 
 			setStudent(currentStudent.length > 0 ? currentStudent[0] : null);
 
@@ -195,7 +195,7 @@ const Student: FC = () => {
 											</div>
 											<div className="student-info__edit" onClick={() => updateEditStudentModalStatus(true)}>
 												<EditIcon />
-												<span>Редактировать ученика</span>
+												<span>Редактировать</span>
 											</div>
 										</div>
 										<div className="student-info__main">
@@ -219,7 +219,7 @@ const Student: FC = () => {
 													<div className="student-info-props__value">
 														{calcClosestLesson !== undefined && calcClosestLesson.length > 0
 															? `${calcClosestLesson[0]!.getDate()} ${months[calcClosestLesson[0]!.getMonth()][1]}, ${
-																	weekdays[(calcClosestLesson[0]!.getDay() + 6) % 7]
+																	weekdays[(calcClosestLesson[0]!.getDay() + 6) % 7][0]
 															  }, ${
 																	calcClosestLesson[0]!.getHours() < 10
 																		? "0" + calcClosestLesson[0]!.getHours()
@@ -319,11 +319,20 @@ const Student: FC = () => {
 														updateHistoryLessonModalStatus(true);
 													}}
 												>
-													{`${hi.day} ${months[hi.month][1]}, ${
-														weekdays[(new Date(hi.year, hi.month, hi.day).getDay() + 6) % 7]
-													}, ${hi.time.hour < 10 ? "0" + hi.time.hour : hi.time.hour}:${
-														hi.time.minute < 10 ? "0" + hi.time.minute : hi.time.minute
-													}`}
+													<span className="student-history-item__day">{hi.day}</span>{" "}
+													<span className="student-history-item__month">{months[hi.month][1]}</span>
+													<span className="student-history-item__month-short">{months[hi.month][2]}</span>,{" "}
+													<span className="student-history-item__weekday">
+														{weekdays[(new Date(hi.year, hi.month, hi.day).getDay() + 6) % 7][0]}
+													</span>
+													<span className="student-history-item__weekday-short">
+														{weekdays[(new Date(hi.year, hi.month, hi.day).getDay() + 6) % 7][1]}
+													</span>
+													,{" "}
+													<span className="student-history-item__time">
+														{hi.time.hour < 10 ? "0" + hi.time.hour : hi.time.hour}:
+														{hi.time.minute < 10 ? "0" + hi.time.minute : hi.time.minute}
+													</span>
 												</div>
 											))}
 										</div>
@@ -332,7 +341,7 @@ const Student: FC = () => {
 							</>
 						) : (
 							<div className="student-notfound">
-								<Description>К сожалению пользователь с ником «{params.username}» не найден.</Description>
+								<Description>К сожалению пользователь «{params.id}» не найден.</Description>
 								<Button
 									onClick={() => navigate("/app/students")}
 									text="Вернуться к ученикам"

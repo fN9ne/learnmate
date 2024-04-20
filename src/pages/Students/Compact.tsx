@@ -10,7 +10,7 @@ const Compact: FC = () => {
 	return (
 		<div className="students-compact">
 			{students.map((student, index) => (
-				<NavLink to={`/app/student/${student.username}`} className="students-compact-item" key={index}>
+				<NavLink to={`/app/student/${student.id}`} className="students-compact-item" key={index}>
 					<div className="students-compact-item__display" style={{ backgroundColor: student.color }}>
 						{student.name.slice(0, 1)}
 					</div>

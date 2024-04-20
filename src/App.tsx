@@ -24,6 +24,7 @@ import { Student } from "./store/reducers/StudentsSlice";
 import LogoutModal from "./components/Modal/LogoutModal";
 import { Payment } from "./store/reducers/PaymentsSlice";
 import { IBook } from "./store/reducers/LearningPlanSlice";
+import PatchNoteModal from "./components/Modal/PatchNoteModal";
 
 const App: FC = () => {
 	const {
@@ -33,6 +34,7 @@ const App: FC = () => {
 		updateLoadedStudents,
 		updateLoadedPayments,
 		updateLoadedBooks,
+		updatePatchNoteModalStatus,
 	} = useActions();
 
 	const location = useLocation();
@@ -45,6 +47,21 @@ const App: FC = () => {
 			updateEmail(JSON.parse(user).user.email);
 		} else {
 			updateAuthorizedStatus(false);
+		}
+	}, []);
+
+	/* PATCH NOTES */
+
+	useEffect(() => {
+		const version = localStorage.getItem("version");
+
+		if (!version || JSON.parse(version).ver !== import.meta.env.VITE_VERSION) {
+			const patchDateArray = import.meta.env.VITE_PATCH_DATE.split(".");
+			const patchDate = new Date(+patchDateArray[2], patchDateArray[1] - 1, +patchDateArray[0]);
+
+			updatePatchNoteModalStatus(true);
+
+			localStorage.setItem("version", JSON.stringify({ ver: import.meta.env.VITE_VERSION, date: patchDate }));
 		}
 	}, []);
 
@@ -103,7 +120,7 @@ const App: FC = () => {
 							<Route index element={<Navigate to="schedule" />} />
 							<Route path="/app/schedule" element={<Schedule />} />
 							<Route path="/app/students" element={<Students />} />
-							<Route path="/app/student/:username" element={<StudentPage />} />
+							<Route path="/app/student/:id" element={<StudentPage />} />
 							<Route path="/app/payments" element={<Payments />} />
 							<Route path="/app/learning-plan" element={<LearningPlan />} />
 						</Route>
@@ -113,6 +130,7 @@ const App: FC = () => {
 			</AP>
 			<NewStudentModal />
 			<LogoutModal />
+			<PatchNoteModal />
 		</>
 	);
 };

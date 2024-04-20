@@ -17,6 +17,10 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+
+		@media (max-width: 425px) {
+			padding: 12px;
+		}
 	}
 
 	&__content {
@@ -75,11 +79,22 @@
 	align-items: center;
 	gap: 24px;
 
+	@media (max-width: 768px) {
+		padding: 20px 16px;
+		border-radius: 12px;
+		max-width: 400px;
+		width: 100%;
+	}
+
 	&__body {
 		width: 380px;
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
+
+		@media (max-width: 768px) {
+			width: 100%;
+		}
 
 		.button {
 			align-self: center;
@@ -111,22 +126,49 @@
 	max-width: 960px;
 	width: 100%;
 
+	@media (max-width: 425px) {
+		border-radius: 12px;
+	}
+
 	&__header {
 		padding: 20px 52px;
 		border-bottom: 1px solid var(--100);
 
-		div {
+		@media (max-width: 996px) {
+			padding: 16px 24px;
+		}
+
+		@media (max-width: 425px) {
+			padding: 12px 20px;
+		}
+
+		&>div {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+
+			@media (max-width: 525px) {
+				align-items: flex-start;
+				flex-direction: column;
+				justify-content: stretch;
+				margin: 0 0 12px 0;
+
+				&:last-child {
+					margin: 0;
+				}
+			}
 		}
 
 		.description {
 			font-size: 14px;
+
+			@media (max-width: 768px) {
+				font-size: 12px;
+			}
 		}
 
 		h2 {
-			line-height: 52px;
+			@include rv("line-height", 40, 52, 1440, 320);
 		}
 	}
 
@@ -137,6 +179,19 @@
 		flex-direction: column;
 		justify-content: center;
 		gap: 20px;
+
+		@media (max-width: 996px) {
+			padding: 16px 24px;
+			height: 570px;
+		}
+
+		@media (max-width: 768px) {
+			height: 494px;
+		}
+
+		@media (max-width: 425px) {
+			padding: 12px;
+		}
 	}
 
 	&__content {
@@ -201,6 +256,11 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+
+		@media (max-width: 768px) {
+			padding: 12px;
+			border-radius: 8px 8px 0 0;
+		}
 	}
 
 	&__body {
@@ -212,10 +272,15 @@
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+
+		@media (max-width: 768px) {
+			padding: 12px;
+			gap: 12px;
+		}
 	}
 
 	&__name {
-		font-size: 20px;
+		@include rv('font-size', 14, 20, 1440, 320);
 		font-weight: 600;
 	}
 
@@ -242,11 +307,26 @@
 	&__row {
 		display: flex;
 		justify-content: space-between;
+		gap: 20px;
+
+		@media (max-width: 768px) {
+			gap: 12px;
+			flex-wrap: wrap;
+
+			.student-select {
+				flex: 1 1 auto;
+				width: auto;
+			}
+		}
 	}
 
 	&__time {
 		display: flex;
 		gap: 12px;
+
+		@media (max-width: 768px) {
+			flex-wrap: wrap;
+		}
 	}
 
 	&__content {
@@ -254,12 +334,29 @@
 		flex-wrap: wrap;
 		column-gap: 32px;
 		row-gap: 20px;
+
+		@media (max-width: 768px) {
+			gap: 12px;
+
+			.textarea {
+				flex: 1 1 auto;
+				display: flex;
+			}
+		}
+	}
+
+	&__footer {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 24px;
 	}
 }
 
 .student-select {
 	position: relative;
 	width: 380px;
+
+	min-width: 230px;
 
 	&__field {
 		position: relative;
@@ -489,6 +586,8 @@
 
 	flex: 0 0 calc(50% - 16px);
 
+	min-width: 230px;
+
 	textarea {
 		width: 100%;
 		height: 110px;
@@ -546,6 +645,13 @@
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
+	max-width: 600px;
+	width: 100%;
+
+	@media (max-width: 768px) {
+		padding: 20px;
+		border-radius: 12px;
+	}
 
 	h1 {
 		text-align: center;
@@ -553,7 +659,6 @@
 
 	.input {
 		margin: 12px 0 0 0;
-		width: 500px;
 	}
 
 	.description {
@@ -657,6 +762,11 @@
 	max-width: 600px;
 	width: 100%;
 
+	@media (max-width: 768px) {
+		padding: 20px;
+		border-radius: 12px;
+	}
+
 	&__header {
 		display: flex;
 		flex-direction: column;
@@ -673,6 +783,10 @@
 		align-items: flex-start;
 		gap: 12px;
 
+		.input {
+			padding: 0;
+		}
+
 		.input,
 		.lesson-time,
 		.textarea {
@@ -686,6 +800,20 @@
 			&:nth-child(4),
 			&:nth-child(5) {
 				flex: 0 0 calc(33.33333% - 8px);
+
+				@media (max-width: 768px) {
+					flex: 0 0 calc(50% - 6px);
+				}
+
+				@media (max-width: 425px) {
+					flex: 0 0 100%;
+				}
+			}
+
+			&:nth-child(5) {
+				@media (max-width: 768px) {
+					flex: 0 0 100%;
+				}
 			}
 
 			&:nth-child(6) {
@@ -720,5 +848,49 @@
 		display: flex;
 		justify-content: center;
 		gap: 24px;
+	}
+}
+
+.patch-note {
+	max-width: 768px;
+	width: 100%;
+	padding: 40px;
+
+	@media (max-width: 768px) {
+		padding: 20px;
+		border-radius: 12px;
+	}
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 0 16px 0;
+		border-bottom: 1px solid var(--200);
+	}
+
+	&__body {
+		margin: 16px 0 0 0;
+	}
+
+	&__list {
+		padding-left: 20px;
+
+		li {
+			&:first-child {
+				margin: 0;
+			}
+
+			margin: 12px 0 0 0;
+			list-style: disc;
+			font-size: 16px;
+			color: var(--900);
+			line-height: 1.35;
+
+			&::marker {
+				position: absolute;
+				left: 0;
+			}
+		}
 	}
 }

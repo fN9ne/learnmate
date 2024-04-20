@@ -46,7 +46,7 @@ const EditStudentModal: FC<EditStudentModalProps> = ({ student }) => {
 	};
 	const handleSave = () => {
 		const newStudents = students.map((student) => {
-			if (student.username === studentState?.username) {
+			if (student.id === studentState?.id) {
 				return studentState;
 			}
 

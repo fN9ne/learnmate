@@ -12,6 +12,7 @@ export interface Learn {
 		minute: number;
 	};
 	isTest: boolean;
+	isConstant: boolean | "ready";
 	homework: string;
 	stoppedAt: string;
 	note: string;
@@ -25,6 +26,7 @@ export interface LearnChange {
 		minute: number;
 	};
 	isTest?: boolean;
+	isConstant?: boolean;
 	homework?: string;
 	stoppedAt?: string;
 	note?: string;

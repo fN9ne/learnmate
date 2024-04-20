@@ -48,13 +48,19 @@ const Students: FC = () => {
 	return (
 		<div className="students">
 			<header className="students__header">
-				<Button text="Добавить ученика" icon={{ element: <UserIcon /> }} onClick={() => updateNewStudentModalStatus(true)} />
-				<StudentsShowTypeSwitcher activeType={showType} onClick={updateShowType} />
+				<div className="students__header-item">
+					<Button text="Добавить ученика" icon={{ element: <UserIcon /> }} onClick={() => updateNewStudentModalStatus(true)} />
+				</div>
+				<div className="students__header-item">
+					<StudentsShowTypeSwitcher activeType={showType} onClick={updateShowType} />
+				</div>
 			</header>
 			<AP mode="wait" initial={false}>
 				{showType === StudentsShowType.table && students.length > 0 && (
 					<m.div {...transitions} key="table" className="students__body">
-						<Table />
+						<div className="students__wrapper">
+							<Table />
+						</div>
 					</m.div>
 				)}
 				{showType === StudentsShowType.compact && students.length > 0 && (
