@@ -26,9 +26,13 @@ const LearnModal: FC = () => {
 	const [lastChildHash, setLastChildHash] = useState<string>("");
 
 	const sortByTime = (a: Learn, b: Learn) => {
-		const timeA = a.time.hour * 60 + a.time.minute;
-		const timeB = b.time.hour * 60 + b.time.minute;
-		return timeA - timeB;
+		if (a.time && b.time) {
+			const timeA = a.time.hour * 60 + a.time.minute;
+			const timeB = b.time.hour * 60 + b.time.minute;
+			return timeA - timeB;
+		}
+
+		return 0;
 	};
 
 	useEffect(() => {
@@ -69,10 +73,7 @@ const LearnModal: FC = () => {
 					day: pickedDay!.day,
 					month: pickedDay!.month,
 					year: pickedDay!.year,
-					time: {
-						hour: 12,
-						minute: 0,
-					},
+					time: null,
 					isTest: false,
 					isConstant: false,
 					homework: "",

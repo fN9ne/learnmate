@@ -12,7 +12,7 @@ const NewStudentModal: FC = () => {
 	const { updateNewStudentModalStatus, addStudent, updateStudentsFetching } = useActions();
 
 	const { fetching } = useAppSelector((state) => state.students);
-	const { books } = useAppSelector((state) => state.learningPlan);
+	const { books, presentations } = useAppSelector((state) => state.learningPlan);
 
 	const firstname = useInput("", { minLength: 2 });
 	const username = useInput("", { minLength: 5 });
@@ -47,6 +47,7 @@ const NewStudentModal: FC = () => {
 				};
 			}),
 			extra_lp: [],
+			presentations: presentations.map((presentation) => ({ ...presentation, finished: false })),
 		});
 
 		updateStudentsFetching(true);

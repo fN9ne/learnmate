@@ -11,6 +11,11 @@ export interface IStudentBook {
 	finished: boolean;
 }
 
+export interface IStudentPresentation {
+	name: string;
+	finished: boolean;
+}
+
 export interface Student {
 	id: number;
 	name: string;
@@ -23,6 +28,7 @@ export interface Student {
 	note: string;
 	learning_plan: IStudentBook[];
 	extra_lp: IStudentBook[];
+	presentations: IStudentPresentation[];
 }
 
 export enum StudentsShowType {

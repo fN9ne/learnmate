@@ -10,7 +10,7 @@ export interface Learn {
 	time: {
 		hour: number;
 		minute: number;
-	};
+	} | null;
 	isTest: boolean;
 	isConstant: boolean | "ready";
 	homework: string;
@@ -24,7 +24,7 @@ export interface LearnChange {
 	time?: {
 		hour: number;
 		minute: number;
-	};
+	} | null;
 	isTest?: boolean;
 	isConstant?: boolean;
 	homework?: string;
