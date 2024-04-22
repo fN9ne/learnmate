@@ -65,8 +65,8 @@ const Student: FC = () => {
 					return lessons.filter((les) => les.hash === lesson)[0];
 				})
 				.sort((a, b) => {
-					const dateA = new Date(a.year, a.month, a.day, a.time.hour, a.time.minute);
-					const dateB = new Date(b.year, b.month, b.day, b.time.hour, b.time.minute);
+					const dateA = new Date(a.year, a.month, a.day, a.time ? a.time.hour : 0, a.time ? a.time.minute : 0);
+					const dateB = new Date(b.year, b.month, b.day, b.time ? b.time.hour : 0, b.time ? b.time.minute : 0);
 					return dateB.getTime() - dateA.getTime();
 				});
 
@@ -95,8 +95,8 @@ const Student: FC = () => {
 				currentLesson.year,
 				currentLesson.month,
 				currentLesson.day,
-				currentLesson.time.hour,
-				currentLesson.time.minute
+				currentLesson.time ? currentLesson.time.hour : 0,
+				currentLesson.time ? currentLesson.time.minute : 0
 			);
 			const currentDate = new Date();
 
@@ -167,6 +167,74 @@ const Student: FC = () => {
 	const handleCancel = () => {
 		setIsEditMode(false);
 		setStudent(students.filter((stud) => stud.username === student?.username)[0]);
+	};
+	const handleCheckPresentation = (num: number) => {
+		setStudents(
+			students.map((stud) => {
+				if (stud.id === student!.id) {
+					return {
+						...student!,
+						presentations: student!.presentations.map((pres, index) => {
+							if (index === num) {
+								return {
+									...pres,
+									finished: !pres.finished,
+								};
+							}
+							return pres;
+						}),
+					};
+				}
+
+				return stud;
+			})
+		);
+		setLessons(
+			lessons.map((lesson) => {
+				if (lesson.student!.id === student!.id) {
+					return {
+						...lesson,
+						student: {
+							...lesson.student!,
+							presentations: lesson.student!.presentations.map((pres, index) => {
+								if (index === num) {
+									return {
+										...pres,
+										finished: !pres.finished,
+									};
+								}
+								return pres;
+							}),
+						},
+					};
+				}
+
+				return lesson;
+			})
+		);
+		setPayments(
+			payments.map((payment) => {
+				if (payment.student!.id === student!.id) {
+					return {
+						...payment,
+						student: {
+							...payment.student!,
+							presentations: payment.student!.presentations.map((pres, index) => {
+								if (index === num) {
+									return {
+										...pres,
+										finished: !pres.finished,
+									};
+								}
+								return pres;
+							}),
+						},
+					};
+				}
+
+				return payment;
+			})
+		);
 	};
 
 	return (
@@ -243,12 +311,42 @@ const Student: FC = () => {
 									</div>
 									<div className="student-lp">
 										<div className="student-lp__header">
-											<h3>Учебный план</h3>
+											<h3>Учебный план • Книги</h3>
 										</div>
 										<div className="student-lp__body">
 											{student.learning_plan.map((book, index) => (
 												<StudentBook student={student} key={index} book={book} />
 											))}
+										</div>
+									</div>
+									<div className="student-lp">
+										<div className="student-lp__header">
+											<h3>Учебный план • Презентации</h3>
+										</div>
+										<div className="student-lp__body student-lp__body_presentations">
+											<div className="student-book__body">
+												{student.presentations.map((presentation, index) => (
+													<div
+														onClick={() => {
+															if (!isEditMode) {
+																handleCheckPresentation(index);
+															}
+														}}
+														className="student-book__lesson"
+														key={index}
+													>
+														<AP mode="wait" initial={false}>
+															{isEditMode && <TrashIcon />}
+															{presentation.finished && !isEditMode && (
+																<m.div {...transitions}>
+																	<Checkmark />
+																</m.div>
+															)}
+														</AP>
+														<span>{presentation.name}</span>
+													</div>
+												))}
+											</div>
 										</div>
 									</div>
 									<div className="student-lp student-lp__extra">
@@ -329,10 +427,12 @@ const Student: FC = () => {
 														{weekdays[(new Date(hi.year, hi.month, hi.day).getDay() + 6) % 7][1]}
 													</span>
 													,{" "}
-													<span className="student-history-item__time">
-														{hi.time.hour < 10 ? "0" + hi.time.hour : hi.time.hour}:
-														{hi.time.minute < 10 ? "0" + hi.time.minute : hi.time.minute}
-													</span>
+													{hi.time && (
+														<span className="student-history-item__time">
+															{hi.time.hour < 10 ? "0" + hi.time.hour : hi.time.hour}:
+															{hi.time.minute < 10 ? "0" + hi.time.minute : hi.time.minute}
+														</span>
+													)}
 												</div>
 											))}
 										</div>

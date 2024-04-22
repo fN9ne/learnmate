@@ -160,6 +160,12 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 								(lesson) => lesson.day === day.day && lesson.month === day.month && lesson.year === day.year
 							);
 
+							const formatTime = (hour: number, minute: number): string => {
+								const formattedHour = hour < 10 ? "0" + hour : hour;
+								const formattedMinute = minute < 10 ? "0" + minute : minute;
+								return `${formattedHour}:${formattedMinute}`;
+							};
+
 							const findNearestLesson = (lessons: Learn[]): string | null => {
 								if (!lessons || lessons.length === 0) {
 									return null;
@@ -170,17 +176,34 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 								const currentMinute = currentTime.getMinutes();
 								const currentTotalMinutes = currentHour * 60 + currentMinute;
 
-								const upcomingLessons = lessons.filter((lesson) => {
+								const upcomingLessonsWithTime = lessons.filter((lesson) => {
 									if (!lesson.time) return false;
 
-									const lessonTotalMinutes = lesson.time.hour * 60 + lesson.time.minute;
+									const lessonTotalMinute = lesson.time.hour * 60 + lesson.time.minute;
+									return lessonTotalMinute > currentTotalMinutes;
 								});
-							};
 
-							const formatTime = (hour: number, minute: number): string => {
-								const formattedHour = hour < 10 ? "0" + hour : hour;
-								const formattedMinute = minute < 10 ? "0" + minute : minute;
-								return `${formattedHour}:${formattedMinute}`;
+								if (upcomingLessonsWithTime.length > 0) {
+									upcomingLessonsWithTime.sort((a, b) => {
+										const timeA = a.time!.hour * 60 + a.time!.minute;
+										const timeB = b.time!.hour * 60 + b.time!.minute;
+										return timeA - timeB;
+									});
+
+									const nearestLesson = upcomingLessonsWithTime[0];
+
+									const formattedTime = formatTime(nearestLesson.time!.hour, nearestLesson.time!.minute);
+
+									return `Занятие в ${formattedTime}`;
+								}
+
+								const lessonsWithNoTime = lessons.filter((lesson) => !lesson.time);
+
+								if (lessonsWithNoTime.length > 0) {
+									return "Занятие в НВ";
+								}
+
+								return null;
 							};
 
 							const isCurrentDay = (): boolean => {
@@ -226,13 +249,7 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 										<>
 											{isCurrentOrFutureDay() && (
 												<m.div {...transitions} className="calendar-day__time">
-													{findNearestLesson(thisDayLessons) !== null
-														? findNearestLesson(thisDayLessons)!.time !== null
-															? `
-													Занятие в ${formatTime(findNearestLesson(thisDayLessons)!.time!.hour, findNearestLesson(thisDayLessons)!.time!.minute)}
-													`
-															: "Занятие в НВ"
-														: null}
+													{findNearestLesson(thisDayLessons)}
 												</m.div>
 											)}
 											<m.div {...transitions} className="calendar-day__students">

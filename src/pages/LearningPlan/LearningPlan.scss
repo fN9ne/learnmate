@@ -194,6 +194,26 @@
 		@media (max-width: 768px) {
 			padding: 8px;
 		}
+
+		&_presentations {
+			padding: 0;
+
+			.book-lesson {
+				padding: 8px;
+				height: auto;
+				min-height: 50px;
+				flex: 0 0 calc(33.33333% - (8px - 8px/5));
+
+				@media (max-width: 768px) {
+					flex: 0 0 calc(50% - (8px - 8px/5));
+				}
+
+				@media (max-width: 500px) {
+					flex: 0 0 100%;
+					min-height: 40px;
+				}
+			}
+		}
 	}
 
 	&-lesson,
@@ -220,7 +240,7 @@
 	&-lesson {
 		@include rv('height', 40, 52, 1920, 320);
 		border: 1px solid var(--100);
-		background-color: var(-0);
+		background-color: var(--0);
 		border-radius: 8px;
 		display: flex;
 		align-items: center;
