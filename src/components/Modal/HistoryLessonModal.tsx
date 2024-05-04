@@ -34,9 +34,11 @@ const HistoryLessonModal: FC<HistoryLessonModalProps> = ({ lesson }) => {
 						<div className="history-lesson__row">
 							<div className="history-lesson__item">
 								<div className="history-lesson__label">время занятия</div>
-								<div className="history-lesson__time">{`${lesson.time.hour < 10 ? "0" + lesson.time.hour : lesson.time.hour}:${
-									lesson.time.minute < 10 ? "0" + lesson.time.minute : lesson.time.minute
-								}`}</div>
+								{lesson.time && (
+									<div className="history-lesson__time">{`${lesson.time.hour < 10 ? "0" + lesson.time.hour : lesson.time.hour}:${
+										lesson.time.minute < 10 ? "0" + lesson.time.minute : lesson.time.minute
+									}`}</div>
+								)}
 							</div>
 							<div className="history-lesson__item">
 								<div className="history-lesson__label">тип занятия</div>

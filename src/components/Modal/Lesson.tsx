@@ -6,7 +6,7 @@ import Select from "./Select";
 import { Student } from "../../store/reducers/StudentsSlice";
 import Time from "./Time";
 import Textarea from "./Textarea";
-import Switch from "../Switch";
+import Switch, { SwitchType } from "../Switch";
 
 interface LessonProps {
 	data: Learn;
@@ -16,6 +16,17 @@ interface LessonProps {
 }
 
 const Lesson: FC<LessonProps> = ({ num, data, changeLesson, onRemove }) => {
+	const [isTime, setIsTime] = useState<boolean>(data.time !== null);
+
+	const toggleTime = () => {
+		if (isTime) {
+			changeLesson({ time: null });
+		} else {
+			changeLesson({ time: { hour: 0, minute: 0 } });
+		}
+		setIsTime((prev) => !prev);
+	};
+
 	const handleSwitchTest = () => changeLesson({ isTest: !data.isTest });
 	const handleSwitchConstant = () => {
 		changeLesson({ isConstant: !data.isConstant });
@@ -42,22 +53,21 @@ const Lesson: FC<LessonProps> = ({ num, data, changeLesson, onRemove }) => {
 	}, []);
 
 	useEffect(() => {
-		if (data.time.minute >= 60) {
-			changeLesson({ time: { hour: data.time.hour + 1, minute: 0 } });
+		if (data.time) {
+			if (data.time.minute >= 60) {
+				changeLesson({ time: { hour: data.time.hour + 1, minute: 0 } });
+			}
+			if (data.time.minute <= -1) {
+				changeLesson({ time: { hour: data.time.hour - 1, minute: 59 } });
+			}
+			if (data.time.hour >= 24) {
+				changeLesson({ time: { hour: 0, minute: data.time.minute } });
+			}
+			if (data.time.hour <= -1) {
+				changeLesson({ time: { hour: 23, minute: data.time.minute } });
+			}
 		}
-		if (data.time.minute <= -1) {
-			changeLesson({ time: { hour: data.time.hour - 1, minute: 59 } });
-		}
-	}, [data.time.minute]);
-
-	useEffect(() => {
-		if (data.time.hour >= 24) {
-			changeLesson({ time: { hour: 0, minute: data.time.minute } });
-		}
-		if (data.time.hour <= -1) {
-			changeLesson({ time: { hour: 23, minute: data.time.minute } });
-		}
-	}, [data.time.hour]);
+	}, [data.time]);
 
 	return (
 		<div id={data.hash} className="lesson" ref={ref} style={{ zIndex: isTarget ? 2 : 1 }} onClick={() => setIsTarget(true)}>
@@ -71,20 +81,23 @@ const Lesson: FC<LessonProps> = ({ num, data, changeLesson, onRemove }) => {
 				<div className="lesson__row">
 					<Select selected={data.student} onSelect={(student: Student) => changeLesson({ student: student })} />
 					<div className="lesson__time">
+						<Switch isChecked={isTime} onClick={toggleTime} type={SwitchType.primary} />
 						<Time
-							value={data.time.hour.toString()}
+							value={data.time ? data.time.hour.toString() : "0"}
 							limits={{ min: -1, max: 24 }}
 							onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-								changeLesson({ time: { hour: Number(event.target.value), minute: data.time.minute } })
+								changeLesson({ time: { hour: Number(event.target.value), minute: data.time ? data.time.minute : 0 } })
 							}
+							disabled={data.time === null}
 							placeholder="часов"
 						/>
 						<Time
-							value={data.time.minute.toString()}
+							value={data.time ? data.time.minute.toString() : "0"}
 							limits={{ min: -1, max: 60 }}
 							onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-								changeLesson({ time: { hour: data.time.hour, minute: Number(event.target.value) } })
+								changeLesson({ time: { hour: data.time ? data.time.hour : 0, minute: Number(event.target.value) } })
 							}
+							disabled={data.time === null}
 							placeholder="минут"
 						/>
 					</div>

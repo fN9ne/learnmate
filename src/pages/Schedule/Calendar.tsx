@@ -167,14 +167,74 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 								(lesson) => lesson.day === day.day && lesson.month === day.month && lesson.year === day.year
 							);
 
-							const minTime =
-								thisDayLessons.length > 0
-									? thisDayLessons.reduce((min, lesson) => {
-											const lessonTime = lesson.time.hour * 60 + lesson.time.minute;
-											const minTime = min.time.hour * 60 + min.time.minute;
-											return lessonTime < minTime ? lesson : min;
-									  })
-									: null;
+							const formatTime = (hour: number, minute: number): string => {
+								const formattedHour = hour < 10 ? "0" + hour : hour;
+								const formattedMinute = minute < 10 ? "0" + minute : minute;
+								return `${formattedHour}:${formattedMinute}`;
+							};
+
+							const findNearestLesson = (lessons: Learn[]): string | null => {
+								if (!lessons || lessons.length === 0) {
+									return null;
+								}
+
+								const currentTime = new Date();
+								const currentHour = currentTime.getHours();
+								const currentMinute = currentTime.getMinutes();
+								const currentTotalMinutes = currentHour * 60 + currentMinute;
+
+								const upcomingLessonsWithTime = lessons.filter((lesson) => {
+									if (!lesson.time) return false;
+
+									const lessonTotalMinute = lesson.time.hour * 60 + lesson.time.minute;
+									return lessonTotalMinute > currentTotalMinutes;
+								});
+
+								if (upcomingLessonsWithTime.length > 0) {
+									upcomingLessonsWithTime.sort((a, b) => {
+										const timeA = a.time!.hour * 60 + a.time!.minute;
+										const timeB = b.time!.hour * 60 + b.time!.minute;
+										return timeA - timeB;
+									});
+
+									const nearestLesson = upcomingLessonsWithTime[0];
+
+									const formattedTime = formatTime(nearestLesson.time!.hour, nearestLesson.time!.minute);
+
+									return `Занятие в ${formattedTime}`;
+								}
+
+								const lessonsWithNoTime = lessons.filter((lesson) => !lesson.time);
+
+								if (lessonsWithNoTime.length > 0) {
+									return "Занятие в НВ";
+								}
+
+								return null;
+							};
+
+							const isCurrentDay = (): boolean => {
+								return (
+									currentDate.getDate() === day.day &&
+									currentDate.getMonth() === day.month &&
+									currentDate.getFullYear() === day.year
+								);
+							};
+
+							const isCurrentOrFutureDay = (): boolean => {
+								const currDay = currentDate.getDate();
+								const currMonth = currentDate.getMonth();
+								const currYear = currentDate.getFullYear();
+
+								if (
+									currYear < day.year ||
+									(currYear === day.year && currMonth < day.month) ||
+									(currYear === day.year && currMonth === day.month && currDay <= day.day)
+								) {
+									return true;
+								}
+								return false;
+							};
 
 							return (
 								<m.div
@@ -185,13 +245,7 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 									key={`${month}-${day.day}-${index}`}
 									className={`calendar-day${day.isActive ? " calendar-day_active" : " calendar-day_inactive"}${
 										isLearningDay ? " calendar-day_learn" : ""
-									}${
-										currentDate.getDate() === day.day &&
-										currentDate.getMonth() === day.month &&
-										currentDate.getFullYear() === day.year
-											? " calendar-day_current"
-											: ""
-									}`}
+									}${isCurrentDay() ? " calendar-day_current" : ""}`}
 									onDragLeave={(event: React.DragEvent<HTMLDivElement>) => dragLeaveHandler(event)}
 									onDragOver={(event: React.DragEvent<HTMLDivElement>) => dragOverHandler(event)}
 									onDrop={(event: React.DragEvent<HTMLDivElement>) => dragDropHandler(event, day)}
@@ -200,19 +254,11 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 									<div className="calendar-day__number">{day.day}</div>
 									{isLearningDay && (
 										<>
-											<m.div {...transitions} className="calendar-day__time">
-												{thisDayLessons.length === 1
-													? `Занятие в ${
-															thisDayLessons[0].time.hour < 10 ? "0" + thisDayLessons[0].time.hour : thisDayLessons[0].time.hour
-													  }:${
-															thisDayLessons[0].time.minute < 10
-																? "0" + thisDayLessons[0].time.minute
-																: thisDayLessons[0].time.minute
-													  }`
-													: `Занятия с ${minTime!.time.hour < 10 ? "0" + minTime!.time.hour : minTime!.time.hour}:${
-															minTime!.time.minute < 10 ? "0" + minTime!.time.minute : minTime!.time.minute
-													  }`}
-											</m.div>
+											{isCurrentOrFutureDay() && (
+												<m.div {...transitions} className="calendar-day__time">
+													{findNearestLesson(thisDayLessons)}
+												</m.div>
+											)}
 											<m.div {...transitions} className="calendar-day__students">
 												{thisDayLessons.map((lesson, index) => (
 													<div

@@ -8,8 +8,8 @@ export interface Payment {
 		day: number;
 		month: number;
 		year: number;
-		hour: number;
-		minute: number;
+		hour: number | null;
+		minute: number | null;
 	};
 	status: boolean | null;
 }

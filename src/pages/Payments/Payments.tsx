@@ -74,7 +74,13 @@ const Payments: FC = () => {
 							{payments.map(
 								(payment, index) =>
 									new Date() >
-										new Date(payment.date.year, payment.date.month, payment.date.day, payment.date.hour, payment.date.minute) && (
+										new Date(
+											payment.date.year,
+											payment.date.month,
+											payment.date.day,
+											payment.date.hour ? payment.date.hour : 0,
+											payment.date.minute ? payment.date.minute : 0
+										) && (
 										<tr key={index}>
 											<td className="students-table__compact">
 												<div className="students-table__color" style={{ backgroundColor: payment.student?.color }}></div>
