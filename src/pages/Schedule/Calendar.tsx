@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-// import { weekdays } from "../../dates/dates";
+import { weekdays } from "../../dates/dates";
 
 import { AnimatePresence as AP, motion as m } from "framer-motion";
 import { useAppSelector } from "../../hooks/useAppSelector";
@@ -137,20 +137,13 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 		exit: { opacity: 0, scale: 0.95 },
 	};
 
-	const temp = ["Не", "игнорь", "меня", "я", "лизал", "твою", "киску"];
-
 	return (
 		<div className="calendar">
 			<div className="calendar__wrapper">
 				<header className="calendar__header">
-					{/* {weekdays.map((weekday, index) => (
+					{weekdays.map((weekday, index) => (
 						<div key={index} className="calendar__header-item">
 							{weekday[0]}
-						</div>
-					))} */}
-					{temp.map((word, index) => (
-						<div key={index} className="calendar__header-item" style={{ color: "blue" }}>
-							{word}
 						</div>
 					))}
 				</header>
