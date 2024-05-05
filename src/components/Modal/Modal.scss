@@ -343,6 +343,12 @@
 				display: flex;
 			}
 		}
+
+		.textarea {
+			&:nth-child(-n+2) {
+				display: none;
+			}
+		}
 	}
 
 	&__footer {
