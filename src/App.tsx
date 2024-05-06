@@ -25,6 +25,7 @@ import LogoutModal from "./components/Modal/LogoutModal";
 import { Payment } from "./store/reducers/PaymentsSlice";
 import { IBook, IPresentation } from "./store/reducers/LearningPlanSlice";
 import PatchNoteModal from "./components/Modal/PatchNoteModal";
+import Statistics from "./pages/Statistics/Statistics";
 
 const App: FC = () => {
 	const {
@@ -131,6 +132,7 @@ const App: FC = () => {
 							<Route path="/app/student/:id" element={<StudentPage />} />
 							<Route path="/app/payments" element={<Payments />} />
 							<Route path="/app/learning-plan" element={<LearningPlan />} />
+							<Route path="/app/statistics" element={<Statistics />} />
 						</Route>
 						<Route path="*" element={<NotFound />} />
 					</Route>

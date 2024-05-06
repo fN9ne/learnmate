@@ -81,6 +81,7 @@
 	&__item {}
 
 	&__link {
+		position: relative;
 		display: block;
 		width: 100%;
 		aspect-ratio: 1 / 1;
@@ -152,6 +153,28 @@
 
 			span {
 				color: var(--900);
+			}
+		}
+
+		&--new {
+			&::before {
+				content: '!';
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 20px;
+				height: 20px;
+				border-radius: 10px;
+				translate: 15% -15%;
+				background-color: var(--error-main);
+				color: var(--0);
+				font-weight: 700;
+				padding: 0 0 0 1px;
+				font-size: 10px;
+				text-align: center;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 			}
 		}
 	}

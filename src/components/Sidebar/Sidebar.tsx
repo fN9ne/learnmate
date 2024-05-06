@@ -8,6 +8,7 @@ export interface SidebarItem {
 	icon: React.ReactNode;
 	path: string;
 	name: string;
+	isNew?: string;
 }
 
 export interface SidebarProps {
