@@ -7,11 +7,7 @@ const Statistics: FC = () => {
 		localStorage.setItem("newpage", "statistics");
 	}, []);
 
-	return (
-		<div className="statistics">
-			<div className="statistics__temp">Страница статистики находится в разработке.</div>
-		</div>
-	);
+	return <div className="statistics"></div>;
 };
 
 export default Statistics;

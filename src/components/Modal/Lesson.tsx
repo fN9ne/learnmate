@@ -103,13 +103,13 @@ const Lesson: FC<LessonProps> = ({ num, data, changeLesson, onRemove }) => {
 					</div>
 				</div>
 				<div className="lesson__content">
+					<Textarea placeholder="Заметки" value={data.note} onChange={(value) => changeLesson({ note: value })} />
+					<Textarea placeholder="Задачи на занятие" value={data.plan} onChange={(value) => changeLesson({ plan: value })} />
 					<Textarea
 						placeholder="Домашнее задание"
 						value={data.homework}
 						onChange={(value) => changeLesson({ homework: value })}
 					/>
-					<Textarea placeholder="Задачи на занятие" value={data.plan} onChange={(value) => changeLesson({ plan: value })} />
-					<Textarea placeholder="Заметки" value={data.note} onChange={(value) => changeLesson({ note: value })} />
 					<Textarea
 						placeholder="Остановились на"
 						value={data.stoppedAt}
