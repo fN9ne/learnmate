@@ -408,33 +408,45 @@ const Student: FC = () => {
 									</div>
 									<div className="student-history__body">
 										<div className="student-history__track">
-											{history?.map((hi, index) => (
-												<div
-													className="student-history-item"
-													key={index}
-													onClick={() => {
-														setLessonToModal(hi);
-														updateHistoryLessonModalStatus(true);
-													}}
-												>
-													<span className="student-history-item__day">{hi.day}</span>{" "}
-													<span className="student-history-item__month">{months[hi.month][1]}</span>
-													<span className="student-history-item__month-short">{months[hi.month][2]}</span>,{" "}
-													<span className="student-history-item__weekday">
-														{weekdays[(new Date(hi.year, hi.month, hi.day).getDay() + 6) % 7][0]}
-													</span>
-													<span className="student-history-item__weekday-short">
-														{weekdays[(new Date(hi.year, hi.month, hi.day).getDay() + 6) % 7][1]}
-													</span>
-													,{" "}
-													{hi.time && (
-														<span className="student-history-item__time">
-															{hi.time.hour < 10 ? "0" + hi.time.hour : hi.time.hour}:
-															{hi.time.minute < 10 ? "0" + hi.time.minute : hi.time.minute}
+											{history
+												?.filter((hi) => {
+													const currentDate = new Date();
+													const hiDate = new Date(
+														hi.year,
+														hi.month,
+														hi.day,
+														hi.time ? hi.time.hour : 0,
+														hi.time ? hi.time.minute : 0
+													);
+													return hiDate.getTime() < currentDate.getTime();
+												})
+												.map((hi, index) => (
+													<div
+														className="student-history-item"
+														key={index}
+														onClick={() => {
+															setLessonToModal(hi);
+															updateHistoryLessonModalStatus(true);
+														}}
+													>
+														<span className="student-history-item__day">{hi.day}</span>{" "}
+														<span className="student-history-item__month">{months[hi.month][1]}</span>
+														<span className="student-history-item__month-short">{months[hi.month][2]}</span>,{" "}
+														<span className="student-history-item__weekday">
+															{weekdays[(new Date(hi.year, hi.month, hi.day).getDay() + 6) % 7][0]}
 														</span>
-													)}
-												</div>
-											))}
+														<span className="student-history-item__weekday-short">
+															{weekdays[(new Date(hi.year, hi.month, hi.day).getDay() + 6) % 7][1]}
+														</span>
+														,{" "}
+														{hi.time && (
+															<span className="student-history-item__time">
+																{hi.time.hour < 10 ? "0" + hi.time.hour : hi.time.hour}:
+																{hi.time.minute < 10 ? "0" + hi.time.minute : hi.time.minute}
+															</span>
+														)}
+													</div>
+												))}
 										</div>
 									</div>
 								</div>
