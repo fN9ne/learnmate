@@ -183,6 +183,24 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 									return lessonTotalMinute > currentTotalMinutes;
 								});
 
+								if (isFutureDay()) {
+									const nearestLessons = lessons
+										.filter((lesson) => lesson.time)
+										.sort((a, b) => {
+											const timeA = a.time!.hour * 60 + a.time!.minute;
+											const timeB = b.time!.hour * 60 + b.time!.minute;
+											return timeA - timeB;
+										});
+
+									if (nearestLessons.length > 0) {
+										const formattedTime = formatTime(nearestLessons[0].time!.hour, nearestLessons[0].time!.minute);
+
+										return `Занятие в ${formattedTime}`;
+									}
+
+									return "Занятие в НВ";
+								}
+
 								if (upcomingLessonsWithTime.length > 0) {
 									upcomingLessonsWithTime.sort((a, b) => {
 										const timeA = a.time!.hour * 60 + a.time!.minute;
@@ -223,6 +241,21 @@ const Calendar: FC<CalendarProps> = ({ year, month }) => {
 									currYear < day.year ||
 									(currYear === day.year && currMonth < day.month) ||
 									(currYear === day.year && currMonth === day.month && currDay <= day.day)
+								) {
+									return true;
+								}
+								return false;
+							};
+
+							const isFutureDay = (): boolean => {
+								const currDay = currentDate.getDate();
+								const currMonth = currentDate.getMonth();
+								const currYear = currentDate.getFullYear();
+
+								if (
+									currYear < day.year ||
+									(currYear === day.year && currMonth < day.month) ||
+									(currYear === day.year && currMonth === day.month && currDay < day.day)
 								) {
 									return true;
 								}
