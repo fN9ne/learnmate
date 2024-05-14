@@ -83,19 +83,6 @@ const Schedule: FC = () => {
 					handlePrevMonth={handlePrevMonth}
 					handleReset={handleReset}
 				/>
-				<div
-					className="schedule-block"
-					style={{
-						display: "flex",
-						alignItems: "center",
-						fontSize: 16,
-						color: "#161719",
-						fontFamily: "Fira Sans Condensed",
-						fontWeight: 500,
-					}}
-				>
-					Я люблю тебя, как до луны и обратно ❤️
-				</div>
 			</header>
 			<AP mode="wait" initial={false}>
 				{!isLoaded && (
