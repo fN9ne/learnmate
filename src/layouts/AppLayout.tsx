@@ -7,7 +7,7 @@ import CalendarIcon from "../icons/calendar.svg?react";
 import GroupIcon from "../icons/group.svg?react";
 import PaymentsIcon from "../icons/payment.svg?react";
 import ListIcon from "../icons/list.svg?react";
-import StatisticsIcon from "../icons/statistics.svg?react";
+// import StatisticsIcon from "../icons/statistics.svg?react";
 import { useAppSelector } from "../hooks/useAppSelector";
 
 const pages: SidebarItem[] = [
@@ -31,12 +31,12 @@ const pages: SidebarItem[] = [
 		path: "/app/learning-plan",
 		name: "Учебный план",
 	},
-	{
+	/* {
 		icon: <StatisticsIcon />,
 		path: "/app/statistics",
 		name: "Статистика",
 		isNew: "statistics",
-	},
+	}, */
 ];
 
 const AppLayout: FC = () => {
