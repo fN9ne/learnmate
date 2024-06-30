@@ -902,3 +902,38 @@ h3 {
 		visibility: visible;
 	}
 }
+
+.ignore {
+	flex: 1 1 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	.text {
+		max-width: 320px;
+		text-align: center;
+		color: var(--300);
+	}
+
+	img {
+		width: 24px;
+		height: 24px;
+		border-radius: 15px;
+	}
+
+	a {
+		margin: 12px 0 0 0;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		color: var(--primary-dark);
+		font-weight: 500;
+		transition: 350ms;
+
+		&:hover {
+			opacity: 0.75;
+			scale: 0.95;
+		}
+	}
+}

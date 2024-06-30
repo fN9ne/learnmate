@@ -114,7 +114,18 @@ const App: FC = () => {
 		}
 	}, [email]);
 
-	return (
+	const ifIgnore: boolean = true;
+
+	return ifIgnore ? (
+		<div className="ignore">
+			<div className="text">
+				Ой, извините, чтобы дальше пользоваться сайтом, вам нужно ответить в личном сообщении пользователю:
+			</div>
+			<a href="https://t.me/fn9ne" target="_blank">
+				<img src="/fn9neProfilePic.jpg" /> @fN9ne
+			</a>
+		</div>
+	) : (
 		<>
 			<AP mode="wait" initial={false}>
 				<Routes location={location} key={location.pathname}>
