@@ -114,7 +114,7 @@ const App: FC = () => {
 		}
 	}, [email]);
 
-	const ifIgnore: boolean = true;
+	const ifIgnore: boolean = false;
 
 	return ifIgnore ? (
 		<div className="ignore">
