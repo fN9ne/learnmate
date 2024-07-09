@@ -82,7 +82,10 @@ const Student: FC = () => {
 								</div>
 								<div className="student-page-input">
 									<div className="student-page-input__label">Дискорд</div>
-									<Input value={student.discord} onChange={(value: string) => handleUpdateStudent("discord", value)} />
+									<Input
+										value={student.discord || ""}
+										onChange={(value: string) => handleUpdateStudent("discord", value.length !== 0 ? value : null)}
+									/>
 								</div>
 								<div className="student-page-input">
 									<div className="student-page-input__label">Стоимость занятия</div>
@@ -145,6 +148,9 @@ interface StudentBookProps extends IBook {
 
 const StudentBook: FC<StudentBookProps> = ({ color, id, lessons, name, studentProgress, studentId }) => {
 	const { updateStudent } = useActions();
+	const { students } = useAppSelector((state) => state.students);
+
+	const student = students.find((student) => student.id === studentId);
 
 	const [isActive, setIsActive] = useState<boolean>(false);
 
@@ -161,11 +167,19 @@ const StudentBook: FC<StudentBookProps> = ({ color, id, lessons, name, studentPr
 			updatedProgress = [lesson];
 		}
 
-		const updatedLearningPlan = updatedProgress.length > 0 ? [{ id, progress: updatedProgress }] : [];
+		const updatedLearningPlan = student?.learningPlan.map((book) =>
+			book.id === id ? { ...book, progress: updatedProgress } : book
+		);
+
+		if (!updatedLearningPlan?.find((book) => book.id === id)) {
+			updatedLearningPlan?.push({ id, progress: updatedProgress });
+		}
 
 		updateStudent({
 			id: studentId,
-			data: { learningPlan: updatedLearningPlan },
+			data: {
+				learningPlan: updatedLearningPlan,
+			},
 		});
 	};
 

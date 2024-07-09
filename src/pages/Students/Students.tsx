@@ -121,7 +121,7 @@ const Student: FC<IStudent> = ({ color, id, name, username, discord, isActive })
 					) : (
 						<>
 							<DiscordIcon />
-							<span>{discord}</span>
+							<span>{discord || "Дискорд не указан"}</span>
 						</>
 					)}
 				</div>
@@ -155,7 +155,6 @@ const NewStudent: FC = ({}) => {
 			presentations: [],
 			username: telegram.value.startsWith("@") ? telegram.value : `@${telegram.value}`,
 			createDate: new Date().toString(),
-			additionalLearningPlan: [],
 		});
 		closeModal("newStudent");
 	};

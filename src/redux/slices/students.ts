@@ -5,24 +5,15 @@ export interface IStudentBook {
 	progress: number[];
 }
 
-export interface IAdditionalStudentBook {
-	id: number;
-	name: string;
-	color: string | null;
-	lessons: number;
-	progress: number[];
-}
-
 export interface IStudent {
 	id: number;
 	color: string;
 	name: string;
 	username: string;
-	discord: string;
+	discord: string | null;
 	cost: number;
 	note: string;
 	learningPlan: IStudentBook[];
-	additionalLearningPlan: IAdditionalStudentBook[];
 	presentations: number[];
 	isActive: boolean;
 	createDate: string;
