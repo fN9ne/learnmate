@@ -1,0 +1,557 @@
+.student-page {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+
+	&__row {
+		display: flex;
+		gap: 20px;
+
+		&:first-child {
+			max-height: 442px;
+		}
+
+		&:last-child {
+			&>.block {
+				&:first-child {
+					flex: 0 0 calc(100%/3*2 - (20px - 20px/2));
+
+					.block {
+						&__body {
+							display: flex;
+							flex-wrap: wrap;
+							gap: 4px;
+
+							.student-book {
+								flex: 0 0 calc(50% - 2px);
+							}
+						}
+					}
+				}
+
+				&:last-child {
+					flex: 0 0 calc(100%/3 - (20px - 20px/2));
+
+					.block {
+						&__body {
+							display: flex;
+							flex-direction: column;
+							gap: 4px;
+						}
+					}
+				}
+
+				.block {
+					&__header {
+						padding: 0 0 16px 0;
+						border-bottom: 1px solid var(--300);
+					}
+
+					&__body {
+						margin: 20px 0 0 0;
+						padding: 0;
+					}
+				}
+			}
+		}
+	}
+
+	&-main {
+		padding: 44px 40px;
+		border-radius: 20px;
+		max-width: 600px;
+		background-color: var(--100);
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+
+		.color-picker {
+			background-color: var(--0);
+		}
+
+		&__header {
+			display: flex;
+			justify-content: space-between;
+			gap: 30px;
+			padding: 0 0 16px 0;
+			position: relative;
+		}
+
+		&__delimiter {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 4px;
+			border-radius: 2px;
+			border: 1px solid var(--700);
+		}
+
+		&__title {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+
+			h2,
+			h3 {
+				font-family: var(--condensedFont);
+			}
+
+			h2 {
+				font-size: 20px;
+				color: var(--800);
+				font-weight: 500;
+			}
+
+			h3 {
+				font-weight: 400;
+				font-size: 16px;
+				color: var(--800);
+			}
+		}
+
+		&__activity {
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background-color: var(--e500);
+			border: 2px solid var(--e900);
+
+			&--active {
+				background-color: var(--c500);
+				border-color: var(--c900);
+			}
+		}
+
+		&__info {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			color: var(--600);
+		}
+
+		&__label {
+			font-size: 16px;
+			color: var(--600);
+			font-family: var(--condensedFont);
+			text-transform: uppercase;
+		}
+
+		&__content {
+			margin: 20px 0 0 0;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+
+			.student-page-input {
+				flex: 0 0 calc(50% - 4px);
+			}
+		}
+
+		&__footer {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+
+			.switch {
+				margin: 18px 0 0 0;
+			}
+		}
+	}
+
+	&-input {
+		&__label {
+			color: var(--500);
+			font-family: var(--condensedFont);
+			text-transform: uppercase;
+		}
+
+		input {
+			height: 50px;
+			font-weight: 500;
+			padding: 0 14px;
+			font-size: 14px;
+			color: var(--800);
+		}
+
+		.input,
+		.color-picker {
+			margin: 4px 0 0 0;
+		}
+	}
+}
+
+.history {
+	flex: 1 1 auto;
+
+	&>.block {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+
+		.block__body {
+			overflow-y: auto;
+		}
+	}
+
+	&-filter {
+		padding: 32px 28px;
+		border-radius: 12px;
+		background-color: var(--100);
+
+		&__button {
+			width: 30px;
+			height: 30px;
+			border-radius: 4px;
+			background-color: var(--200);
+			transition: 350ms;
+
+			svg path {
+				fill: var(--800);
+			}
+
+			&:hover {
+				background-color: var(--300);
+			}
+		}
+
+		&__wrapper {
+			position: fixed;
+			z-index: 101;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: rgba(25, 23, 26, 0.7);
+		}
+
+		&__header {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			font-size: 24px;
+			font-weight: 500;
+			color: var(--800);
+
+			svg {
+				width: 18px;
+				height: 18px;
+
+				path {
+					fill: var(--800)
+				}
+			}
+		}
+
+		&__body {
+			margin: 32px 0 0 0;
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+		}
+
+		&__label {
+			font-family: var(--condensedFont);
+			color: var(--500);
+			text-transform: uppercase;
+		}
+
+		&__options {
+			margin: 12px 0 0 0;
+			display: flex;
+			gap: 4px;
+		}
+
+		&__option {
+			display: flex;
+			align-items: center;
+			height: 40px;
+			padding: 0 16px;
+			border-radius: 4px;
+			background-color: transparent;
+			transition: 350ms;
+			color: var(--500);
+			cursor: pointer;
+
+			&:hover {
+				background-color: var(--200);
+				color: var(--600);
+			}
+
+			&--active {
+				background-color: var(--200);
+				color: var(--p500);
+
+				&:hover {
+					background-color: var(--200);
+					color: var(--p700);
+				}
+			}
+		}
+
+		&__extra {
+			margin: 12px 0 0 0;
+			display: flex;
+			gap: 12px;
+
+			input {
+				padding: 0 18px;
+				font-size: 14px;
+				height: 50px;
+			}
+		}
+
+		&__input {
+			flex: 1 1 auto;
+
+			.history-filter__label {
+				font-size: 12px;
+			}
+
+			.input {
+				margin: 4px 0 0 0;
+			}
+		}
+	}
+
+	&__content {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		overflow-y: auto;
+		padding: 0 12px 0 0;
+	}
+
+	&-block {
+		&__title {
+			font-weight: 500;
+			font-family: var(--condensedFont);
+			color: var(--800);
+			padding: 0 0 12px 0;
+			border-bottom: 1px solid var(--300);
+		}
+
+		&__content {
+			margin: 20px 0 0 0;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 4px;
+		}
+	}
+
+	&-item {
+		flex: 0 0 calc(100%/3 - (4px - 4px/3));
+
+		&__container {
+			padding: 32px 28px;
+			border-radius: 12px;
+			background-color: var(--100);
+			max-width: 468px;
+		}
+
+		&__main {
+			font-family: var(--condensedFont);
+			background-color: var(--200);
+			border-radius: 8px;
+			padding: 16px 14px;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			cursor: pointer;
+			transition: 350ms;
+
+			&:hover {
+				background-color: var(--300);
+			}
+		}
+
+		&__activity {
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			border: 2px solid var(--e900);
+			background-color: var(--e500);
+
+			&--active {
+				border-color: var(--c900);
+				background-color: var(--c500);
+			}
+		}
+
+		&__date {
+			color: var(--700);
+		}
+
+		&__time {
+			font-weight: 500;
+			color: var(--800);
+			margin: 0 0 0 auto;
+		}
+
+		&__wrapper {
+			position: fixed;
+			z-index: 101;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: rgba(25, 23, 26, 0.7);
+		}
+
+		&__header {
+			font-family: var(--condensedFont);
+			font-weight: 500;
+			font-size: 24px;
+			color: var(--800);
+			padding: 0 0 12px 0;
+			border-bottom: 1px solid var(--300);
+		}
+
+		&__body {
+			margin: 20px 0 0 0;
+		}
+
+		&__row {
+			display: flex;
+			gap: 24px;
+		}
+
+		&__label {
+			font-family: var(--condensedFont);
+			color: var(--500);
+			text-transform: uppercase;
+		}
+
+		&__value {
+			margin: 4px 0 0 0;
+			font-size: 18px;
+			font-weight: 500;
+			color: var(--700);
+		}
+
+		&__content {
+			margin: 20px 0 0 0;
+			display: flex;
+			gap: 20px;
+			flex-wrap: wrap;
+
+			.history-item {
+				&__prop {
+					flex: 0 0 calc(50% - 10px);
+				}
+
+				&__value {
+					font-weight: 400;
+					font-size: 14px;
+				}
+			}
+		}
+
+		&__footer {
+			margin: 20px 0 0 0;
+
+			.link {
+				background-color: transparent;
+			}
+		}
+	}
+}
+
+.student-book {
+	&__main {
+		padding: 20px 16px;
+		border-radius: 8px;
+		background-color: var(--200);
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		transition: 350ms;
+		width: 100%;
+		cursor: pointer;
+		border: 1px solid transparent;
+
+		&:hover {
+			opacity: 0.75;
+		}
+	}
+
+	&__color {
+		width: 8px;
+		height: 8px;
+		border-radius: 4px;
+		border: 1px solid var(--700);
+	}
+
+	&__name {
+		color: var(--700);
+	}
+
+	&__lessons {
+		color: var(--600);
+		margin: 0 0 0 auto;
+	}
+
+	&__body {
+		margin: 8px 0 0 0;
+		padding: 0 0 8px 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+	}
+
+	&__lesson {
+		background-color: var(--200);
+		flex: 0 0 calc(100%/10 - (4px - 4px/10));
+		aspect-ratio: 1 / 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: 1px solid transparent;
+		font-family: var(--condensedFont);
+		color: var(--700);
+		border-radius: 4px;
+		transition: 350ms;
+		cursor: pointer;
+
+		&:hover {
+			opacity: 0.75;
+		}
+
+		&--active {
+			border-color: var(--c500);
+			color: var(--c500);
+		}
+	}
+
+	&--active {
+		.student-book {
+			&__main {
+				border-color: var(--c500);
+			}
+
+			&__checkmark path {
+				stroke: var(--c500);
+			}
+		}
+	}
+
+	&__checkmark {
+		width: 16px;
+		height: 16px;
+		margin: 0 0 0 auto;
+
+		path {
+			stroke: transparent;
+			transition: 350ms;
+		}
+	}
+}

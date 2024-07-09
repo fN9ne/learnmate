@@ -1,0 +1,971 @@
+.schedule {
+	flex: 1 1 auto;
+	height: 100%;
+	position: relative;
+
+	&__loader {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__container,
+	&__redactor {
+		height: 100%;
+	}
+}
+
+.calendar {
+	width: 100%;
+
+	&-wrapper {
+		width: 100%;
+	}
+
+	/* borders */
+
+	border-collapse: collapse;
+
+	th,
+	td {
+		border: 1px solid var(--300);
+		border-top: 0;
+
+		&:first-child {
+			border-left: 0;
+		}
+
+		&:last-child {
+			border-right: 0;
+		}
+	}
+
+	tr {
+		&:last-child {
+			td {
+				border-bottom: 0;
+			}
+		}
+	}
+
+	/* other */
+
+	th,
+	td {
+		width: calc(100% / 7);
+	}
+
+	th {
+		padding: 18px 0 14px 16px;
+		text-align: left;
+		font-size: 14px;
+		font-weight: 400;
+		color: var(--500);
+		background-color: var(--200);
+	}
+
+	&-day {
+		min-width: 125px;
+		position: relative;
+		height: 115px;
+		padding: 20px;
+		transition: 350ms;
+		cursor: pointer;
+
+		&__body {
+			height: 100%;
+			display: flex;
+			align-items: flex-end;
+			flex-direction: column;
+		}
+
+		&__time {
+			margin: 6px 0 0 0;
+			padding: 5px 8px;
+			border-radius: 4px;
+			border: 1px solid var(--p300);
+			font-size: 12px;
+			line-height: 1;
+			color: var(--p500);
+			background-color: var(--p100);
+		}
+
+		&__students {
+			margin: auto 0 0 0;
+			display: flex;
+			gap: 6px;
+		}
+
+		&__student {
+			width: 16px;
+			height: 16px;
+			border-radius: 4px;
+			border: 1px solid var(--700);
+			cursor: grab;
+			transition: 200ms;
+			font-size: 11px;
+			line-height: 16px;
+			text-align: center;
+			color: var(--900);
+
+			&:hover {
+				opacity: 0.75;
+				width: 22px;
+				height: 22px;
+				border-radius: 5.5px;
+				margin: -3px;
+			}
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: -1px;
+			left: -1px;
+			width: 100%;
+			height: 100%;
+			border: 1px solid transparent;
+			pointer-events: none;
+			transition: 350ms;
+		}
+
+		&:hover {
+			&::before {
+				border-color: var(--400);
+			}
+		}
+
+		&__number {
+			font-weight: 500;
+			color: var(--700);
+		}
+
+		&--current {
+			z-index: 2;
+			background-color: var(--200);
+
+			&::before {
+				border-color: var(--900);
+			}
+
+			&:hover {
+				background-color: var(--100);
+
+				&::before {
+					border-color: var(--600);
+				}
+			}
+		}
+
+		&--lessons {
+			z-index: 1;
+
+			background-color: #FCF8FF;
+
+			&::before {
+				border-color: var(--p500);
+			}
+
+			.calendar-day {
+				&__number {
+					color: var(--p500);
+				}
+			}
+
+			&:hover {
+				background-color: var(--100);
+
+				&::before {
+					border-color: var(--p300);
+				}
+			}
+		}
+
+		&--lessons.calendar-day--current {
+			&::before {
+				border-color: var(--p500);
+				border-width: 2px;
+				width: calc(100% - 2px);
+				height: calc(100% - 2px);
+			}
+		}
+
+		&--inactive {
+			.calendar-day {
+				&__number {
+					color: var(--300);
+				}
+			}
+		}
+
+		&--lessons.calendar-day--inactive {
+			.calendar-day {
+				&__number {
+					color: var(--p500);
+					opacity: 0.35;
+				}
+
+				&__time,
+				&__students {
+					opacity: 0.35;
+				}
+			}
+
+			&::before {
+				opacity: 0.35;
+			}
+		}
+
+		&--dragover {
+			background-color: var(--200);
+
+			&.calendar-day {
+				&--lessons {
+					background-color: var(--p100);
+				}
+
+				&--current {
+					background-color: var(--300);
+				}
+			}
+		}
+	}
+}
+
+.month-changer {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	background-color: var(--200);
+	padding: 16px;
+	border-radius: 4px;
+
+	button {
+		background-color: transparent;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__display {
+		width: 105px;
+		font-weight: 500;
+		color: var(--800);
+		transition: 350ms;
+
+		&:hover {
+			color: var(--600);
+		}
+	}
+
+	&__arrow {
+		width: 20px;
+		height: 20px;
+		transition: 350ms;
+		border-radius: 50%;
+
+		svg {
+			translate: -0.5px 0;
+
+			path {
+				fill: var(--800);
+			}
+		}
+
+		&:hover {
+			background-color: var(--300);
+		}
+
+		&:last-child {
+			rotate: 180deg;
+		}
+	}
+}
+
+._highlighted {
+	background-color: #fcf8ff;
+	border-color: #f4e6fe;
+
+	.upcoming-lesson {
+		&__countdown {
+			color: var(--p500);
+		}
+	}
+}
+
+.upcoming-lesson {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	position: relative;
+	min-height: 40px;
+
+	&__loader {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		&--delimiter {
+			padding: 0 0 16px 0;
+			border-bottom: 1px solid var(--300);
+		}
+	}
+
+	&__date {
+		font-weight: 500;
+		font-size: 24px;
+		color: var(--800);
+	}
+
+	&__time {
+		font-size: 24px;
+		color: var(--700);
+	}
+
+	&__label {
+		font-size: 16px;
+		color: var(--600);
+	}
+
+	&__countdown {
+		color: var(--800);
+		font-weight: 600;
+		font-size: 18px;
+		transition: 350ms;
+	}
+
+	button.link {
+		align-self: flex-start;
+		margin: 10px 0 0 0;
+		background-color: transparent;
+	}
+
+	&-student {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		&__name {
+			line-height: 16px;
+			font-size: 14px;
+			color: var(--700);
+			translate: 0 1px;
+		}
+
+		&__color {
+			width: 16px;
+			height: 16px;
+			border-radius: 4px;
+			border: 1px solid var(--700);
+		}
+	}
+}
+
+.notes {
+	overflow-y: auto;
+	flex: 1;
+	height: 100%;
+	padding: 0 8px 0 0;
+	scrollbar-gutter: stable;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	position: relative;
+	height: 100%;
+
+	&__loader {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&::-webkit-scrollbar {
+		background-color: var(--200);
+		width: 14px;
+		border-radius: 7px;
+
+		&-thumb {
+			background-color: var(--500);
+			border: 3px solid var(--200);
+			border-radius: 7px;
+
+			&:hover {
+				background-color: var(--600);
+			}
+		}
+	}
+
+	&__add {
+		width: 30px;
+		height: 30px;
+		border-radius: 4px;
+		background-color: var(--200);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: 350ms;
+
+		&:hover {
+			background-color: var(--300);
+			border-radius: 50%;
+		}
+
+		svg rect {
+			fill: var(--800);
+		}
+	}
+}
+
+.note {
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__name {
+		color: var(--700);
+	}
+
+	&__remove {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: transparent;
+
+		svg {
+			rotate: 45deg;
+
+			rect {
+				transition: 350ms;
+				fill: var(--400)
+			}
+		}
+
+		&:hover {
+			svg rect {
+				fill: var(--700);
+			}
+		}
+	}
+
+	&__textarea {
+		width: 100%;
+		margin: 12px 0 0 0;
+		background-color: var(--200);
+		height: 100px;
+		border-radius: 8px;
+		resize: none;
+		padding: 16px 14px;
+		color: var(--700);
+
+		&::placeholder {
+			color: var(--500);
+		}
+
+		&::-webkit-scrollbar {
+			background-color: var(--200);
+			width: 8px;
+			border-radius: 4px;
+
+			&-thumb {
+				background-color: var(--500);
+				border: 2px solid var(--200);
+				border-radius: 4px;
+
+				&:hover {
+					background-color: var(--600);
+				}
+			}
+		}
+	}
+}
+
+.redactor {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&__empty {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__buttons {
+		display: flex;
+		gap: 20px;
+
+		.button {
+			&:first-child {
+				height: 50px;
+				font-size: 14px;
+				font-weight: 400;
+				padding: 0 20px;
+
+				svg {
+					width: 16px;
+					height: 16px;
+
+					path {
+						fill: transparent;
+						stroke-width: 3;
+						stroke: var(--0);
+					}
+				}
+			}
+		}
+	}
+
+	.block {
+		width: 100%;
+		max-width: 100%;
+		height: 100%;
+		max-height: 100%;
+		transition: 250ms;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+
+		&__header {
+			padding: 0 0 24px 0;
+			align-items: flex-end;
+			border-bottom: 1px solid var(--300);
+		}
+
+		&__title {
+			font-size: 32px;
+		}
+
+		&__body {
+			overflow-y: auto;
+		}
+	}
+
+	&__lessons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+
+		scrollbar-gutter: stable;
+		overflow: auto;
+		height: 100%;
+
+		.lesson {
+			flex: 0 0 calc(50% - 15px);
+		}
+	}
+
+	&__content {
+		overflow-y: auto;
+		height: 100%;
+	}
+
+	&--minified {
+		.block {
+			max-width: 420px;
+			max-height: 402px;
+
+			.button {
+				margin: 40px 0 0 0;
+			}
+
+			&__body {
+				overflow-y: visible;
+			}
+		}
+	}
+}
+
+.lesson {
+	background-color: var(--200);
+	padding: 28px 24px;
+	border-radius: 12px;
+
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 0 16px 0;
+		border-bottom: 1px solid var(--400);
+	}
+
+	&__title {
+		font-family: var(--condensedFont);
+		font-weight: 500;
+		font-size: 18px;
+		color: var(--800);
+	}
+
+	&__remove {
+		width: 28px;
+		height: 28px;
+		margin: -5px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: transparent;
+
+		svg path {
+			transition: 350ms;
+		}
+
+		&:hover {
+			svg path {
+				fill: var(--700);
+			}
+		}
+	}
+
+	&__body {
+		margin: 20px 0 0 0;
+		display: flex;
+		justify-content: space-between;
+		gap: 20px;
+		padding: 0 0 20px 0;
+		border-bottom: 1px solid var(--400);
+	}
+
+	&__footer {
+		margin: 20px 0 0 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+
+		textarea {
+			flex: 0 0 calc(50% - 10px);
+			height: 80px;
+			border-radius: 4px;
+			border: 2px solid var(--300);
+			background-color: var(--100);
+			padding: 14px 18px;
+			resize: none;
+			font-weight: 500;
+			color: var(--800);
+
+			&::placeholder {
+				font-weight: 400;
+				color: var(--600);
+			}
+		}
+	}
+
+	&__col {
+		&:first-child {
+			flex: 1 1 auto;
+		}
+
+		&:last-child {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+		}
+	}
+
+	&__item {
+		display: flex;
+		align-items: center;
+		height: 50px;
+		gap: 16px;
+		margin: 20px 0 0 0;
+
+		&:first-child {
+			margin: 0;
+		}
+	}
+
+	&__time-container {
+		display: flex;
+		gap: 8px;
+		transition: 350ms;
+		opacity: 0.35;
+		pointer-events: none;
+
+		&--active {
+			opacity: 1;
+			pointer-events: auto;
+		}
+	}
+
+	&--new {
+		background-color: transparent;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		height: 452px;
+
+		&:hover {
+			.lesson__create {
+				width: 120px;
+				height: 120px;
+				border-color: var(--500);
+
+				&::before,
+				&::after {
+					background-color: var(--500);
+					width: 32px;
+				}
+			}
+		}
+	}
+
+	&__create {
+		width: 100px;
+		height: 100px;
+		border-radius: 20px;
+		border: 2px dashed var(--400);
+		position: relative;
+		transition: 350ms;
+
+		&::before,
+		&::after {
+			content: '';
+			width: 24px;
+			height: 2px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			translate: -50% -50%;
+			transition: 350ms;
+			background-color: var(--400);
+		}
+
+		&::after {
+			rotate: 90deg;
+		}
+	}
+}
+
+.select {
+	max-width: 306px;
+	width: 100%;
+	position: relative;
+
+	&__main {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 50px;
+		padding: 0 20px;
+		border-radius: 4px;
+		background-color: var(--100);
+		border: 2px solid var(--300);
+		outline: 2px solid transparent;
+		outline-offset: 1px;
+		position: relative;
+		cursor: pointer;
+		transition: 350ms;
+
+		&:hover {
+			border-color: var(--400);
+		}
+
+		svg {
+			rotate: -90deg;
+			transition: 350ms;
+
+			path {
+				fill: var(--600);
+				transition: 350ms;
+			}
+		}
+
+		&--active {
+			border-color: var(--p500);
+			outline-color: var(--p100);
+
+			svg {
+				rotate: 90deg;
+
+				path {
+					fill: var(--p500);
+				}
+			}
+
+			.select__placeholder {
+				color: var(--p500);
+			}
+
+			&:hover {
+				border-color: var(--p300);
+
+				.select__placeholder {
+					color: var(--p300);
+				}
+
+				svg path {
+					fill: var(--p300);
+				}
+			}
+		}
+
+		&--error {
+			border-color: var(--e500);
+			outline-color: var(--e100);
+
+			svg {
+				path {
+					fill: var(--e500);
+				}
+			}
+
+			.select__placeholder {
+				color: var(--e500);
+			}
+
+			&:hover {
+				border-color: var(--e300);
+
+				.select__placeholder {
+					color: var(--e300);
+				}
+
+				svg path {
+					fill: var(--e300);
+				}
+			}
+		}
+	}
+
+	&__open-student {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 24px;
+		height: 24px;
+		margin: -5px -5px -5px 0;
+		background-color: transparent;
+
+		svg {
+			width: 14px;
+			height: 14px;
+			rotate: 0deg;
+			translate: 0 1px;
+
+			path {
+				fill: var(--p500);
+				transition: 350ms;
+			}
+		}
+
+		&:hover {
+			svg path {
+				fill: var(--p700)
+			}
+		}
+	}
+
+	&__body {
+		position: absolute;
+		top: calc(100% + 5px);
+		left: 0;
+		border: 2px solid var(--300);
+		background-color: var(--100);
+		border-radius: 4px;
+		width: 100%;
+		z-index: 2;
+		padding: 10px 4px 10px 0;
+
+		&-wrapper {
+			max-height: 122px;
+			overflow: auto;
+
+			&::-webkit-scrollbar {
+				background-color: transparent;
+				width: 6px;
+
+				&-thumb {
+					border: 0;
+				}
+			}
+		}
+	}
+
+	&__value,
+	&__item {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	&__item {
+		height: 34px;
+		padding: 0 18px;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		cursor: pointer;
+		transition: 350ms;
+
+		&:hover {
+			background-color: var(--200);
+		}
+	}
+
+	&__color {
+		width: 16px;
+		height: 16px;
+		border-radius: 4px;
+		border: 1px solid var(--700);
+	}
+
+	&__placeholder {
+		color: var(--600);
+		transition: 350ms;
+	}
+
+	&__name {
+		color: var(--800);
+	}
+}
+
+.time-input {
+	position: relative;
+
+	input {
+		width: 120px;
+		height: 50px;
+		border-radius: 4px;
+		background-color: var(--100);
+		border: 2px solid var(--300);
+		padding: 0 18px;
+		font-size: 16px;
+		font-weight: 500;
+		color: var(--800);
+
+		&::-webkit-inner-spin-button,
+		&::-webkit-outer-spin-button {
+			appearance: none;
+			margin: 0;
+		}
+	}
+
+	&__label,
+	svg {
+		pointer-events: none;
+	}
+
+	&__label {
+		font-family: var(--condensedFont);
+		color: var(--600);
+		position: absolute;
+		top: 50%;
+		translate: 0 calc(-50% + 2px);
+		left: 50px;
+	}
+
+	svg {
+		position: absolute;
+		right: 20px;
+		top: 50%;
+		translate: 0 calc(-50% + 1px);
+	}
+}

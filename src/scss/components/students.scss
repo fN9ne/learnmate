@@ -1,0 +1,179 @@
+.students {
+	height: 100%;
+	position: relative;
+
+	&__loader {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__new {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.block {
+			max-width: 580px;
+			width: 100%;
+
+			&__title {
+				font-size: 32px;
+			}
+
+			&__header {
+				padding: 0 0 24px 0;
+				border-bottom: 1px solid var(--300);
+			}
+
+			&__body {
+				padding: 24px 0 0 0;
+			}
+		}
+	}
+
+	&__content {
+		height: 100%;
+
+		.student {
+			flex: 0 0 calc(25% - (20px - 20px/4));
+		}
+	}
+
+	&__list {
+		display: flex;
+		height: 100%;
+		flex-wrap: wrap;
+		gap: 20px;
+	}
+}
+
+.student {
+	border-radius: 12px;
+	background-color: var(--200);
+	padding: 24px 20px;
+	transition: 350ms;
+	cursor: pointer;
+
+	&__name {
+		font-weight: 500;
+		font-size: 20px;
+		color: var(--900);
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	&__delimiter {
+		height: 4px;
+		border-radius: 2px;
+		border: 1px solid var(--700);
+		margin: 8px 0 0 0;
+	}
+
+	&__footer {
+		margin: 12px 0 0 0;
+		display: flex;
+		justify-content: space-between;
+
+		&>svg {
+			rotate: 180deg;
+
+			path {
+				fill: var(--p500);
+			}
+		}
+	}
+
+	&__color {
+		width: 12px;
+		height: 12px;
+		border-radius: 4px;
+		border: 1px solid var(--700);
+	}
+
+	&__username {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		span {
+			color: var(--800);
+		}
+
+		svg {
+			path {
+				fill: var(--800);
+			}
+		}
+	}
+
+	&:hover {
+		opacity: 0.5;
+	}
+
+	&--inactive {
+		opacity: 0.35;
+	}
+}
+
+.new-student {
+	&__body {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+		padding: 0 0 32px 0;
+		border-bottom: 1px solid var(--300);
+		margin: 0 0 24px 0;
+
+		&>div {
+			flex: 0 0 calc(50% - 10px);
+		}
+
+		.input {
+			input {
+				padding: 0 0 0 42px;
+				height: 50px;
+				font-size: 14px;
+				color: var(--800);
+
+				&::placeholder {
+					color: var(--600);
+				}
+			}
+
+			&__icon {
+				left: 16px;
+
+				svg {
+					width: 12px;
+
+					path {
+						fill: var(--600);
+					}
+				}
+			}
+
+			&--filled {
+				.input {
+					&__icon svg path {
+						fill: var(--800);
+					}
+				}
+			}
+		}
+	}
+
+	&__footer {
+		display: flex;
+		gap: 24px;
+
+		.button {
+			height: 50px;
+			padding: 0 18px;
+			font-size: 14px;
+			font-weight: 400;
+		}
+	}
+}

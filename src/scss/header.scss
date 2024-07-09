@@ -1,0 +1,172 @@
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: calc(100% - 14px);
+	z-index: 100;
+
+	@media (max-width: 425px) {
+		width: 100%;
+	}
+
+	&__logo {
+		@media (max-width: 1280px) {
+			width: 80px;
+		}
+	}
+
+	&__wrapper {
+		backdrop-filter: blur(5px);
+		padding: 20px 0 0;
+		border-radius: 20px;
+
+		@media (max-width: 425px) {
+			padding: 10px 0 0;
+		}
+	}
+
+	&__content {
+		padding: 32px 40px;
+		background-color: var(--100);
+		border-radius: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		box-shadow: 2px 0 15px rgba(25, 23, 26, 0.05);
+
+		@media (max-width: 1280px) {
+			padding: 16px 16px;
+			border-radius: 12px;
+		}
+	}
+
+	&-user {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+
+		&__avatar {
+			width: 40px;
+			height: 40px;
+			border-radius: 4px;
+			background-color: var(--p500);
+			color: var(--0);
+			font-weight: 700;
+			font-size: 20px;
+			text-transform: uppercase;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		&__logout {
+			background-color: transparent;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			margin: 6px 0 0 0;
+			color: var(--500);
+			transition: 350ms;
+
+			span {
+				line-height: 12px;
+			}
+
+			svg path {
+				fill: var(--500);
+				transition: 350ms;
+			}
+
+			&:hover {
+				color: var(--700);
+
+				svg path {
+					fill: var(--700);
+				}
+			}
+		}
+	}
+
+	&-sidebar {
+		display: flex;
+		gap: 12px;
+
+		&-button {
+			width: 30px;
+			height: 30px;
+			border-radius: 4px;
+			background-color: var(--200);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			svg {
+				width: 14px;
+				height: 14px;
+
+				path {
+					fill: var(--700);
+				}
+			}
+
+			&--highlighted {
+				position: relative;
+
+				&::before {
+					content: '';
+					width: 10px;
+					height: 10px;
+					border-radius: 50%;
+					background-color: var(--p500);
+					position: absolute;
+					right: -2px;
+					top: -2px;
+				}
+			}
+		}
+	}
+}
+
+.navbar {
+	&__list {
+		display: flex;
+		gap: 12px;
+	}
+
+	&__link {
+		padding: 20px 24px;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		color: var(--500);
+		transition: 350ms;
+
+		svg {
+			translate: 0 -1px;
+
+			path {
+				fill: var(--500);
+				transition: 350ms;
+			}
+		}
+
+		&:hover {
+			color: var(--600);
+
+			svg path {
+				fill: var(--600);
+			}
+		}
+
+		&.active {
+			background-color: var(--200);
+			border-radius: 4px;
+			padding: 20px 40px;
+			color: var(--700);
+
+			svg path {
+				fill: var(--700);
+			}
+		}
+	}
+}

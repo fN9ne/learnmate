@@ -1,0 +1,16 @@
+@import "./mixins";
+@import "./fonts";
+@import "./reset";
+@import "./style";
+@import "./modal";
+/* components */
+@import "./header";
+/* pages */
+@import "./authoriaztion";
+@import "./components/students";
+@import "./components/schedule";
+@import "./components/lp";
+@import "./components/student";
+@import "./components/payments";
+@import "./components/usersguide";
+@import "./components/settings";

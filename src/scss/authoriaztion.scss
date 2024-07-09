@@ -1,0 +1,146 @@
+@import "./mixins";
+
+.authorization {
+	min-height: 100%;
+	display: flex;
+	justify-content: flex-end;
+
+	@media (min-width: 996px) {
+		background: url("/loginPageIllustration.jpg") no-repeat center;
+
+		@include rv("background-position", -878, -275, 1920, 996);
+	}
+
+	&__content {
+		padding: 50px 20px;
+		width: 100%;
+		max-width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #fff;
+
+		@media (min-width: 996px) {
+			@include rv("max-width", 500, 807, 1920, 996);
+		}
+	}
+
+	.form {
+		max-width: 420px;
+	}
+
+	&-form {
+		&__delimiter {
+			margin: 16px 0 0 0;
+			color: var(--700);
+			font-family: var(--condensedFont);
+			display: flex;
+			align-items: center;
+			gap: 12px;
+
+			&::before,
+			&::after {
+				content: '';
+				height: 2px;
+				flex: 1 1 auto;
+				background-color: var(--100);
+			}
+		}
+
+		&__inputs {
+			margin: 16px 0 0 0;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+	}
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	transition: 350ms;
+
+	&--fetching {
+		pointer-events: none;
+
+		&>*:not(.loader) {
+			opacity: 0.5;
+		}
+	}
+
+	&__loader {
+		backdrop-filter: blur(2px);
+		width: calc(100% + 6px);
+		height: calc(100% + 6px);
+		left: -3px;
+		top: -3px;
+		z-index: 5;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__description {
+		margin: 20px 0 0 0;
+	}
+
+	&__body {
+		margin: 32px 0 0 0;
+		width: 100%;
+	}
+
+	.button {
+		width: 100%;
+	}
+
+	&>.button {
+		margin: 32px 0 0 0;
+	}
+
+	&__footer {
+		margin: 16px 0 0 0;
+	}
+
+	&__error {
+		margin: 0;
+		opacity: 0;
+		visibility: hidden;
+		transition: 350ms;
+		text-align: center;
+
+		&--active {
+			margin: 20px 0 -8px 0;
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}
+
+.email-confirm {
+	max-width: 420px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	position: relative;
+
+	.button {
+		margin: 10px 0 0 0;
+	}
+
+	&__footer {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 20px;
+		margin: 10px 0 0 0;
+	}
+
+	&__error {
+		max-width: 340px;
+	}
+}

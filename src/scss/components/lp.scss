@@ -1,0 +1,201 @@
+.lp {
+	height: 100%;
+	position: relative;
+
+	&__loader {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__block {
+		display: flex;
+		flex-direction: column;
+		overflow: auto;
+		flex: 0 0 calc(50% - 10px);
+	}
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		padding: 0 0 24px 0;
+		border-bottom: 1px solid var(--300);
+		margin: 0 0 20px 0;
+	}
+
+	&__title {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		font-size: 18px;
+		font-weight: 500;
+		font-weight: 500;
+		font-family: var(--condensedFont);
+		color: var(--700);
+
+		svg {
+			height: 14px;
+
+			path {
+				fill: var(--700)
+			}
+		}
+	}
+
+	&__body {
+		padding: 0 12px 0 0;
+		display: flex;
+		align-items: flex-start;
+		flex-wrap: wrap;
+		gap: 12px;
+		overflow: auto;
+
+		.lp-item {
+			flex: 0 0 calc(25% - (12px - 12px/4))
+		}
+	}
+}
+
+.lp-item {
+	background-color: var(--200);
+	border-radius: 8px;
+	padding: 20px 16px;
+	cursor: pointer;
+	transition: 350ms;
+
+	&:hover:not(.lp-item--edit) {
+		opacity: 0.75;
+	}
+
+	&__main {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		transition: 350ms;
+		border-bottom: 1px solid transparent;
+		position: relative;
+		z-index: 2;
+		background-color: var(--200);
+	}
+
+	&__name {
+		color: var(--700);
+		line-height: 17px;
+
+		&--edit {
+			width: 140px;
+			background-color: transparent;
+			height: 17px;
+		}
+	}
+
+	&__lessons {
+		margin: 0 0 0 auto;
+		color: var(--600);
+
+		&-edit {
+			color: var(--600);
+			width: 27px;
+			height: 14px;
+			background-color: transparent;
+			text-align: right;
+		}
+	}
+
+	&__color {
+		width: 20px;
+		height: 20px;
+		margin: -6px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: 350ms;
+		position: relative;
+		z-index: 2;
+
+		& span,
+		&-preview {
+			display: block;
+			width: 8px;
+			height: 8px;
+			border-radius: 4px;
+			border: 1px solid var(--700);
+		}
+
+		&-picker {
+			position: fixed;
+		}
+
+		&--edit {
+			border-radius: 50%;
+			cursor: pointer;
+
+			&:hover {
+				background-color: var(--300);
+			}
+		}
+	}
+
+	&__edit {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__button {
+		background-color: transparent;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 12px;
+		color: var(--500);
+		position: relative;
+		transition: 350ms;
+
+		&::before {
+			content: '';
+			height: 1px;
+			width: 0;
+			position: absolute;
+			bottom: -2px;
+			right: 0;
+			transition: 350ms;
+			background-color: var(--500);
+		}
+
+		&:hover {
+			color: var(--700);
+
+			&::before {
+				width: 100%;
+				left: 0;
+				right: auto;
+				background-color: var(--700);
+			}
+
+			svg path {
+				fill: var(--700);
+			}
+		}
+
+		svg {
+			height: 12px;
+
+			path {
+				fill: var(--500);
+				transition: 350ms;
+			}
+		}
+	}
+
+	&--edit {
+		cursor: auto;
+		z-index: 12;
+
+		.lp-item__main {
+			padding: 0 0 16px 0;
+			margin: 0 0 20px 0;
+			border-bottom-color: var(--300);
+		}
+	}
+}
