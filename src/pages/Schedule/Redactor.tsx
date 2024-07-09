@@ -522,7 +522,7 @@ const Selectbox: FC<SelectboxProps> = ({ id, value, onSelect, lessonsWithoutStud
 						</div>
 						<a
 							title={`Открыть страницу ученика "${student.name}, ${student.username}"`}
-							href={`http://localhost:5173/student/${student.id}`}
+							href={`https://learnmate.vercel.app/student/${student.id}`}
 							onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => event.stopPropagation()}
 							target="_blank"
 							className="select__open-student"

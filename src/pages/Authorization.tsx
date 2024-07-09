@@ -36,7 +36,7 @@ const logInWithGoogle = async () => {
 	await supabase.auth.signInWithOAuth({
 		provider: "google",
 		options: {
-			redirectTo: "http://localhost:5173/schedule",
+			redirectTo: "https://learnmate.vercel.app/schedule",
 			scopes: "",
 		},
 	});
@@ -250,7 +250,7 @@ const SignUpForm: FC = () => {
 				email: email.value,
 				password: sha256(password.value) + "",
 				options: {
-					emailRedirectTo: "http://localhost:5173/schedule",
+					emailRedirectTo: "https://learnmate.vercel.app/schedule",
 				},
 			});
 
@@ -374,7 +374,7 @@ const EmailConfirm: FC = () => {
 					email,
 					type: "signup",
 					options: {
-						emailRedirectTo: "http://localhost:5173/schedule",
+						emailRedirectTo: "https://learnmate.vercel.app/schedule",
 					},
 				});
 
